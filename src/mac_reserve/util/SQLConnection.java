@@ -1,4 +1,4 @@
-package mac_reserver.util;
+package mac_reserve.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import mac_reserve.model.User;
 import mac_reserve.model.UserModel;
-import mac_reserver.util.SQLConnection;
+import mac_reserve.util.SQLConnection;
 
 public class UserModelDAO {
 	private static SQLConnection DBMgr = SQLConnection.getInstance();

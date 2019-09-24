@@ -8,10 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import mac_reserve.model.State;
+import mac_reserve.util.SQLConnection;
 
 import java.sql.Date;
-
-import mac_reserver.util.SQLConnection;
 
 public class FM_UtilityDAO {
 

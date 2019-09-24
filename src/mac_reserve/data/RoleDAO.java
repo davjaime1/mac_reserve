@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import mac_reserve.model.Role;
-import mac_reserver.util.SQLConnection;
+import mac_reserve.util.SQLConnection;
 
 public class RoleDAO
 {
