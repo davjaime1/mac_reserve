@@ -8,6 +8,21 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
+
+<style>
+.submit {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 6px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 <div class="main">
@@ -18,14 +33,13 @@
 	  <div style="float:right">
 	  <form align="right" name="form1" method="post" action="index.jsp">
   	  <label>
-  	  <input name="submit2" type="submit" id="submit2" value="Logout">
+  	  <input name="submit2" type="submit" class="submit" id="submit2" value="Logout">
   	  </label>
 	  </form>
 	  </div>
 	
-      <div class="logo"><h1><a href="<c:url value='/' />">Mac Reserve</a></h1></div>
-      <header>
-        <h2>Facility Manager Home</h2>
+	      <header>
+        <h2 style="color:blue">Facility Manager Home</h2>
     	</header>
   <div class="content">  
 
