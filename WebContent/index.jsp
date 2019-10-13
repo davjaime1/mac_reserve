@@ -7,37 +7,68 @@
 <title>Log In</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
+
+
+
+<style>
+header {
+  background-color: #F0C61F;
+  padding: 5px;
+  text-align: center;
+  font-size: 35px;
+  color: blue; 
+}
+
+.bcenter{text-align: center;}
+
+table.center {
+   margin-left:auto; 
+    margin-right:auto;
+  }
+</style>
+
 <body>
 	<header>
-        <h2 style="color:blue">MAC Reserve System</h2>
+        <h1>MAC Reserve System</h1>
     </header>
-<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: orange; border: none; width:200px" disabled="disabled">
-<table>
+
+<table class="center">
+
 <tr>
 	<td>
+	<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: orange; border: none; margin-left:83px" disabled="disabled"><br>	
 	<form action="/mac_reserve/UserController?action=loginUser" method="post">
-	<table style="width: 1200px; ">
-	<tr>
-	<tr>
-  	<td> User name: </td>
- 	<td> <input name="idusername" value="<c:out value='${USERS.username}'/>" type="text" maxlength="45">  </td>
-  	<td> <input name="marnumberError"  value="<c:out value='${errorMsgs.userNameError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
-	</tr>
- 
-    <tr>
-    <td> Password: </td>
-    <td> <input name="idpassword" value="<c:out value='${USERS.password}'/>" type="text" maxlength="16"> </td>
- 	<td> <input name="facilityname"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
-
-    </tr>
-
-</table>
-  <input style="color:blue;background-color: orange" type="submit" value="Submit" >
+		<table>
+			<tr>
+			  	<th>Username:</th>
+			 	<td> <input name="idusername" type="text" maxlength="45">  </td>
+			</tr>
+			<tr>
+				<td></td>
+	    		<td> <input name="marnumberError"  value="<c:out value='${errorMsgs.userNameError}'/>" type="text"  style ="background-color: white; color: orange; border: none;margin-left:100"   disabled="disabled" maxlength="60"> </td>
+			</tr>
+			
+		 
+		    <tr>
+		    	<th>Password:</th>
+		    	<td> <input name="idpassword" type="text" maxlength="16"> </td>
+		    </tr>
+		    <tr>
+		    	<td></td>
+		 	<td> <input name="facilityname"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color: white; color: orange; border: none;"   disabled="disabled" maxlength="60"> </td>
+		    </tr>
+		    
+		</table>
+		<div class="bcente">
+	  	<input style="color:blue;background-color: #F0C61F;width:175px ;margin-left: 80px;" type="submit" value="Login" >
+	  	</div>
 	</form>      
-</td>
-  <tr>
-<td><a href="/mac_reserve/UserController?action=registerProfile"  target="_top"> Register Here </a>
+	</td>
+	
+  	<tr>
+		<td><a href="/mac_reserve/UserController?action=registerProfile"  target="_top" style="margin-left: 125px;"> Register Here </a>
     </tr>
+
 </table>
 
 </body>
