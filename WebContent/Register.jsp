@@ -5,114 +5,122 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Register form</title>
+<link rel="stylesheet" href="css/register.css" type="text/css"/> 
 </head>
-<body>
-<header>
-        <h2 style="color:blue">Registration</h2>
+
+<body style="background-color: #0948b1;">
+	<header class="mac">
+        <h1>MAC Reserve System</h1>
     </header>
-<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: orange; border: none; width:800px" disabled="disabled">
-<table>
-  <tr>
-   <td>
-    <form name="companyForm" action="/mac_reserve/UserController?action=registerUser" method="post">
-    <table style="width: 1200px; ">
-    <tr>
-    <td> User Name (*): </td>
-    <td> <input name="idusername" value="<c:out value='${user.username}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.userNameError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
     
-	<tr>
-   <td> UTA ID (*): </td>
-    <td> <input name="idutaID" value="<c:out value='${user.utaId}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.utaidError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
+	<header>
+        <h1 style="color:white">Registration</h1>
+    </header>
+    
+	<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; margin-left:748px; width:165px" disabled="disabled">
+	<table class = "center">
+  		<tr>
+   			<td>
+    			<form name="companyForm" action="/mac_reserve/UserController?action=registerUser" method="post">
+    			<table class="center">
+    				<tr>
+    					<td style="color:white"> User Name (*): </td>
+    					<td> <input name="idusername" value="<c:out value='${user.username}'/>"  type="text" maxlength="16"> </td>
+  						<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.userNameError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+    				</tr>
+    
+					<tr>
+   						<td style="color:white"> UTA ID (*): </td>
+				    	<td> <input name="idutaID" value="<c:out value='${user.utaId}'/>" type="text" maxlength="16"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.utaidError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
+    
+    				<tr>
+				    	<td style="color:white"> First Name (*): </td>
+				    	<td> <input name="idfirstname" value="<c:out value='${user.firstName}'/>" type="text" maxlength="16"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.firstnameError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
     
     
-    <tr>
-    <td> First Name (*): </td>
-    <td> <input name="idfirstname" value="<c:out value='${user.firstName}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.firstnameError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
+				    <tr>
+					    <td style="color:white"> Last Name (*): </td>
+					    <td> <input name="idlastname" value="<c:out value='${user.lastName}'/>" type="text" maxlength="16"> </td>
+					  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.lastnameError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+					</tr>
+				    
+				    <tr>
+				    	<td style="color:white"> Password(*): </td>
+				    	<td> <input name="idpassword" value="<c:out value='${user.password}'/>" type="text" maxlength="16"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
+				    
+				    <tr>
+				    	<td style="color:white"> Address (*): </td>
+				    	<td> <input name="idaddress" value="<c:out value='${user.address}'/>" type="text" maxlength="200"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.addressError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
+				    
+				    <tr>
+				    	<td style="color:white"> City (*): </td>
+				    	<td> <input name="idcity" value="<c:out value='${user.city}'/>" type="text" maxlength="16"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.cityError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
+				    
+				    <tr>
+					    <td style="color:white"> State (*): </td>
+					    <td> 
+					    	<select name="idstate">
+					        	<c:forEach items="${STATE}" var="item" varStatus="status">
+					            	<option value="${item.id}">${item.name}</option>
+					          	</c:forEach>
+					    	</select>
+					    </td>
+				    </tr>
+				    
+				    <tr>
+				    	<td style="color:white"> Zip (*): </td>
+				    	<td> <input name="idzip" value="<c:out value='${user.zip}'/>" type="text" maxlength="16"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.zipError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
+				    
+				    <tr>
+				        <td style="color:white"> Phone (*): </td>
+				    	<td> <input name="idphone" value="<c:out value='${user.phone}'/>" type="text" maxlength="16"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.phoneError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
+				    
+				    <tr>
+				        <td style="color:white"> E-mail (*): </td>
+				    	<td> <input name="idemail" value="<c:out value='${user.email}'/>" type="text" maxlength="45"> </td>
+				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.emailError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
+				    </tr>
     
-    
-    <tr>
-    <td> Last Name (*): </td>
-    <td> <input name="idlastname" value="<c:out value='${user.lastName}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.lastnameError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
-    
-    <tr>
-       <td> Password(*): </td>
-    <td> <input name="idpassword" value="<c:out value='${user.password}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
-    
-    <tr>
-       <td> Address (*): </td>
-    <td> <input name="idaddress" value="<c:out value='${user.address}'/>" type="text" maxlength="200"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.addressError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
-    
-    <tr>
-          <td> City (*): </td>
-    <td> <input name="idcity" value="<c:out value='${user.city}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.cityError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
-    
-    <tr>
-    <td> State (*): </td>
-    <td> 
-    <select name="idstate">
-          <c:forEach items="${STATE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.name}</option>
-          </c:forEach>
-    </select>
-    </td>
-    
-    </tr>
-    <tr>
-       <td> Zip (*): </td>
-    <td> <input name="idzip" value="<c:out value='${user.zip}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.zipError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
-    
-       <tr>
-        <td> Phone (*): </td>
-    <td> <input name="idphone" value="<c:out value='${user.phone}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.phoneError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
-    
-    <tr>
-        <td> E-mail (*): </td>
-    <td> <input name="idemail" value="<c:out value='${user.email}'/>" type="text" maxlength="45"> </td>
-  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.emailError}'/>" type="text"  style ="background-color: white; color: orange; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
-    </tr>
-    
-    <tr>
-    <td> Role: </td>
-     <td> 
-    <select name="idrole">
-          <c:forEach items="${ROLE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.name}</option>
-          </c:forEach>
-    </select>
-    </td>
-    </tr>
+				    <tr>
+				   		<td style="color:white"> Role: </td>
+				     	<td> 
+				    		<select name="idrole">
+				          		<c:forEach items="${ROLE}" var="item" varStatus="status">
+				            		<option value="${item.id}">${item.name}</option>
+				          		</c:forEach>
+				    		</select>
+				    	</td>
+				    </tr>
 
-  
-    
-    <tr>
-    <td colspan="2">(*) Mandatory field</td>
-    </tr>
-    </table>
-    <input name="action" value="registerUser" type="hidden">
-    <input style="color:blue;background-color: orange" type="submit" value="Register User">
-    </form>
-</td>
-</tr>
-</table>
-
-
+    				<tr>
+    					<td colspan="2" style="color:white">(*) Mandatory field</td>
+    				</tr>
+    				<tr style="height:30px"></tr>
+    			</table>
+    			
+    			<input name="action" value="registerUser" type="hidden">
+    			<input style="color:blue;background-color: orange; margin-left:110px" type="submit" value="Register System User">
+    			</form>
+			</td>
+		</tr>
+		<tr>
+			
+	    </tr>
+	</table>
+	<p style="color:white;margin-left:698px">Already Have an Account?<a href="/mac_reserve/index.jsp"  target="_top" style="color:white;"> Login Here</a></p>
 </body>
 </html>
