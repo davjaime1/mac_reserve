@@ -4,46 +4,42 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>User Home</title>
-    <style>
-.submit {
-  background-color: red;
-  border: none;
-  color: white;
-  padding: 6px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-</style>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>User Home</title>
+
+<link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
+
 </head>
 
-<body>
-	  <div style="float:right">
-	  <form align="right" name="form1" method="post" action="index.jsp">
-  	  <label>
-  	  <input name="submit2" type="submit" class="submit"id="submit2" value="Logout">
-  	  </label>
-	  </form>
-	  </div>
+<body style="background-color: #0948b1;">
+	<header class="mac">
+        <h1>MAC Reserve System</h1>
+    </header>
+    
+	<div style="float:right">
+		<form name="form1" method="post" action="index.jsp">
+  	  		<label>
+  	  			<input name="submit2" type="submit" class="submit"id="submit2" value="Logout">
+  	  		</label>
+	  	</form>
+	</div>
+	
     <header>
-        <h2 style="color:blue">User Home</h2>
+        <h1 style="color:white">User Home</h1>
     </header>
 
     <section>
-
+    	<nav>
         <ul>
-            <li><a href="/mac_reserver/UserController?action=viewProfile" target="_top"><span>View Profile</span></a></li>
-            <li><a href="/mac_reserver/UserController?action=serachAvailableFacilities" target="_top"><span>Search Available Facilities</span></a></li>
-            <li><a href="/mac_reserver/UserController?action=viewMyReservations" target="_top"><span>My Reserved Facilities</span></a></li>
-            <li><a href="/mac_reserver/UserController?action=viewNoShow" target="_top"><span>View My No Shows</span></a></li>
-            <li><a href="/mac_reserver/UserController?action=viewViolation" target="_top"><span>View My Violations</span></a></li>
+            <li><a href="/mac_reserver/UserController?action=viewProfile" target="_top" style="color:white"><span>View Profile</span></a></li>
+            <li><a href="/mac_reserver/UserController?action=serachAvailableFacilities" target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
+            <li><a href="/mac_reserver/UserController?action=viewMyReservations" target="_top" style="color:white"><span>My Reserved Facilities</span></a></li>
+            <li><a href="/mac_reserver/UserController?action=viewNoShow" target="_top" style="color:white"><span>View My No Shows</span></a></li>
+            <li><a href="/mac_reserver/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
         </ul>
-
+        </nav>
+        <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
+        <article></article>
     </section>
 
 </body>

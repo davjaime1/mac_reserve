@@ -57,7 +57,7 @@ public class UserErrorMsgs{
 		else {
 			if(!userNameError.equals("") || !passwordError.equals(""))
 
-				this.errorMsg = "Whoops, can't login because...";
+				this.errorMsg = "Unable to login";
 			else
 				this.errorMsg = "";
 		}

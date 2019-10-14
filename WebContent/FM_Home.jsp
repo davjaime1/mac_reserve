@@ -5,56 +5,40 @@
 <html>
 <head>
 <title>Facility Manager Homepage</title>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="style.css" rel="stylesheet" type="text/css" />
-
-<style>
-.submit {
-  background-color: red;
-  border: none;
-  color: white;
-  padding: 6px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-</style>
+<link href="css/commonUI.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-<div class="main">
-  <div class="header">
-    <div class="header_resize">
 
-<!-- TO MAKE THE URL REFERENCES WORK YOU MUST HAVE SESSION ID DISABLED IN URL - SEE WEB.XML -->
-	  <div style="float:right">
-	  <form align="right" name="form1" method="post" action="index.jsp">
-  	  <label>
-  	  <input name="submit2" type="submit" class="submit" id="submit2" value="Logout">
-  	  </label>
-	  </form>
-	  </div>
+<body style="background-color: #0948b1;">
+	<header class="mac">
+        <h1>MAC Reserve System</h1>
+    </header>
+
+	<div style="float:right">
+		<form name="form1" method="post" action="index.jsp">
+  			<label>
+  				<input name="submit2" type="submit" class="submit" id="submit2" value="Logout">
+  			</label>
+		</form>
+	</div>
 	
-	      <header>
-        <h2 style="color:blue">Facility Manager Home</h2>
-    	</header>
-  <div class="content">  
+	<header>
+		<h1 style="color:white">Facility Manager Home</h1>
+    </header>
 
-      <div class="menu_nav">
-        <ul>
-          <li><a href="/mac_reserve/UserController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
-          <li><a href="/mac_reserve/FM_Controller?action=searchAvailableFacilities"  target="_top"><span>Search Available Facilities</span></a></li>
-          <li><a href="/mac_reserve/FM_Controller?action=searchUser"  target="_top"><span>Search for User</span></a></li>
-          <li><a href="/mac_reserve/FM_Controller?action=facilityAvailability" target="_top"><span>Modify Facility Availability</span></a></li>
-          
-        </ul>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>  
+  
+  	<section>
+    	<nav>
+        	<ul>
+            	<li><a href="/mac_reserve/UserController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+          		<li><a href="/mac_reserve/FM_Controller?action=searchAvailableFacilities"  target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
+          		<li><a href="/mac_reserve/FM_Controller?action=searchUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
+          		<li><a href="/mac_reserve/FM_Controller?action=facilityAvailability" target="_top" style="color:white"><span>Modify Facility Availability</span></a></li>
+        	</ul>
+        </nav>
+        <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
+        <article></article>
+    </section>
+   
 </body>
 </html>
