@@ -6,32 +6,18 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<style>
-	.submit {
-	  background-color: red;
-	  border: none;
-	  color: white;
-	  padding: 6px 15px;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  font-size: 16px;
-	  margin: 4px 2px;
-	  cursor: pointer;
-	}
+	<title>Admin Home</title>
+	<link rel="stylesheet" href="css/commonUI.css" type="text/css"/>
 	
-	.logout{
-	
-	   position:fixed;
-	   right:10px;
-	   top:5px;
-	}
-	</style>
 </head>
 
-<body>
-	<div class = "logout">
-		<form align="right" name="form1" method="post" action="index.jsp">
+<body style="background-color: #0948b1;">
+	<header class="mac">
+        <h1>MAC Reserve System</h1>
+    </header>
+    
+	<div style="float:right">
+		<form name="form1" method="post" action="index.jsp">
 	  		<label>
 	  			<input name="submit2" type="submit" class="submit" id="submit2" value="Logout">
 	  		</label>
@@ -39,13 +25,21 @@
 	</div>
 	
     <header>
-    	<h2 style="color:blue">Admin Home</h2>
+    	<h1 style="color:white">Admin Home</h1>
     </header>
     
-    <ul>
-      <li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
-      <li><a href="/mac_reserve/AdminController?action=searchUser"  target="_top"><span>Search for User</span></a></li>
-    </ul>
+    <section>
+    	<nav>
+        <ul>
+            <li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+      <li><a href="/mac_reserve/AdminController?action=searchUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
+        </ul>
+        </nav>
+        <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
+        <article></article>
+    </section>
+    
+    
 </body>
 
 </html>

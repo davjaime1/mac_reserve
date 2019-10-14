@@ -17,7 +17,7 @@
     </header>
     
 	<div style="float:right">
-		<form align="right" name="form1" method="post" action="index.jsp">
+		<form name="form1" method="post" action="index.jsp">
   	  		<label>
   	  			<input name="submit2" type="submit" class="submit"id="submit2" value="Logout">
   	  		</label>
