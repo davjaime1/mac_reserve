@@ -12,11 +12,11 @@
 
 <style>
 header {
-  background-color: #F0C61F;
+  background-color: #f68026;
   padding: 5px;
   text-align: center;
   font-size: 35px;
-  color: blue; 
+  color: white; 
 }
 
 .bcenter{text-align: center;}
@@ -27,49 +27,43 @@ table.center {
   }
 </style>
 
-<body>
+<body style="background-color: #0948b1;">
 	<header>
         <h1>MAC Reserve System</h1>
     </header>
 
-<table class="center">
-
-<tr>
-	<td>
-	<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: orange; border: none; margin-left:83px" disabled="disabled"><br>	
-	<form action="/mac_reserve/UserController?action=loginUser" method="post">
-		<table>
-			<tr>
-			  	<th>Username:</th>
-			 	<td> <input name="idusername" type="text" maxlength="45">  </td>
-			</tr>
-			<tr>
-				<td></td>
-	    		<td> <input name="marnumberError"  value="<c:out value='${errorMsgs.userNameError}'/>" type="text"  style ="background-color: white; color: orange; border: none;margin-left:100"   disabled="disabled" maxlength="60"> </td>
-			</tr>
-			
-		 
-		    <tr>
-		    	<th>Password:</th>
-		    	<td> <input name="idpassword" type="text" maxlength="16"> </td>
-		    </tr>
-		    <tr>
-		    	<td></td>
-		 	<td> <input name="facilityname"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color: white; color: orange; border: none;"   disabled="disabled" maxlength="60"> </td>
-		    </tr>
-		    
-		</table>
-		<div class="bcente">
-	  	<input style="color:blue;background-color: #F0C61F;width:175px ;margin-left: 80px;" type="submit" value="Login" >
-	  	</div>
-	</form>      
-	</td>
-	
-  	<tr>
-		<td><a href="/mac_reserve/UserController?action=registerProfile"  target="_top" style="margin-left: 125px;"> Register Here </a>
-    </tr>
-
-</table>
+	<table class="center">
+	<tr>
+		<td>
+		<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; margin-left:83px" disabled="disabled"><br>	
+		<form action="/mac_reserve/UserController?action=loginUser" method="post">
+			<table>
+				<tr>
+				  	<th style="color:white">Username:</th>
+				 	<td> <input name="idusername" type="text" maxlength="45" >  </td>
+				</tr>
+				<tr>
+					<td></td>
+		    		<td> <input name="marnumberError"  value="<c:out value='${errorMsgs.userNameError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none;margin-left:100"   disabled="disabled" maxlength="60"> </td>
+				</tr>
+			    <tr>
+			    	<th style="color:white">Password:</th>
+			    	<td> <input name="idpassword" type="text" maxlength="16"> </td>
+			    </tr>
+			    <tr>
+			    	<td></td>
+			 	<td> <input name="facilityname"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none;"   disabled="disabled" maxlength="60"> </td>
+			    </tr>
+			</table>
+			<div class="bcente">
+		  	<input style="color:blue;background-color: orange;width:175px ;margin-left: 80px;" type="submit" value="Login" >
+		  	</div>
+		</form>      
+		</td>
+	  	<tr>
+			<td><a href="/mac_reserve/UserController?action=registerProfile"  target="_top" style="margin-left: 125px;color:white;"> Register Here </a>
+	    </tr>
+	</table>
 
 </body>
 </html>
