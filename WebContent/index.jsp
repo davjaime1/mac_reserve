@@ -6,26 +6,7 @@
 <head>
 <title>Log In</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="style.css" rel="stylesheet" type="text/css" />
-
-
-
-<style>
-header {
-  background-color: #f68026;
-  padding: 5px;
-  text-align: center;
-  font-size: 35px;
-  color: white; 
-}
-
-.bcenter{text-align: center;}
-
-table.center {
-   margin-left:auto; 
-    margin-right:auto;
-  }
-</style>
+<link href="css/index.css" rel="stylesheet" type="text/css" />
 
 <body style="background-color: #0948b1;">
 	<header>
