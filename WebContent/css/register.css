@@ -1,0 +1,16 @@
+header.mac 
+{
+    background-color: #f68026;
+    padding: 5px;
+    text-align: center;
+    font-size: 35px;
+    color: white; 
+}
+
+.bcenter{text-align: center;}
+
+table.center 
+	{
+	   margin-left:auto; 
+	    margin-right:auto;
+	}
