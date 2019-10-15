@@ -5,7 +5,7 @@ import mac_reserve.data.UserModelDAO;
 public class UserModel {
 	
 	private String username;
-	private String utaId;
+	private String id;
 	private String firstName;
 	private String lastName;
 	private String password;
@@ -17,9 +17,9 @@ public class UserModel {
 	private String email;
 	private String phone;
 	
-	public void setUser (String username, String utaId, String firstName, String lastName, String password, String role, String address,String state,String city,String zip, String phone, String email) {
+	public void setUser (String username, String id, String firstName, String lastName, String password, String role, String address,String state,String city,String zip, String phone, String email) {
 		setUsername(username);
-		setUtaId(utaId);
+		setId(id);
 		setFirstName(firstName);
 		setLastName(lastName);
 		setPassword(password);
@@ -41,11 +41,11 @@ public class UserModel {
 		return username;
 	}
 	
-	public void setUtaId(String utaId) {
-		this.utaId=utaId;
+	public void setId(String id) {
+		this.id=id;
 	}
-	public String getUtaId() {
-		return utaId;
+	public String getId() {
+		return id;
 	}
 	
 	public void setFirstName(String firstName) {
@@ -121,7 +121,7 @@ public class UserModel {
 	public void validateUser (String action, UserErrorMsgs errorMsgs) {
 	
 			errorMsgs.setUserNameError(validateUsername(action, this.getUsername()));
-			errorMsgs.setUtaidError(validateUtaId(this.getUtaId()));
+			errorMsgs.setUtaidError(validateId(this.getId()));
 			errorMsgs.setFirstnameError(validateFirstName(this.getFirstName()));
 			errorMsgs.setLastnameError(validateLastName(this.getLastName()));
 			errorMsgs.setPasswordError(validatePassword(this.getPassword()));
@@ -170,10 +170,10 @@ public class UserModel {
 	}
 
 
-	private String validateUtaId(String utaId) {
+	private String validateId(String id) {
 		String regex="\\d{10}";
 		String result="";
-		if(!utaId.equals("") && utaId.matches(regex)) {
+		if(!id.equals("") && id.matches(regex)) {
 		
 			result="";
 	}else {

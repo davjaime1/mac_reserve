@@ -30,10 +30,10 @@
     
     <section>
     	<nav>
-        <ul>
-            <li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
-      <li><a href="/mac_reserve/AdminController?action=searchUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
-        </ul>
+	        <ul>
+	            <li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+	      		<li><a href="/mac_reserve/AdminController?action=searchUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
+	        </ul>
         </nav>
         <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
         <article></article>

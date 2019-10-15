@@ -106,18 +106,18 @@ public class UserController extends HttpServlet
         else if (action.equalsIgnoreCase("viewProfile"))
         {
             String username = (String) session.getAttribute("username");
-            System.out.println(username);
+            //System.out.println(username);
             
             ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
             fetch_profile = UserModelDAO.returnProfile(username);
             UserModel currentUser = new UserModel();
-            currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getUtaId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
+            currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
                     fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
                     fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
             
             session.setAttribute("USERS", currentUser);
-            url = "/ViewProfile.jsp";
-            getServletContext().getRequestDispatcher("/ViewProfile.jsp").forward(request, response);
+            url = "/UserViewProfile.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         
         else
@@ -132,7 +132,7 @@ public class UserController extends HttpServlet
             UserModel currentUser = new UserModel();
             if (fetch_profile.size() != 0)
             {
-                currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getUtaId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
+                currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
                         fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
                         fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
                 currentUser.validateLogin(action, password, CerrorMsgs);

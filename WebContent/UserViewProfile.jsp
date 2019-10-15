@@ -39,7 +39,63 @@
         </ul>
         </nav>
         <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
-        <article></article>
+        <article>
+        	<table class="center">
+				<tr>
+					<td>
+			        	<table border="1" class="center"> 
+			    			<tr>
+			    				<td> Username: </td>
+			    				<td> <c:out value="${USERS.username}" /> </td>
+			    			</tr>
+							
+							<tr>
+			    				<td> UTA Id: </td>
+			    				<td> <c:out value="${USERS.id}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> First Name: </td>
+			    				<td> <c:out value="${USERS.firstName}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Last Name: </td>
+			    				<td> <c:out value="${USERS.lastName}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Address: </td>
+			    				<td> <c:out value="${USERS.address}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> State: </td>
+			    				<td> <c:out value="${USERS.state}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Zip Code: </td>
+			    				<td> <c:out value="${USERS.zip}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Phone Number: </td>
+			    				<td> <c:out value="${USERS.phone}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Email: </td>
+			    				<td> <c:out value="${USERS.email}" /> </td>
+			    			</tr>
+			
+			    			<tr>
+			   				</tr>
+			    		</table>
+					</td>
+				</tr>
+			</table>
+        </article>
     </section>
 
 </body>
