@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Home</title>
+<title>View Profile</title>
 
 <link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
 
@@ -38,12 +38,12 @@
             <li><a href="/mac_reserve/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
         </ul>
         </nav>
-        <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
+        <!-- Here goes the page the function stuff for each page -->
         <article>
         	<table class="center">
 				<tr>
 					<td>
-			        	<table border="1" class="center"> 
+			        	<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
 			    				<td> <c:out value="${USERS.username}" /> </td>
@@ -81,7 +81,7 @@
 			    			
 			    			<tr>
 			    				<td> Phone Number: </td>
-			    				<td> <c:out value="${USERS.phone}" /> </td>
+			    				<td> <c:out value=" ${USERS.phone}" /> </td>
 			    			</tr>
 			    			
 			    			<tr>

@@ -37,7 +37,7 @@
           		<li><a href="/mac_reserve/FM_Controller?action=facilityAvailability" target="_top" style="color:white"><span>Modify Facility Availability</span></a></li>
         	</ul>
         </nav>
-        <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
+        <!-- Here goes the page the function stuff for each page -->
         <article>
         	<table class="center">
 				<tr>

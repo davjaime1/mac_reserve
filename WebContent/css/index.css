@@ -1,18 +1,30 @@
-header 
-	{
-	  background-color: #f68026;
-	  padding: 5px;
-	  text-align: center;
-	  font-size: 35px;
-	  color: white; 
-	}
+header.mac 
+{
+	background-color:#f68026;
+	border: 3px solid #0948b1;
+	outline-style: solid;
+	outline-color: white;
+	padding: 5px;
+	text-align: center;
+	font-size: 35px;
+	color: white; 
+}
+
+body
+{
+	margin:40px;
+	padding:0;
+}
 	
-	.bcenter{text-align: center;}
+.bcenter
+{
+	text-align: center;
+}
 	
-	table.center 
-	{
-	   margin-left:auto; 
-	    margin-right:auto;
-	}
+table.center 
+{
+	margin-left:auto; 
+	margin-right:auto;
+}
 
 	

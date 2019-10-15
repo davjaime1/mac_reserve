@@ -1,16 +1,28 @@
 header.mac 
 {
-    background-color: #f68026;
+    background-color:#f68026;
+    border: 3px solid #0948b1;
+    outline-style: solid;
+    outline-color: white;
     padding: 5px;
     text-align: center;
     font-size: 35px;
     color: white; 
 }
 
-.bcenter{text-align: center;}
+body
+{
+    margin:40px;
+    padding:0;
+}
+
+.bcenter
+{
+    text-align: center;
+}
 
 table.center 
-	{
-	   margin-left:auto; 
-	    margin-right:auto;
-	}
+{
+    margin-left:auto; 
+    margin-right:auto;
+}

@@ -31,7 +31,7 @@
     
 					<tr>
    						<td style="color:white"> UTA ID (*): </td>
-				    	<td> <input name="idutaID" value="<c:out value='${user.utaId}'/>" type="text" maxlength="16"> </td>
+				    	<td> <input name="idutaID" value="<c:out value='${user.id}'/>" type="text" maxlength="16"> </td>
 				  		<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.utaidError}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; width: 120px"  disabled="disabled" maxlength="60"> </td>
 				    </tr>
     
@@ -113,7 +113,7 @@
     			</table>
     			
     			<input name="action" value="registerUser" type="hidden">
-    			<input style="color:blue;background-color: orange; margin-left:110px" type="submit" value="Register System User">
+    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Register System User">
     			</form>
 			</td>
 		</tr>
@@ -121,6 +121,6 @@
 			
 	    </tr>
 	</table>
-	<p style="color:white;margin-left:698px">Already Have an Account?<a href="/mac_reserve/index.jsp"  target="_top" style="color:white;"> Login Here</a></p>
+	<p style="color:white;margin-left:580px">Already Have an Account?<a href="/mac_reserve/index.jsp"  target="_top" style="color:white;"> Login Here</a></p>
 </body>
 </html>
