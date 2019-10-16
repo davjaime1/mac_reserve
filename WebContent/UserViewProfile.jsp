@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Home</title>
+<title>View Profile</title>
 
 <link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
 
@@ -38,8 +38,64 @@
             <li><a href="/mac_reserve/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
         </ul>
         </nav>
-        <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
-        <article></article>
+        <!-- Here goes the page the function stuff for each page -->
+        <article>
+        	<table class="center">
+				<tr>
+					<td>
+			        	<table class="center"> 
+			    			<tr>
+			    				<td> Username: </td>
+			    				<td> <c:out value="${USERS.username}" /> </td>
+			    			</tr>
+							
+							<tr>
+			    				<td> UTA Id: </td>
+			    				<td> <c:out value="${USERS.id}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> First Name: </td>
+			    				<td> <c:out value="${USERS.firstName}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Last Name: </td>
+			    				<td> <c:out value="${USERS.lastName}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Address: </td>
+			    				<td> <c:out value="${USERS.address}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> State: </td>
+			    				<td> <c:out value="${USERS.state}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Zip Code: </td>
+			    				<td> <c:out value="${USERS.zip}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Phone : </td>
+			    				<td> <c:out value=" ${USERS.phone}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Email: </td>
+			    				<td> <c:out value="${USERS.email}" /> </td>
+			    			</tr>
+			
+			    			<tr>
+			   				</tr>
+			    		</table>
+					</td>
+				</tr>
+			</table>
+        </article>
     </section>
 
 </body>

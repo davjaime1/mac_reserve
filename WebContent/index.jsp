@@ -5,11 +5,11 @@
 <html>
 <head>
 <title>Log In</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css/index.css" rel="stylesheet" type="text/css" />
-
+</head>
 <body style="background-color: #0948b1;">
-	<header>
+	<header class="mac">
         <h1>MAC Reserve System</h1>
     </header>
 
@@ -37,12 +37,12 @@
 			    </tr>
 			</table>
 			<div class="bcente">
-		  	<input style="color:blue;background-color: orange;width:175px ;margin-left: 80px;" type="submit" value="Login" >
+		  	<input style="color:blue;background-color: orange;width:163px ;margin-left: 80px;" type="submit" value="Login" >
 		  	</div>
 		</form>      
 		</td>
 	  	<tr>
-			<td><a href="/mac_reserve/UserController?action=registerProfile"  target="_top" style="margin-left: 125px;color:white;"> Register Here </a>
+			<td><a href="/mac_reserve/UserController?action=registerProfile"  target="_top" style="margin-left: 118px;color:white;"> Register Here </a>
 	    </tr>
 	</table>
 

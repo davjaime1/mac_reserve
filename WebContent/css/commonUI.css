@@ -3,6 +3,12 @@
     box-sizing: border-box;
 }
 
+body
+{
+    margin:40px;
+    padding:0;
+}
+
 .submit 
 {
     background-color: red;
@@ -20,7 +26,10 @@
 
 header.mac 
 {
-    background-color: #f68026;
+    background-color:#f68026;
+    border: 3px solid #0948b1;
+    outline-style: solid;
+    outline-color: white;
     padding: 5px;
     text-align: center;
     font-size: 35px;
@@ -33,7 +42,10 @@ nav
     float: left;
     width: 20%;
     /* only for demonstration, should be removed */
-    background: #f68026;
+    background-color:#f68026;
+    border: 3px solid #0948b1;
+    outline-style: solid;
+    outline-color: white;
     padding: 20px;
 }
 
@@ -58,6 +70,31 @@ article
     float: left;
     padding: 20px;
     width: 80%;
-    background-color: #f1f1f1;
+    background-color:white;
+    border: 3px solid #0948b1;
+    outline-style: solid;
+    outline-color: white;
     height: 800px; /* only for demonstration, should be removed */
+}
+
+table.center 
+{
+    margin-left:auto; 
+    margin-right:auto;
+    
+    border: 3px solid #f68026;
+    outline-style: solid;
+    outline-color: white;
+}
+    
+tr
+{
+    background-color: #f68026;
+}
+
+td
+{
+    color: white;
+    padding: 12px;
+    font-size: 30px;
 }

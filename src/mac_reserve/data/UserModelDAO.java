@@ -19,7 +19,7 @@ public class UserModelDAO {
 			stmt = conn.createStatement();
 			String insertmar = queryString + " VALUES ('"  
 					+ user.getUsername()  + "','"	
-					+ user.getUtaId()  + "','"	
+					+ user.getId()  + "','"	
 					+ user.getFirstName() + "','"
 					+ user.getLastName() + "','"
 					+ user.getPassword() + "','"
@@ -54,7 +54,7 @@ public class UserModelDAO {
 		
 				
 				res.setUsername(resultSet.getString("username"));
-				res.setUtaId(resultSet.getString("id"));
+				res.setId(resultSet.getString("id"));
 				res.setFirstName(resultSet.getString("firstname"));
 				res.setLastName(resultSet.getString("lastname"));
 				res.setPassword(resultSet.getString("password"));
