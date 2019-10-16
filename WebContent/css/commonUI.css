@@ -70,7 +70,7 @@ article
     float: left;
     padding: 20px;
     width: 80%;
-    background-color:#f68026;
+    background-color:white;
     border: 3px solid #0948b1;
     outline-style: solid;
     outline-color: white;
@@ -81,7 +81,7 @@ table.center
 {
     margin-left:auto; 
     margin-right:auto;
-    background-color: #0948b1;
+    
     border: 3px solid #f68026;
     outline-style: solid;
     outline-color: white;
@@ -95,5 +95,6 @@ tr
 td
 {
     color: white;
+    padding: 12px;
     font-size: 30px;
 }

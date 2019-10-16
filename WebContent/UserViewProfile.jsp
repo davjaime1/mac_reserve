@@ -80,7 +80,7 @@
 			    			</tr>
 			    			
 			    			<tr>
-			    				<td> Phone Number: </td>
+			    				<td> Phone : </td>
 			    				<td> <c:out value=" ${USERS.phone}" /> </td>
 			    			</tr>
 			    			

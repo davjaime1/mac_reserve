@@ -40,7 +40,7 @@
         	<table class="center">
 				<tr>
 					<td>
-			        	<table border="1" class="center"> 
+			        	<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
 			    				<td> <c:out value="${USERS.username}" /> </td>
@@ -77,7 +77,7 @@
 			    			</tr>
 			    			
 			    			<tr>
-			    				<td> Phone Number: </td>
+			    				<td> Phone: </td>
 			    				<td> <c:out value="${USERS.phone}" /> </td>
 			    			</tr>
 			    			
