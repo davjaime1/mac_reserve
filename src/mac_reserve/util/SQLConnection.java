@@ -14,7 +14,7 @@ public class SQLConnection {
 		DB_DRIVER = "com.mysql.jdbc.Driver";
 		DB_CONNECTION  = "jdbc:mysql://localhost:3306/mac_reserve?autoReconnect=true&useSSL=false";
 		DB_USER  = "root";
-		DB_PASSWORD = "Slothisme1234";
+		DB_PASSWORD = "root";
 	}
 	public static synchronized SQLConnection getInstance() {
         if (single_instance == null)
