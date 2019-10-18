@@ -16,7 +16,7 @@
 	<table class="center">
 	<tr>
 		<td>
-		<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; margin-left:83px" disabled="disabled"><br>	
+		<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: #0948b1; color: orange; border: none; margin-left:83px; width:230px" disabled="disabled"><br>	
 		<form action="/mac_reserve/UserController?action=loginUser" method="post">
 			<table>
 				<tr>

@@ -23,6 +23,10 @@ body
 
 table.center 
 {
+    background-color: #f68026;
+    border: 3px solid #0948b1;
+    outline-style: solid;
+    outline-color: white;
     margin-left:auto; 
     margin-right:auto;
 }
