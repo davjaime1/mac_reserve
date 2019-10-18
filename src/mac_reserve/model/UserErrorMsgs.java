@@ -43,7 +43,7 @@ public class UserErrorMsgs{
 
 
 	public void setErrorMsg(String action) {
-		if (action.contains("registerUser")) {
+		if (action.contains("registerUser")|| action.contains("update")) {
 
 			if(!userNameError.equals("") || !utaidError.equals("")|| !firstnameError.equals("") || !lastnameError.equals("") || !passwordError.equals("") 
 					|| !roleError.equals("")|| !addressError.equals("") || !stateError.equals("") || !cityError.equals("")|| !zipError.equals("")

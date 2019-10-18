@@ -81,5 +81,26 @@ public class UserModelDAO {
 	public static Boolean userNameunique(String name)  {  
 		return (returnProfile(name).isEmpty());
 	}
+	
+    public static void updateUser(UserModel user)
+    {
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		try {
+			stmt = conn.createStatement();
+			String insertmar = "UPDATE users SET firstname = '"+ user.getFirstName()
+					+ "',"+ "lastname = '"+ user.getLastName() 
+					+ "',"+ "password = '"+ user.getPassword() 
+					+ "',"+ "address = '"+ user.getAddress()
+					+ "',"+ "city = '"+ user.getCity()
+					+ "',"+ "state = '"+ user.getState() 
+					+ "', " + "zip = '"+ user.getZip() 
+					+ "', " + "phone = '"+ user.getPhone() 
+					+ "', " + "role = '"+ user.getRole()
+					+ "', " +" email = '"+ user.getEmail()  + "' WHERE username = '" + user.getUsername()+ "'";
+			stmt.executeUpdate(insertmar);	
+			conn.commit(); 
+		} catch (SQLException e) {}
+    }
  
 }

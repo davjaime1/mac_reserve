@@ -30,13 +30,13 @@
 
     <section>
     	<nav>
-        <ul>
-            <li><a href="/mac_reserve/UserController?action=viewProfile" target="_top" style="color:white"><span>View Profile</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=serachAvailableFacilities" target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewMyReservations" target="_top" style="color:white"><span>My Reserved Facilities</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewNoShow" target="_top" style="color:white"><span>View My No Shows</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
-        </ul>
+	        <ul>
+	            <li><a href="/mac_reserve/UserController?action=viewProfile" target="_top" style="color:white"><span>View Profile</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=serachAvailableFacilities" target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=viewMyReservations" target="_top" style="color:white"><span>My Reserved Facilities</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=viewNoShow" target="_top" style="color:white"><span>View My No Shows</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
+	        </ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
         <article>
@@ -55,6 +55,16 @@
 			    			</tr>
 			    			
 			    			<tr>
+			    				<td> Password: </td>
+			    				<td> <c:out value="${USERS.password}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Role: </td>
+			    				<td> <c:out value="${USERS.role}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
 			    				<td> First Name: </td>
 			    				<td> <c:out value="${USERS.firstName}" /> </td>
 			    			</tr>
@@ -67,6 +77,11 @@
 			    			<tr>
 			    				<td> Address: </td>
 			    				<td> <c:out value="${USERS.address}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> City: </td>
+			    				<td> <c:out value="${USERS.city}" /> </td>
 			    			</tr>
 			    			
 			    			<tr>
@@ -88,11 +103,20 @@
 			    				<td> Email: </td>
 			    				<td> <c:out value="${USERS.email}" /> </td>
 			    			</tr>
+			    			
 			
 			    			<tr>
 			   				</tr>
 			    		</table>
 					</td>
+					<tr>
+						<td>
+							<form name="Update Profile" action="/mac_reserve/UserController?action=viewUpdateProfile" method="post" style="margin-left: 135px;">
+			    				<input name="action" value="updateProfile" type="hidden">
+			    				<input type="submit" value="Update Profile">
+			    			</form>
+			    		</td>
+					</tr>
 				</tr>
 			</table>
         </article>
