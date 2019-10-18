@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Profile</title>
+<title>Update Profile</title>
 
 <link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
 
@@ -43,64 +43,66 @@
         	<table class="center">
 				<tr>
 					<td>
+						<form name="companyForm" action="/mac_reserve/UserController?action=updateUser" method="post">
 			        	<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
-			    				<td> <c:out value="${USERS.username}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.username}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 							
 							<tr>
 			    				<td> UTA Id: </td>
-			    				<td> <c:out value="${USERS.id}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.id}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> First Name: </td>
-			    				<td> <c:out value="${USERS.firstName}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.firstName}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Last Name: </td>
-			    				<td> <c:out value="${USERS.lastName}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.lastName}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Address: </td>
-			    				<td> <c:out value="${USERS.address}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.address}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> State: </td>
-			    				<td> <c:out value="${USERS.state}" /> </td>
+			    				<td> 
+							    <select name="idstate">
+							          <c:forEach items="${STATE}" var="item" varStatus="status">
+							            <option value="${item.id}">${item.name}</option>
+							          </c:forEach>
+							    </select>
+							    </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Zip Code: </td>
-			    				<td> <c:out value="${USERS.zip}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.zip}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Phone : </td>
-			    				<td> <c:out value=" ${USERS.phone}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.phone}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Email: </td>
-			    				<td> <c:out value="${USERS.email}" /> </td>
+			    				<td><input name="idusername" value="<c:out value='${USERS.email}'/>" type="text" maxlength="45"></td>
 			    			</tr>
 			
 			    			<tr>
 			   				</tr>
 			    		</table>
+			    		<input name="action" value="registerUser" type="hidden">
+    					<input style="width:163px; margin-left:92px" type="submit" value="Update User">
+    					</form>
 					</td>
-					<tr>
-						<td>
-							<form name="Update Profile" action="/mac_reserve/UserController?action=viewUpdateProfile" method="post" style="margin-left: 130px;">
-			    				<input name="action" value="updateProfile" type="hidden">
-			    				<input type="submit" value="Update Profile">
-			    			</form>
-			    		</td>
-					</tr>
 				</tr>
 			</table>
         </article>
