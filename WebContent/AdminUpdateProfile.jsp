@@ -25,49 +25,66 @@
 	</div>
 	
     <header>
-        <h1 style="color:white">User Home</h1>
+        <h1 style="color:white">Admin Home</h1>
     </header>
 
     <section>
     	<nav>
-        <ul>
-            <li><a href="/mac_reserve/UserController?action=viewProfile" target="_top" style="color:white"><span>View Profile</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=serachAvailableFacilities" target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewMyReservations" target="_top" style="color:white"><span>My Reserved Facilities</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewNoShow" target="_top" style="color:white"><span>View My No Shows</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
-        </ul>
+	        <ul>
+	            <li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+		      			<li><a href="/mac_reserve/AdminController?action=searchUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
+	        </ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
         <article>
         	<table class="center">
 				<tr>
 					<td>
-						<form name="companyForm" action="/mac_reserve/AdminController?action=updateProfile" method="post">
-			        	<table class="center"> 
+						<form name="companyForm" action="/mac_reserve/AdminController?action=updateProfile&idusername=${USERS.username}&idutaID=${USERS.id}&idrole=${USERS.role}" method="post">
+			        		<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.username}'/>" type="text" maxlength="45"></td>
+			    				<td> <c:out value="${USERS.username}" /> </td>
 			    			</tr>
 							
 							<tr>
 			    				<td> UTA Id: </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.id}'/>" type="text" maxlength="45"></td>
+			    				<td> <c:out value="${USERS.id}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Role: </td>
+			    				<td> <c:out value="${USERS.role}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Password: </td>
+			    				<td><input name="idpassword" value="<c:out value='${USERS.password}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color:#f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> First Name: </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.firstName}'/>" type="text" maxlength="45"></td>
+			    				<td><input name="idfirstname" value="<c:out value='${USERS.firstName}'/>" type="text" maxlength="45"></td>
+			    				  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.firstnameError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Last Name: </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.lastName}'/>" type="text" maxlength="45"></td>
+			    				<td><input name="idlastname" value="<c:out value='${USERS.lastName}'/>" type="text" maxlength="45"></td>
+			    				  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.lastnameError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Address: </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.address}'/>" type="text" maxlength="45"></td>
+			    				<td><input name="idaddress" value="<c:out value='${USERS.address}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.addressError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> City: </td>
+			    				<td><input name="idcity" value="<c:out value='${USERS.city}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.cityError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			    			
 			    			<tr>
@@ -83,25 +100,32 @@
 			    			
 			    			<tr>
 			    				<td> Zip Code: </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.zip}'/>" type="text" maxlength="45"></td>
+			    				<td><input name="idzip" value="<c:out value='${USERS.zip}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.zipError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Phone : </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.phone}'/>" type="text" maxlength="45"></td>
+			    				<td><input name="idphone" value="<c:out value='${USERS.phone}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.phoneError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Email: </td>
-			    				<td><input name="idusername" value="<c:out value='${USERS.email}'/>" type="text" maxlength="45"></td>
+			    				<td><input name="idemail" value="<c:out value='${USERS.email}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.emailError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			
 			    			<tr>
 			   				</tr>
 			    		</table>
-			    		<input name="action" value="registerUser" type="hidden">
-    					<input style="width:163px; margin-left:92px" type="submit" value="Update User">
-    					</form>
+			    		<tr>
+							<td>
+					    		<input name="action" value="registerUser" type="hidden">
+		    					<input style="width:163px; margin-left:157px" type="submit" value="Update">
+		    					</form>
+	    					</td>
+						</tr>
 					</td>
 				</tr>
 			</table>

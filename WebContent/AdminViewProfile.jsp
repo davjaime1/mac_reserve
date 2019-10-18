@@ -31,7 +31,7 @@
     <section>
     	<nav>
 	        <ul>
-	            	<li><a href="/mac_reserve/UserController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+	            	<li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
 	      			<li><a href="/mac_reserve/AdminController?action=searchUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
 	      	</ul>
         </nav>
@@ -52,6 +52,16 @@
 			    			</tr>
 			    			
 			    			<tr>
+			    				<td> Password: </td>
+			    				<td> <c:out value="${USERS.password}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Role: </td>
+			    				<td> <c:out value="${USERS.role}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
 			    				<td> First Name: </td>
 			    				<td> <c:out value="${USERS.firstName}" /> </td>
 			    			</tr>
@@ -64,6 +74,11 @@
 			    			<tr>
 			    				<td> Address: </td>
 			    				<td> <c:out value="${USERS.address}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> City: </td>
+			    				<td> <c:out value="${USERS.city}" /> </td>
 			    			</tr>
 			    			
 			    			<tr>

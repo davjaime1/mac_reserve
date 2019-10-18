@@ -30,13 +30,13 @@
 
     <section>
     	<nav>
-        <ul>
-            <li><a href="/mac_reserve/UserController?action=viewProfile" target="_top" style="color:white"><span>View Profile</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=serachAvailableFacilities" target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewMyReservations" target="_top" style="color:white"><span>My Reserved Facilities</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewNoShow" target="_top" style="color:white"><span>View My No Shows</span></a></li>
-            <li><a href="/mac_reserve/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
-        </ul>
+	        <ul>
+	            <li><a href="/mac_reserve/UserController?action=viewProfile" target="_top" style="color:white"><span>View Profile</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=serachAvailableFacilities" target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=viewMyReservations" target="_top" style="color:white"><span>My Reserved Facilities</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=viewNoShow" target="_top" style="color:white"><span>View My No Shows</span></a></li>
+	            <li><a href="/mac_reserve/UserController?action=viewViolation" target="_top" style="color:white"><span>View My Violations</span></a></li>
+	        </ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
         <article>
@@ -124,12 +124,12 @@
 			   				</tr>
 			    		</table>
 			    		<tr>
-						<td>
-			    		<input name="action" value="registerUser" type="hidden">
-    					<input style="width:163px; margin-left:157px" type="submit" value="Update User">
-    					</form>
-    					</td>
-					</tr>
+							<td>
+					    		<input name="action" value="registerUser" type="hidden">
+		    					<input style="width:163px; margin-left:157px" type="submit" value="Update">
+		    					</form>
+	    					</td>
+						</tr>
 					</td>
 				</tr>
 			</table>

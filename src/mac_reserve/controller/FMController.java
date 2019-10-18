@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mac_reserve.data.FM_UtilityDAO;
 import mac_reserve.data.UserModelDAO;
+import mac_reserve.model.State;
+import mac_reserve.model.UserErrorMsgs;
 import mac_reserve.model.UserModel;
 
 
@@ -21,6 +24,11 @@ import mac_reserve.model.UserModel;
 public class FMController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+    
+    private void userParam(HttpServletRequest request, UserModel user)
+    {
+        user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"));
+    }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -70,11 +78,14 @@ public class FMController extends HttpServlet
             //System.out.println(username);
             
             ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+            ArrayList<State> stateInDB = new ArrayList<State>();
             fetch_profile = UserModelDAO.returnProfile(username);
             UserModel currentUser = new UserModel();
             currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
                     fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
                     fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+            stateInDB = FM_UtilityDAO.listStates();
+            session.setAttribute("STATE", stateInDB);
             
             session.setAttribute("USERS", currentUser);
             url = "/FMUpdateProfile.jsp";
@@ -82,19 +93,41 @@ public class FMController extends HttpServlet
         }
         else if(action.equalsIgnoreCase("updateProfile"))
         {
-        	String username = (String) session.getAttribute("username");
-            //System.out.println(username);
+        	//To DO: Add the Make the changes in DB
+        	UserModel user = new UserModel();
+            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+            userParam(request, user);
+            user.validateUser(action, CerrorMsgs);
+            session.setAttribute("USERS", user);
             
-            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
-            fetch_profile = UserModelDAO.returnProfile(username);
-            UserModel currentUser = new UserModel();
-            currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
-                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
-                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
-            
-            session.setAttribute("USERS", currentUser);
-            url = "/FMViewProfile.jsp";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
+            session.setAttribute("USERS", user);
+            if (!CerrorMsgs.getErrorMsg().equals(""))
+            {
+                // if error messages
+                session.setAttribute("errorMsgs", CerrorMsgs);
+                getServletContext().getRequestDispatcher("/FMUpdateProfile.jsp").forward(request, response);
+            }
+            else
+            {
+                // if no error messages
+                UserModelDAO.updateUser(user);
+				session.setAttribute("USERS", user);
+				
+				//Takes you back to the view profile, to view the changes
+	        	String username = (String) session.getAttribute("username");
+	            //System.out.println(username);
+	            
+	            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+	            fetch_profile = UserModelDAO.returnProfile(username);
+	            UserModel currentUser = new UserModel();
+	            currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
+	                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
+	                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+	            
+	            session.setAttribute("USERS", currentUser);
+	            url = "/FMViewProfile.jsp";
+	            getServletContext().getRequestDispatcher(url).forward(request, response);
+            }	
         }
     }
 }
