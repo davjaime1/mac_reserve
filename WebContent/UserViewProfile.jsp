@@ -111,7 +111,7 @@
 					</td>
 					<tr>
 						<td>
-							<form name="Update Profile" action="/mac_reserve/UserController?action=viewUpdateProfile" method="post" style="margin-left: 130px;">
+							<form name="Update Profile" action="/mac_reserve/UserController?action=viewUpdateProfile" method="post" style="margin-left: 135px;">
 			    				<input name="action" value="updateProfile" type="hidden">
 			    				<input type="submit" value="Update Profile">
 			    			</form>

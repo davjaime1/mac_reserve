@@ -40,6 +40,7 @@
         </nav>
         <!-- Here goes the page the function stuff for each page -->
         <article>
+        	<!--<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: white; border: none; width:800px" disabled="disabled">-->
         	<table class="center">
 				<tr>
 					<td>
@@ -63,26 +64,31 @@
 			    			<tr>
 			    				<td> Password: </td>
 			    				<td><input name="idpassword" value="<c:out value='${USERS.password}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.passwordError}'/>" type="text"  style ="background-color:#f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> First Name: </td>
 			    				<td><input name="idfirstname" value="<c:out value='${USERS.firstName}'/>" type="text" maxlength="45"></td>
+			    				  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.firstnameError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Last Name: </td>
 			    				<td><input name="idlastname" value="<c:out value='${USERS.lastName}'/>" type="text" maxlength="45"></td>
+			    				  	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.lastnameError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Address: </td>
 			    				<td><input name="idaddress" value="<c:out value='${USERS.address}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.addressError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> City: </td>
 			    				<td><input name="idcity" value="<c:out value='${USERS.city}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.cityError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			    			
 			    			<tr>
@@ -99,24 +105,31 @@
 			    			<tr>
 			    				<td> Zip Code: </td>
 			    				<td><input name="idzip" value="<c:out value='${USERS.zip}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.zipError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Phone : </td>
 			    				<td><input name="idphone" value="<c:out value='${USERS.phone}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.phoneError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Email: </td>
 			    				<td><input name="idemail" value="<c:out value='${USERS.email}'/>" type="text" maxlength="45"></td>
+			    				<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.emailError}'/>" type="text"  style ="background-color: #f68026;; color: white; border: none; width: 109px"  disabled="disabled" maxlength="60"> </td>			    				
 			    			</tr>
 			
 			    			<tr>
 			   				</tr>
 			    		</table>
+			    		<tr>
+						<td>
 			    		<input name="action" value="registerUser" type="hidden">
-    					<input style="width:163px; margin-left:92px" type="submit" value="Update User">
+    					<input style="width:163px; margin-left:157px" type="submit" value="Update User">
     					</form>
+    					</td>
+					</tr>
 					</td>
 				</tr>
 			</table>
