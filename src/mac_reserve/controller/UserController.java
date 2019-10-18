@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import mac_reserve.data.FM_UtilityDAO;
 import mac_reserve.data.RoleDAO;
 import mac_reserve.data.UserModelDAO;
+import mac_reserve.data.UserDAO;
 import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
@@ -125,6 +126,48 @@ public class UserController extends HttpServlet
             //System.out.println(username);
             
             ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+            ArrayList<State> stateInDB = new ArrayList<State>();
+            fetch_profile = UserModelDAO.returnProfile(username);
+            UserModel currentUser = new UserModel();
+            currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
+                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+            stateInDB = FM_UtilityDAO.listStates();
+            session.setAttribute("STATE", stateInDB);
+            
+            session.setAttribute("USERS", currentUser);
+            url = "/UserUpdateProfile.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("updateProfile"))
+        {
+        	//To DO: Add the Make the changes in DB
+        	UserModel user = new UserModel();
+            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+            userParam(request, user);
+            user.validateUser(action, CerrorMsgs);
+            session.setAttribute("USERS", user);
+            
+            session.setAttribute("USERS", user);
+            if (!CerrorMsgs.getErrorMsg().equals(""))
+            {
+                // if error messages
+                session.setAttribute("errorMsgs", CerrorMsgs);
+                getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
+            }
+            else
+            {
+                // if no error messages
+                UserModelDAO.updateUser(user);
+				session.setAttribute("USERS", user);
+ 
+            }
+        	
+        	//Takes you back to the view profile, to view the changes
+        	String username = (String) session.getAttribute("username");
+            //System.out.println(username);
+            
+            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
             fetch_profile = UserModelDAO.returnProfile(username);
             UserModel currentUser = new UserModel();
             currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
@@ -132,12 +175,8 @@ public class UserController extends HttpServlet
                     fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
             
             session.setAttribute("USERS", currentUser);
-            url = "/UpdateProfile.jsp";
+            url = "/UserViewProfile.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
-        }
-        else if(action.equalsIgnoreCase("updateProfile"))
-        {
-        	//To Do
         }
         else
         {

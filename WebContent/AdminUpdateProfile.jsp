@@ -43,7 +43,7 @@
         	<table class="center">
 				<tr>
 					<td>
-						<form name="companyForm" action="/mac_reserve/UserController?action=updateUser" method="post">
+						<form name="companyForm" action="/mac_reserve/AdminController?action=updateProfile" method="post">
 			        	<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
