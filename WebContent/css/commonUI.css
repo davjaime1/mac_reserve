@@ -36,12 +36,10 @@ header.mac
     color: white; 
 }
 
-/* Create two columns/boxes that floats next to each other */
 nav 
 {
     float: left;
     width: 20%;
-    /* only for demonstration, should be removed */
     background-color:#f68026;
     border: 3px solid #0948b1;
     outline-style: solid;
@@ -49,14 +47,12 @@ nav
     padding: 20px;
 }
 
-/* Style the list inside the menu */
 nav ul
 {
 list-style-type: none;
 padding: 0;
 }
 
-/* Clear floats after the columns */
 section:after
 {
     content: "";
@@ -96,5 +92,17 @@ td
 {
     color: white;
     padding: 12px;
-    font-size: 30px;
+    font-size: 24px;
+}
+
+div.mav
+{
+    width:500px;
+    height:700px;
+    margin-left:auto; 
+    margin-right:auto;
+    background-image: url(mav.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity:0.4;
 }
