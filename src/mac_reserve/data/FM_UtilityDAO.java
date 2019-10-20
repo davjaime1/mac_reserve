@@ -57,9 +57,8 @@ public class FM_UtilityDAO {
 	}
 	
 	private static ArrayList<UserModel> ReturnMatchingUsers(String queryString) {
-		// TODO Auto-generated method stub
-		ArrayList<UserModel> fetch_profile= new ArrayList<UserModel>();
-		UserModel res=new UserModel();	
+		ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+			
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -68,6 +67,7 @@ public class FM_UtilityDAO {
             stmt = conn.createStatement();
             ResultSet resultSet = stmt.executeQuery(queryString);
 			while (resultSet.next()) {
+				UserModel res=new UserModel();
 				res.setUsername(resultSet.getString("username"));
 				res.setId(resultSet.getString("id"));
 				res.setFirstName(resultSet.getString("firstname"));

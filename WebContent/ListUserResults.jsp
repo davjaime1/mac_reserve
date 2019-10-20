@@ -40,13 +40,13 @@
         	<table class="center">
 				<tr>
 					<td>
-			        	<table class="center"> 
+			        	<table class="center" border="1"> 
 			        		<tr>
-					            <td>Username</td>
-					            <td>ID</td>
-					            <td>First Name</td>
-					            <td>Last Name</td>
-					            <td>Role</td>
+					            <td style="text-decoration: underline">Username</td>
+					            <td style="text-decoration: underline">ID</td>
+					            <td style="text-decoration: underline">First Name</td>
+					            <td style="text-decoration: underline">Last Name</td>
+					            <td style="text-decoration: underline">Role</td>
 					        </tr>
 					
 					        <c:forEach items="${USERS}" var="user">
