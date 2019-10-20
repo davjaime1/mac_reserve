@@ -45,7 +45,7 @@ public class AdminController extends HttpServlet
             roleInDB = RoleDAO.listRoles();
             session.setAttribute("ROLE", roleInDB);
             
-        	url = "/SearchForUser.jsp";
+        	url = "/AdminSearchForUser.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("viewSpecificUser"))
@@ -164,7 +164,7 @@ public class AdminController extends HttpServlet
         	results = FM_UtilityDAO.searchUsers(searchUsername, searchRole);
         	session.setAttribute("USERS", results);
         	
-        	url = "/ListUserResults.jsp";
+        	url = "/AdminListUserResults.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
     }
