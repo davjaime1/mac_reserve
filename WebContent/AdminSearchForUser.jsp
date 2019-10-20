@@ -6,7 +6,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Admin Home</title>
+	<title>Search For User</title>
 	<link rel="stylesheet" href="css/commonUI.css" type="text/css"/>
 	
 </head>
@@ -35,8 +35,36 @@
 	      		<li><a href="/mac_reserve/AdminController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
 	        </ul>
         </nav>
-        <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
-        <article></article>
+        <!-- Here goes the page the function stuff for each page-->
+        <article>
+        	<table class="center">
+				<tr>
+					<td>
+						<form name="userForm" action="/mac_reserve/AdminController?action=searchForUser" method="post">
+			        	<table class="center"> 
+			        		<tr>
+			    				<td> Username: </td>
+			    				<td><input name="idusername" value="" type="text" maxlength="45"></td>
+			    			</tr>
+			    			
+			    			<tr>
+						   		<td style="color:white"> Role: </td>
+						     	<td> 
+						    		<select name="idrole">
+						          		<c:forEach items="${ROLE}" var="item" varStatus="status">
+						            		<option value="${item.id}">${item.name}</option>
+						          		</c:forEach>
+						    		</select>
+						    	</td>
+						    </tr>
+			        	</table>
+			        	<input name="action" value="searchUser" type="hidden">
+		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Users">
+		    			</form>
+			        </td>
+			    </tr>
+			</table>        
+        </article>
     </section>
     
     

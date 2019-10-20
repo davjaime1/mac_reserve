@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mac_reserve.data.FM_UtilityDAO;
+import mac_reserve.data.RoleDAO;
 import mac_reserve.data.UserModelDAO;
+import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
 import mac_reserve.model.UserModel;
+import mac_reserve.model.User;
 
 
 /**
@@ -33,12 +36,33 @@ public class AdminController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        String action = request.getParameter("action");
+        String action = request.getParameter("action"), url ="";
         session.removeAttribute("errorMsgs");
         
-        if (action.equalsIgnoreCase(""))
+        if (action.equalsIgnoreCase("viewSearchForUser"))
         {
-        	//
+        	ArrayList<Role> roleInDB = new ArrayList<Role>();
+            roleInDB = RoleDAO.listRoles();
+            session.setAttribute("ROLE", roleInDB);
+            
+        	url = "/AdminSearchForUser.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("viewSpecificUser"))
+        {
+        	String username = request.getParameter("username");
+        	
+        	ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+            fetch_profile = UserModelDAO.returnProfile(username);
+            UserModel user = new UserModel();
+            user.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
+                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+            
+            session.setAttribute("USERS", user);
+            url = "/AdminViewUser.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        	
         }
         else // redirect all other gets to post
             doPost(request, response);
@@ -129,6 +153,19 @@ public class AdminController extends HttpServlet
 	            url = "/AdminViewProfile.jsp";
 	            getServletContext().getRequestDispatcher(url).forward(request, response);
             }	
+        }
+        else if(action.equalsIgnoreCase("searchForUser"))
+        {
+        	String searchUsername = request.getParameter("idusername");
+        	String searchRole = request.getParameter("idrole");
+        	
+        	//Need to search query based on the username and role
+        	ArrayList<UserModel> results = new ArrayList<UserModel>();
+        	results = FM_UtilityDAO.searchUsers(searchUsername, searchRole);
+        	session.setAttribute("USERS", results);
+        	
+        	url = "/AdminListUserResults.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
         }
     }
 }

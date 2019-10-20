@@ -25,15 +25,17 @@
 	</div>
 	
     <header>
-        <h1 style="color:white">Admin Home</h1>
+        <h1 style="color:white">Facility Manager Home</h1>
     </header>
 
     <section>
     	<nav>
 	        <ul>
-	            	<li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
-	      			<li><a href="/mac_reserve/AdminController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
-	      	</ul>
+	            <li><a href="/mac_reserve/FMController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+          		<li><a href="/mac_reserve/FMController?action=searchAvailableFacilities"  target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
+          		<li><a href="/mac_reserve/FMController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
+          		<li><a href="/mac_reserve/FMController?action=facilityAvailability" target="_top" style="color:white"><span>Modify Facility Availability</span></a></li>
+        	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
         <article>
@@ -105,14 +107,6 @@
 			   				</tr>
 			    		</table>
 					</td>
-					<tr>
-						<td>
-							<form name="Update Profile" action="/mac_reserve/AdminController?action=viewUpdateProfile" method="post" style="margin-left: 130px;">
-			    				<input name="action" value="updateProfile" type="hidden">
-			    				<input type="submit" value="Update Profile">
-			    			</form>
-		    			</td>
-					</tr>
 				</tr>
 			</table>
         </article>
