@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mac_reserve.data.FM_UtilityDAO;
+import mac_reserve.data.RoleDAO;
 import mac_reserve.data.UserModelDAO;
+import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
 import mac_reserve.model.UserModel;
@@ -33,12 +35,17 @@ public class AdminController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        String action = request.getParameter("action");
+        String action = request.getParameter("action"), url ="";
         session.removeAttribute("errorMsgs");
         
-        if (action.equalsIgnoreCase(""))
+        if (action.equalsIgnoreCase("viewSearchForUser"))
         {
-        	//
+        	ArrayList<Role> roleInDB = new ArrayList<Role>();
+            roleInDB = RoleDAO.listRoles();
+            session.setAttribute("ROLE", roleInDB);
+            
+        	url = "/SearchForUser.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else // redirect all other gets to post
             doPost(request, response);
@@ -129,6 +136,20 @@ public class AdminController extends HttpServlet
 	            url = "/AdminViewProfile.jsp";
 	            getServletContext().getRequestDispatcher(url).forward(request, response);
             }	
+        }
+        else if(action.equalsIgnoreCase("searchForUser"))
+        {
+        	String searchUsername = request.getParameter("idusername");
+        	String searchRole = request.getParameter("idrole");
+        	
+        	//Need to search query based on the username and role
+        	ArrayList<UserModel> results = new ArrayList<UserModel>();
+        	results = FM_UtilityDAO.searchUsers(searchUsername, searchRole);
+        	
+        	session.setAttribute("USERS", results);
+        	
+        	url = "/ListUserResults.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
         }
     }
 }
