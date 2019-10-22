@@ -198,6 +198,7 @@ public class UserModelDAO {
                 user.setDate(date);
                 user.setFrom(list.getString("from"));
                 user.setTo(list.getString("to"));
+                user.setDeposit(getDeposit(list.getString("facilitytype")));
                 facilities.add(user);
             }
         }
@@ -238,6 +239,7 @@ public class UserModelDAO {
                 }
                 user.setFrom(list.getString("from"));
                 user.setTo(list.getString("to"));
+                user.setDeposit(list.getString("Deposit"));
                 facilities.add(user);
             }
         }
@@ -278,6 +280,7 @@ public class UserModelDAO {
                 }
                 user.setFrom(list.getString("from"));
                 user.setTo(list.getString("to"));
+                user.setDeposit(getDeposit(list.getString("facilitytype")));
                 facilities.add(user);
             }
         }
@@ -310,7 +313,7 @@ public class UserModelDAO {
     public static void addReservation(Facility res, String user)
     {
 
-    	String queryString = "INSERT INTO `facilityreservation` VALUES (\"" + res.getName() + "\",\"" + res.getType() +"\",\"" + res.getVenue() + "\",\"" + user + "\",\"" + res.getDate() + "\",\"" + res.getDay() + "\",\"" + res.getFrom() + "\",\"" + res.getTo() + "\");";
+    	String queryString = "INSERT INTO `facilityreservation` VALUES (\"" + res.getName() + "\",\"" + res.getType() +"\",\"" + res.getVenue() + "\",\"" + user + "\",\"" + res.getDate() + "\",\"" + res.getDay() + "\",\"" + res.getFrom() + "\",\"" + res.getTo() + "\",\"" + res.getDeposit() + "\");";
     	Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
         try
@@ -324,5 +327,28 @@ public class UserModelDAO {
         {
             System.out.println("Could not insert Reservation into database\n" + e.getMessage());
         }
+    }
+    
+    public static String getDeposit(String type)
+    {
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        String queryString = "SELECT deposit FROM facilities WHERE facilitytype=\"" + type + "\"";
+        String deposit="";
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                
+            	deposit = list.getString("deposit");
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        return deposit;
     }
 }

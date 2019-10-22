@@ -55,7 +55,8 @@
 								<th class="myTableHead" style="padding-right: 30px; text-align: left">Hours</th> 
 								<th class="myTableHead" style="padding-right: 30px; text-align: left">Date</th> 
 				                <th class="myTableHead" style="padding-right: 30px; text-align: left">From</th> 
-				                <th class="myTableHead" style="padding-right: 30px; text-align: left">To</th>  
+				                <th class="myTableHead" style="padding-right: 30px; text-align: left">To</th>
+				                <th class="myTableHead" style="padding-right: 30px; text-align: left">Deposit</th>
 							</tr>
 
 					 		<c:forEach items="${AVAILABLE}" var="item" varStatus="status">
@@ -68,6 +69,7 @@
 								<td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.date}" /></td>
 					            <td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.from}" /></td>
 					            <td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.to}" /></td>
+					            <td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.deposit}" /></td>
 								</tr>
 							</c:forEach>
 			        	</table>
