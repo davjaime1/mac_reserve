@@ -114,7 +114,6 @@ DROP TABLE IF EXISTS `facilityreservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `facilityreservation` (
-  `reservationid` varchar(16) NOT NULL,
   `facilityname` varchar(45) NOT NULL,
   `facilitytype` varchar(45) NOT NULL,
   `venue` varchar(45) NOT NULL,
@@ -123,7 +122,6 @@ CREATE TABLE `facilityreservation` (
   `day` varchar(16) NOT NULL,
   `from` varchar(16) NOT NULL,
   `to` varchar(16) NOT NULL,
-  PRIMARY KEY (`reservationid`),
   KEY `fk_fr_facilityname_idx` (`facilityname`),
   KEY `fk_fr_facilitytype_idx` (`facilitytype`),
   KEY `fk_fr_venue_idx` (`venue`),

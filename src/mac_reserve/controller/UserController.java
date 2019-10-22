@@ -27,10 +27,20 @@ import mac_reserve.model.UserModel;
 public class UserController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+    private String type;
+    private String date;
+    private String time;
     
     private void userParam(HttpServletRequest request, UserModel user)
     {
         user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"));
+    }
+    
+    private void setParam(HttpServletRequest request, String type, String date, String time)
+    {
+    	this.type = type;
+    	this.date = date;
+    	this.time = time;
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -204,6 +214,7 @@ public class UserController extends HttpServlet
         	//System.out.println(request.getParameter("idtimes"));
         	//Now we need to query based on these fields
         	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
+        	setParam(request, request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
         	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
         	session.setAttribute("AVAILABLE", aFacilityList);
         	
@@ -219,6 +230,47 @@ public class UserController extends HttpServlet
         	session.setAttribute("FACILITYs", aFacilityList);
         	url = "/UserListAvailableReservations.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("addReservations"))
+        {
+        	
+        	String username = (String)session.getAttribute("username");
+        	System.out.println(username);
+			if (request.getParameter("radioRes")!=null)
+			{
+				int sel = Integer.parseInt(request.getParameter("radioRes")) - 1;
+				//+++++++The following is to get the reservation previously selected +++++++
+				//Now we need to query based on these fields
+	        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
+	        	aFacilityList = UserModelDAO.listAvailableReservations(type, date, time);
+	        	session.setAttribute("AVAILABLE", aFacilityList);
+	        	
+				//Get All Reserved Facilities List
+				//String username = (String) session.getAttribute("username");
+	        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+	        	ReservationList = UserModelDAO.listReservations();
+	        	
+	        	//Now we need to remove the current reservations from the possible reservations
+	        	//aFacilityList will be the list with the remaining possible reservations
+	        	UserModelDAO.AvailableReservations(aFacilityList, ReservationList);
+	        	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	        	
+				//Okay now we need to insert into database
+				
+				UserModelDAO.addReservation(aFacilityList.get(sel), username);
+				//res.setType();
+				url = "/UserHome.jsp";
+	            getServletContext().getRequestDispatcher(url).forward(request, response);
+			}
+			else 
+			{ // determine if Submit button was clicked without selecting a reservation
+				if (request.getParameter("ListSelectedResButton")!=null) {
+					String errorMsgs =  "Please select a Reservation";
+					session.setAttribute("errorMsgs",errorMsgs);
+					url="/UserListAvailableReservations.jsp";
+					getServletContext().getRequestDispatcher(url).forward(request, response);
+				}
+			}
         }
         else
         {

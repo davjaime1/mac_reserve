@@ -44,9 +44,11 @@
         	<table class="center" border="1">
 				<tr>
 					<td>
-						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations" method="post">
-			        	<table class="center"> 
+						<input name="errMsg"  value="<c:out value='${errorMsgs}'/>" type="text"  style ="background-color:#f68026;; color: white; border: none; width: 200px" disabled="disabled"> 
+						<form name="userForm" action="/mac_reserve/UserController?action=addReservations" method="post">
+			        	<table class="center" border="1"> 
 			        		<tr>
+			        			<th class="myTableHead" style="padding-right: 35px; text-align: left"></th> 
 								<th class="myTableHead" style="padding-right: 35px; text-align: left">Facility Type</th> 
 								<th class="myTableHead" style="padding-right: 20px; text-align: left">Facility Name</th>
 								<th class="myTableHead" style="padding-right: 30px; text-align: left">Venue</th>
@@ -57,8 +59,9 @@
 							</tr>
 
 					 		<c:forEach items="${AVAILABLE}" var="item" varStatus="status">
-								<tr class="myTableRow">			
-								<td class="myTableCell" style="padding-right: 35px; "><c:out value="${item.type}" /></td>
+								<tr class="myTableRow">	
+								<td class="myTableCell" style="width: 20px; text-align: center"><input type="radio" id="radioRes${status.count}" name="radioRes" value="${status.count}"></td>		
+								<td class="myTableCell" style="padding-right: 35px; "><c:out value="${item.type}"/></td>
 								<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.name}" /></td>
 								<td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.venue}" /></td>
 								<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.day}" /></td>
@@ -68,7 +71,7 @@
 								</tr>
 							</c:forEach>
 			        	</table>
-			        	<input name="action" value="searchUser" type="hidden">
+			        	<input name="ListSelectedResButton" value="searchUser" type="hidden">
 		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Reservations">
 		    			</form>
 			        </td>
