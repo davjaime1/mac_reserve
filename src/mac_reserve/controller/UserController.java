@@ -36,7 +36,7 @@ public class UserController extends HttpServlet
     private String type;
     private String date;
     private String time;
-    private static final String DATE_FORMAT = "yyyy/MM/dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
     private static final DateTimeFormatter dateFormat8 = DateTimeFormatter.ofPattern(DATE_FORMAT);
     
@@ -90,7 +90,7 @@ public class UserController extends HttpServlet
         // TODO Auto-generated method stub
         // doGet(request, response);
         
-        String action = request.getParameter("action"), url = "";
+        String action = request.getParameter("action"), url = "/";
         HttpSession session = request.getSession();
         
         // int selectedCompanyIndex;
@@ -226,17 +226,50 @@ public class UserController extends HttpServlet
         	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         	Date date = new Date();
         	String cDate = formatter.format(date);
-        	
+        	System.out.println(cDate);
         	LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             localDateTime = localDateTime.plusDays(1);
             String nDate = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate2 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate3 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate4 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate5 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate6 = dateFormat8.format(localDateTime);
+            System.out.println(nDate);
+            System.out.println(nDate2);
+            System.out.println(nDate3);
+            System.out.println(nDate4);
+            System.out.println(nDate5);
+            System.out.println(nDate6);
+            
+            boolean error = true;
         	
-        	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate))) {
-				String errorMsgs =  "You may only make a reservation for today or tommorow";
-				session.setAttribute("errorMsgs",errorMsgs);
-				url="/UserSearchAvailableFacilities.jsp";
-				getServletContext().getRequestDispatcher(url).forward(request, response);
-			}
+            //Decide between next day or next week
+            if(request.getParameter("idfacilitytype").equals("OVBC") || request.getParameter("idfacilitytype").equals("OBBC"))
+            {
+            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate) || request.getParameter("iddate").equals(nDate2)|| request.getParameter("iddate").equals(nDate3)|| request.getParameter("iddate").equals(nDate4)|| request.getParameter("iddate").equals(nDate5)|| request.getParameter("iddate").equals(nDate6))) {
+            		String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved within a week in advance";
+    				session.setAttribute("errorMsgs",errorMsgs);
+    				url="/UserSearchAvailableFacilities.jsp";
+    				error = false;
+    			}
+            }
+            else
+            {
+            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate))) {
+    				String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved a day in advanced";
+    				session.setAttribute("errorMsgs",errorMsgs);
+    				url="/UserSearchAvailableFacilities.jsp";
+    				error = false;
+    			}	
+            }
+        	
+            if(error) {
         	//System.out.println(request.getParameter("idfacilitytype"));
         	//System.out.println(request.getParameter("iddate"));
         	//System.out.println(request.getParameter("idtimes"));
@@ -257,6 +290,7 @@ public class UserController extends HttpServlet
         	
         	session.setAttribute("FACILITYs", aFacilityList);
         	url = "/UserListAvailableReservations.jsp";
+            }
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("addReservations"))
