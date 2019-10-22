@@ -1,7 +1,14 @@
 package mac_reserve.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import mac_reserve.data.FM_UtilityDAO;
 import mac_reserve.data.RoleDAO;
 import mac_reserve.data.UserModelDAO;
+import mac_reserve.model.Facility;
 import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
@@ -26,11 +34,32 @@ import mac_reserve.model.UserModel;
 public class FMController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+    private String type;
+    private String date;
+    private String time;
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+    private static final DateTimeFormatter dateFormat8 = DateTimeFormatter.ofPattern(DATE_FORMAT);
     
     private void userParam(HttpServletRequest request, UserModel user)
     {
         user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"));
     }
+    
+    private void setParam(HttpServletRequest request, String type, String date, String time)
+    {
+    	this.type = type;
+    	this.date = date;
+    	this.time = time;
+    }
+    
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -112,6 +141,92 @@ public class FMController extends HttpServlet
             
             session.setAttribute("USERS", currentUser);
             url = "/FMUpdateProfile.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("viewSearchAvailableFacilities"))
+        {
+        	//Get Possible Facilities list
+        	ArrayList<Facility> facilityList = new ArrayList<Facility>();	
+			facilityList = UserModelDAO.listFacilityTypes();
+			session.setAttribute("FACILITY", facilityList);
+			ArrayList<String> timeList = new ArrayList<String>();
+			timeList = UserModelDAO.listTimes();        	
+			session.setAttribute("TIMES", timeList);
+			//Display current date
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        	Date date = new Date();
+        	String dates = formatter.format(date);
+        	session.setAttribute("DATE", dates);
+        	url = "/FMSearchAvailableFacilities.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("listAvailableReservations"))
+        {
+        	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        	Date date = new Date();
+        	String cDate = formatter.format(date);
+      
+        	LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            localDateTime = localDateTime.plusDays(1);
+            String nDate = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate2 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate3 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate4 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate5 = dateFormat8.format(localDateTime);
+            localDateTime = localDateTime.plusDays(1);
+            String nDate6 = dateFormat8.format(localDateTime);
+            
+            boolean error = true;
+        	
+            //Decide between next day or next week
+            if(request.getParameter("idfacilitytype").equals("OVBC") || request.getParameter("idfacilitytype").equals("OBBC"))
+            {
+            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate) || request.getParameter("iddate").equals(nDate2)|| request.getParameter("iddate").equals(nDate3)|| request.getParameter("iddate").equals(nDate4)|| request.getParameter("iddate").equals(nDate5)|| request.getParameter("iddate").equals(nDate6))) {
+            		String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved within a week in advance";
+    				session.setAttribute("errorMsgs",errorMsgs);
+    				url="/FMSearchAvailableFacilities.jsp";
+    				error = false;
+    			}
+            }
+            else
+            {
+            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate))) {
+    				String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved a day in advanced";
+    				session.setAttribute("errorMsgs",errorMsgs);
+    				url="/FMSearchAvailableFacilities.jsp";
+    				error = false;
+    			}	
+            }
+        	
+            if(error) {
+            SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
+            Date myDate = parseDate(request.getParameter("iddate"));
+            String dayOfWeek = simpleDateformat.format(myDate);
+        	//System.out.println(request.getParameter("idfacilitytype"));
+        	//System.out.println(request.getParameter("iddate"));
+        	//System.out.println(request.getParameter("idtimes"));
+        	//Now we need to query based on these fields
+        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
+        	setParam(request, request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
+        	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"), dayOfWeek);
+        	session.setAttribute("AVAILABLE", aFacilityList);
+        	
+			//Get All Reserved Facilities List
+			String username = (String) session.getAttribute("username");
+        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+        	ReservationList = UserModelDAO.listReservations();
+        	
+        	//Now we need to remove the current reservations from the possible reservations
+        	//aFacilityList will be the list with the remaining possible reservations
+        	UserModelDAO.AvailableReservations(aFacilityList, ReservationList);
+        	
+        	session.setAttribute("FACILITYs", aFacilityList);
+        	url = "/FMListAvailableReservations.jsp";
+            }
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("updateProfile"))

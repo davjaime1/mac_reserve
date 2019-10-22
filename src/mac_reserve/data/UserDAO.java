@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import mac_reserve.model.Facility;
 import mac_reserve.model.User;
 import mac_reserve.util.SQLConnection;
 

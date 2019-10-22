@@ -104,6 +104,12 @@
 			    			<tr>
 			   				</tr>
 			    		</table>
+			    		<input name="action" value="registerUser" type="hidden">
+		    			<input style="color:blue;background-color: orange; width:163px; margin-left:14px" type="submit" value="Revoke/Unrevoke">
+		    			</form>
+		    			<input name="action" value="registerUser" type="hidden">
+		    			<input style="color:blue;background-color: orange; width:163px; margin-left:20px" type="submit" value="Change User Role">
+		    			</form>
 					</td>
 				</tr>
 			</table>

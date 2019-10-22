@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import mac_reserve.model.Facility;
 import mac_reserve.model.User;
 import mac_reserve.model.UserModel;
 import mac_reserve.util.SQLConnection;
@@ -102,5 +103,287 @@ public class UserModelDAO {
 			conn.commit(); 
 		} catch (SQLException e) {}
     }
+    
+    public static ArrayList<Facility> listFacilityTypes()
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+        
+    	String queryString = "SELECT * FROM facilitytypes"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("id"));
+                user.setName(list.getString("name"));
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
+    }
+    
+    public static ArrayList<String> listTimes()
+    {
+    	ArrayList<String> time = new ArrayList<String>();
+        
+    	String queryString = "SELECT f.from FROM facilitiesoptions f WHERE facilityname = 'BMC1' AND day ='D'"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                
+                time.add(list.getString("from"));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        time.add(0, "All Times");
+        return time;
+    }
+    
+    public static ArrayList<Facility> listAvailableReservations(String type, String date, String time, String week)
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+    	if(time.equals("All Times"))
+    		time = "";
+    	String queryString="";
+        if(week.equals("Saturday") || week.equals("Sunday"))
+        {
+        	queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='E'"; 
+
+        }
+        else
+        {
+        	queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='D'"; 
+
+        }
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            list.next();
+            Facility users = new Facility();
+            users.setType(list.getString("facilitytype"));
+            users.setName(list.getString("facilityname"));
+            users.setVenue(list.getString("venue"));
+            if(list.getString("day").equals("D"))
+            {
+            	users.setDay("Weekday Hours");
+            }
+            else
+            {
+            	users.setDay("Weekend Hours");
+            }
+            users.setDate(date);
+            users.setFrom(list.getString("from"));
+            users.setTo(list.getString("to"));
+            String dep = getDeposit(list.getString("facilitytype"));
+            users.setDeposit(dep);
+            facilities.add(users);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("facilitytype"));
+                user.setName(list.getString("facilityname"));
+                user.setVenue(list.getString("venue"));
+                if(list.getString("day").equals("D"))
+                {
+                	user.setDay("Weekday Hours");
+                }
+                else
+                {
+                	user.setDay("Weekend Hours");
+                }
+                user.setDate(date);
+                user.setFrom(list.getString("from"));
+                user.setTo(list.getString("to"));
+                user.setDeposit(dep);
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
+    }
+    
+    public static ArrayList<Facility> listMyReservations(String username)
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+        
+    	String queryString = "SELECT * FROM facilityreservation f WHERE f.reservedUser=\"" + username + "\""; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("facilitytype"));
+                user.setName(list.getString("facilityname"));
+                user.setVenue(list.getString("venue"));
+                user.setDate(list.getString("date"));
+                if(list.getString("day").equals("D"))
+                {
+                	user.setDay("Weekday Hours");
+                }
+                else
+                {
+                	user.setDay("Weekend Hours");
+                }
+                user.setFrom(list.getString("from"));
+                user.setTo(list.getString("to"));
+                user.setDeposit(list.getString("Deposit"));
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
+    }
  
+    public static ArrayList<Facility> listReservations()
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+        
+    	String queryString = "SELECT * FROM facilityreservation"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            list.next();
+            Facility user1 = new Facility();
+            user1.setType(list.getString("facilitytype"));
+            user1.setName(list.getString("facilityname"));
+            user1.setVenue(list.getString("venue"));
+            user1.setDate(list.getString("date"));
+            if(list.getString("day").equals("D"))
+            {
+            	user1.setDay("Weekday Hours");
+            }
+            else
+            {
+            	user1.setDay("Weekend Hours");
+            }
+            user1.setFrom(list.getString("from"));
+            user1.setTo(list.getString("to"));
+            String dep = getDeposit(list.getString("facilitytype"));
+            user1.setDeposit(dep);
+            facilities.add(user1);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("facilitytype"));
+                user.setName(list.getString("facilityname"));
+                user.setVenue(list.getString("venue"));
+                user.setDate(list.getString("date"));
+                if(list.getString("day").equals("D"))
+                {
+                	user.setDay("Weekday Hours");
+                }
+                else
+                {
+                	user.setDay("Weekend Hours");
+                }
+                user.setFrom(list.getString("from"));
+                user.setTo(list.getString("to"));
+                user.setDeposit(dep);
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
+    }
+    
+    public static void AvailableReservations(ArrayList<Facility> aFacilityList, ArrayList<Facility> ReservationList)
+    {
+		int possSize = aFacilityList.size();
+		int inDBSize = ReservationList.size();
+		for(int i = 0; i < possSize; i++)
+		{
+			for(int j = 0; j < inDBSize; j++)
+			{
+				if(aFacilityList.get(i).getName().equals(ReservationList.get(j).getName()) && aFacilityList.get(i).getDate().equals(ReservationList.get(j).getDate()) && aFacilityList.get(i).getFrom().equals(ReservationList.get(j).getFrom()))
+				{
+					aFacilityList.remove(i);
+					i--;
+					possSize--;
+				}
+			}
+		}
+    }
+    
+    public static void addReservation(Facility res, String user)
+    {
+
+    	String queryString = "INSERT INTO `facilityreservation` VALUES (\"" + res.getName() + "\",\"" + res.getType() +"\",\"" + res.getVenue() + "\",\"" + user + "\",\"" + res.getDate() + "\",\"" + res.getDay() + "\",\"" + res.getFrom() + "\",\"" + res.getTo() + "\",\"" + res.getDeposit() + "\");";
+    	Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate(queryString);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not insert Reservation into database\n" + e.getMessage());
+        }
+    }
+    
+    public static String getDeposit(String type)
+    {
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        String queryString = "SELECT deposit FROM facilities WHERE facilitytype=\"" + type + "\"";
+        String deposit="";
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            list.next();
+            deposit = list.getString("deposit");
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        return deposit;
+    }
 }
