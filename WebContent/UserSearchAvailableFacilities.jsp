@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>User Home</title>
+<title>Search For Reservations</title>
 
 <link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
 
@@ -41,6 +41,44 @@
         </nav>
         <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
         <article>
+        	<table class="center">
+				<tr>
+					<td>
+						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations" method="post">
+			        	<table class="center"> 
+			        		<tr>
+			    				<td> Facility Type: </td>
+							    <td> 
+							    <select name="idfacilitytype">
+							          <c:forEach items="${FACILITY}" var="item" varStatus="status">
+							            <option value="${item.type}">${item.type}</option>
+							          </c:forEach>
+							    </select>
+							    </td>
+			    			</tr>
+			    				<td>Date: </td>
+			    				<td>
+				    				<input type="date" id="iddate" name="iddate"
+							       	value= "2019-10-24"
+							       	min="2019-01-01" max="2019-12-31">
+							    </td>
+			    			<tr>
+						   		<td> Times: </td>
+							    <td> 
+							    <select name="idtimes">
+							          <c:forEach items="${TIMES}" var="item" varStatus="status">
+							            <option value="${item}">${item}</option>
+							          </c:forEach>
+							    </select>
+							    </td>
+						    </tr>
+			        	</table>
+			        	<input name="action" value="searchUser" type="hidden">
+		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Reservations">
+		    			</form>
+			        </td>
+			    </tr>
+			</table>
         </article>
     </section>
 

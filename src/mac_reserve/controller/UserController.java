@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import mac_reserve.data.FM_UtilityDAO;
 import mac_reserve.data.RoleDAO;
 import mac_reserve.data.UserModelDAO;
-import mac_reserve.data.UserDAO;
+import mac_reserve.model.Facility;
 import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
@@ -176,6 +176,30 @@ public class UserController extends HttpServlet
 	            url = "/UserViewProfile.jsp";
 	            getServletContext().getRequestDispatcher(url).forward(request, response);
             }	
+        }
+        else if(action.equalsIgnoreCase("viewSearchAvailableFacilities"))
+        {
+        	//Get Facilities list
+        	ArrayList<Facility> facilityList = new ArrayList<Facility>();	
+			facilityList = UserModelDAO.listFacilityTypes();
+			session.setAttribute("FACILITY", facilityList);
+			ArrayList<String> timeList = new ArrayList<String>();
+			timeList = UserModelDAO.listTimes();
+			session.setAttribute("TIMES", timeList);
+        	url = "/UserSearchAvailableFacilities.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("listAvailableReservations"))
+        {
+        	//System.out.println(request.getParameter("idfacilitytype"));
+        	//System.out.println(request.getParameter("iddate"));
+        	//System.out.println(request.getParameter("idtimes"));
+        	//Now we need to query based on these fields
+        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
+        	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
+        	session.setAttribute("AVAILABLE", aFacilityList);
+        	url = "/UserListAvailableReservations.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else
         {

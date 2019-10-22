@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import mac_reserve.model.Facility;
 import mac_reserve.model.User;
 import mac_reserve.model.UserModel;
 import mac_reserve.util.SQLConnection;
@@ -101,6 +102,101 @@ public class UserModelDAO {
 			stmt.executeUpdate(insertmar);	
 			conn.commit(); 
 		} catch (SQLException e) {}
+    }
+    
+    public static ArrayList<Facility> listFacilityTypes()
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+        
+    	String queryString = "SELECT * FROM facilitytypes"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("id"));
+                user.setName(list.getString("name"));
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
+    }
+    
+    public static ArrayList<String> listTimes()
+    {
+    	ArrayList<String> time = new ArrayList<String>();
+        
+    	String queryString = "SELECT f.from FROM facilitiesoptions f WHERE facilityname = 'BMC1' AND day ='D'"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                
+                time.add(list.getString("from"));
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        time.add(0, "All Times");
+        return time;
+    }
+    
+    public static ArrayList<Facility> listAvailableReservations(String type, String date, String time)
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+    	if(time.equals("All Times"))
+    		time = "";
+        
+    	String queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "'"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("facilitytype"));
+                user.setName(list.getString("facilityname"));
+                user.setVenue(list.getString("venue"));
+                if(list.getString("day").equals("D"))
+                {
+                	user.setDay("Weekday");
+                }
+                else
+                {
+                	user.setDay("Weekend");
+                }
+                user.setFrom(list.getString("from"));
+                user.setTo(list.getString("to"));
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
     }
  
 }
