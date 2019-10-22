@@ -181,6 +181,25 @@ public class UserModelDAO {
         {
             stmt = conn.createStatement();
             ResultSet list = stmt.executeQuery(queryString);
+            list.next();
+            Facility users = new Facility();
+            users.setType(list.getString("facilitytype"));
+            users.setName(list.getString("facilityname"));
+            users.setVenue(list.getString("venue"));
+            if(list.getString("day").equals("D"))
+            {
+            	users.setDay("Weekday Hours");
+            }
+            else
+            {
+            	users.setDay("Weekend Hours");
+            }
+            users.setDate(date);
+            users.setFrom(list.getString("from"));
+            users.setTo(list.getString("to"));
+            String dep = getDeposit(list.getString("facilitytype"));
+            users.setDeposit(dep);
+            facilities.add(users);
             while (list.next())
             {
                 Facility user = new Facility();
@@ -198,7 +217,7 @@ public class UserModelDAO {
                 user.setDate(date);
                 user.setFrom(list.getString("from"));
                 user.setTo(list.getString("to"));
-                user.setDeposit(getDeposit(list.getString("facilitytype")));
+                user.setDeposit(dep);
                 facilities.add(user);
             }
         }
@@ -263,6 +282,25 @@ public class UserModelDAO {
         {
             stmt = conn.createStatement();
             ResultSet list = stmt.executeQuery(queryString);
+            list.next();
+            Facility user1 = new Facility();
+            user1.setType(list.getString("facilitytype"));
+            user1.setName(list.getString("facilityname"));
+            user1.setVenue(list.getString("venue"));
+            user1.setDate(list.getString("date"));
+            if(list.getString("day").equals("D"))
+            {
+            	user1.setDay("Weekday Hours");
+            }
+            else
+            {
+            	user1.setDay("Weekend Hours");
+            }
+            user1.setFrom(list.getString("from"));
+            user1.setTo(list.getString("to"));
+            String dep = getDeposit(list.getString("facilitytype"));
+            user1.setDeposit(dep);
+            facilities.add(user1);
             while (list.next())
             {
                 Facility user = new Facility();
@@ -280,7 +318,7 @@ public class UserModelDAO {
                 }
                 user.setFrom(list.getString("from"));
                 user.setTo(list.getString("to"));
-                user.setDeposit(getDeposit(list.getString("facilitytype")));
+                user.setDeposit(dep);
                 facilities.add(user);
             }
         }
@@ -339,11 +377,8 @@ public class UserModelDAO {
         {
             stmt = conn.createStatement();
             ResultSet list = stmt.executeQuery(queryString);
-            while (list.next())
-            {
-                
-            	deposit = list.getString("deposit");
-            }
+            list.next();
+            deposit = list.getString("deposit");
         }
         catch (SQLException e)
         {
