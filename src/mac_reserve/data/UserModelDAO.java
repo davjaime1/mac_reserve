@@ -302,7 +302,6 @@ public class UserModelDAO {
     {
 
     	String queryString = "INSERT INTO `facilityreservation` VALUES (\"" + res.getName() + "\",\"" + res.getType() +"\",\"" + res.getVenue() + "\",\"" + user + "\",\"" + res.getDate() + "\",\"" + res.getDay() + "\",\"" + res.getFrom() + "\",\"" + res.getTo() + "\");";
-        System.out.println(queryString);
     	Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
         try

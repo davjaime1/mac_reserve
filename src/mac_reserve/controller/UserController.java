@@ -2,6 +2,12 @@ package mac_reserve.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +36,9 @@ public class UserController extends HttpServlet
     private String type;
     private String date;
     private String time;
+    private static final String DATE_FORMAT = "yyyy/MM/dd";
+    private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+    private static final DateTimeFormatter dateFormat8 = DateTimeFormatter.ofPattern(DATE_FORMAT);
     
     private void userParam(HttpServletRequest request, UserModel user)
     {
@@ -204,11 +213,30 @@ public class UserController extends HttpServlet
 			ArrayList<String> timeList = new ArrayList<String>();
 			timeList = UserModelDAO.listTimes();        	
 			session.setAttribute("TIMES", timeList);
+			//Display current date
+			SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        	Date date = new Date();
+        	String dates = formatter.format(date);
+        	session.setAttribute("DATE", dates);
         	url = "/UserSearchAvailableFacilities.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("listAvailableReservations"))
         {
+        	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        	Date date = new Date();
+        	String cDate = formatter.format(date);
+        	
+        	LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            localDateTime = localDateTime.plusDays(1);
+            String nDate = dateFormat8.format(localDateTime);
+        	
+        	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate))) {
+				String errorMsgs =  "You may only make a reservation for today or tommorow";
+				session.setAttribute("errorMsgs",errorMsgs);
+				url="/UserSearchAvailableFacilities.jsp";
+				getServletContext().getRequestDispatcher(url).forward(request, response);
+			}
         	//System.out.println(request.getParameter("idfacilitytype"));
         	//System.out.println(request.getParameter("iddate"));
         	//System.out.println(request.getParameter("idtimes"));
@@ -235,7 +263,6 @@ public class UserController extends HttpServlet
         {
         	
         	String username = (String)session.getAttribute("username");
-        	System.out.println(username);
 			if (request.getParameter("radioRes")!=null)
 			{
 				int sel = Integer.parseInt(request.getParameter("radioRes")) - 1;

@@ -8,7 +8,6 @@
 <title>Search For Reservations</title>
 
 <link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
-
 </head>
 
 <body style="background-color: #0948b1;">
@@ -44,6 +43,7 @@
         	<table class="center">
 				<tr>
 					<td>
+						<input name="errMsg"  value="<c:out value='${errorMsgs}'/>" type="text"  style ="background-color:#f68026;; color: white; border: none; width: 400px" disabled="disabled"> 
 						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations" method="post">
 			        	<table class="center"> 
 			        		<tr>
@@ -59,8 +59,7 @@
 			    				<td>Date: </td>
 			    				<td>
 				    				<input type="date" id="iddate" name="iddate"
-							       	value= "2019-10-24"
-							       	min="2019-01-01" max="2019-12-31">
+				    				value= "${DATE}">
 							    </td>
 			    			<tr>
 						   		<td> Times: </td>
