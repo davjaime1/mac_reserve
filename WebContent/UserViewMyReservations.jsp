@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Available Reservations</title>
+<title>My Reservations</title>
 
 <link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
 
@@ -40,12 +40,11 @@
 	        </ul>
         </nav>
         <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
-        <article style="height: auto">
+        <article style="height: auto; ">
         	<table class="center" border="1">
 				<tr>
 					<td>
-						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations" method="post">
-			        	<table class="center"> 
+			        	<table class="center" border="1"> 
 			        		<tr>
 								<th class="myTableHead" style="padding-right: 35px; text-align: left">Facility Type</th> 
 								<th class="myTableHead" style="padding-right: 20px; text-align: left">Facility Name</th>
@@ -68,9 +67,6 @@
 								</tr>
 							</c:forEach>
 			        	</table>
-			        	<input name="action" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Reservations">
-		    			</form>
 			        </td>
 			    </tr>
 			</table>

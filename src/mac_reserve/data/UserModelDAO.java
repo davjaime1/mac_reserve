@@ -180,11 +180,52 @@ public class UserModelDAO {
                 user.setVenue(list.getString("venue"));
                 if(list.getString("day").equals("D"))
                 {
-                	user.setDay("Weekday");
+                	user.setDay("Weekday Hours");
                 }
                 else
                 {
-                	user.setDay("Weekend");
+                	user.setDay("Weekend Hours");
+                }
+                user.setDate(date);
+                user.setFrom(list.getString("from"));
+                user.setTo(list.getString("to"));
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
+    }
+    
+    public static ArrayList<Facility> listMyReservations(String username)
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+        
+    	String queryString = "SELECT * FROM facilityreservation f WHERE f.reservedUser=\"" + username + "\""; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("facilitytype"));
+                user.setName(list.getString("facilityname"));
+                user.setVenue(list.getString("venue"));
+                user.setDate(list.getString("date"));
+                if(list.getString("day").equals("D"))
+                {
+                	user.setDay("Weekday Hours");
+                }
+                else
+                {
+                	user.setDay("Weekend Hours");
                 }
                 user.setFrom(list.getString("from"));
                 user.setTo(list.getString("to"));
@@ -199,4 +240,62 @@ public class UserModelDAO {
         return facilities;
     }
  
+    public static ArrayList<Facility> listReservations()
+    {
+    	ArrayList<Facility> facilities = new ArrayList<Facility>();
+        
+    	String queryString = "SELECT * FROM facilityreservation"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Facility user = new Facility();
+                user.setType(list.getString("facilitytype"));
+                user.setName(list.getString("facilityname"));
+                user.setVenue(list.getString("venue"));
+                user.setDate(list.getString("date"));
+                if(list.getString("day").equals("D"))
+                {
+                	user.setDay("Weekday Hours");
+                }
+                else
+                {
+                	user.setDay("Weekend Hours");
+                }
+                user.setFrom(list.getString("from"));
+                user.setTo(list.getString("to"));
+                facilities.add(user);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Error in UserDAO\n" + e.getMessage());
+        }
+        
+        return facilities;
+    }
+    
+    public static void AvailableReservations(ArrayList<Facility> aFacilityList, ArrayList<Facility> ReservationList)
+    {
+		int possSize = aFacilityList.size();
+		int inDBSize = ReservationList.size();
+		for(int i = 0; i < possSize; i++)
+		{
+			for(int j = 0; j < inDBSize; j++)
+			{
+				if(aFacilityList.get(i).getName().equals(ReservationList.get(j).getName()) && aFacilityList.get(i).getDate().equals(ReservationList.get(j).getDate()) && aFacilityList.get(i).getFrom().equals(ReservationList.get(j).getFrom()))
+				{
+					aFacilityList.remove(i);
+					i--;
+					possSize--;
+				}
+			}
+		}
+    }
+
 }

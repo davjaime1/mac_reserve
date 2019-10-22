@@ -52,7 +52,15 @@ public class UserController extends HttpServlet
             url = "/index.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
-        
+        else if(action.equalsIgnoreCase("viewMyReservations"))
+        {
+        	String username = (String) session.getAttribute("username");
+        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+        	ReservationList = UserModelDAO.listMyReservations(username);
+        	session.setAttribute("AVAILABLE", ReservationList);
+        	url = "/UserViewMyReservations.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
         else // redirect all other gets to post
             doPost(request, response);
     }
@@ -179,12 +187,12 @@ public class UserController extends HttpServlet
         }
         else if(action.equalsIgnoreCase("viewSearchAvailableFacilities"))
         {
-        	//Get Facilities list
+        	//Get Possible Facilities list
         	ArrayList<Facility> facilityList = new ArrayList<Facility>();	
 			facilityList = UserModelDAO.listFacilityTypes();
 			session.setAttribute("FACILITY", facilityList);
 			ArrayList<String> timeList = new ArrayList<String>();
-			timeList = UserModelDAO.listTimes();
+			timeList = UserModelDAO.listTimes();        	
 			session.setAttribute("TIMES", timeList);
         	url = "/UserSearchAvailableFacilities.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -198,6 +206,17 @@ public class UserController extends HttpServlet
         	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
         	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
         	session.setAttribute("AVAILABLE", aFacilityList);
+        	
+			//Get All Reserved Facilities List
+			String username = (String) session.getAttribute("username");
+        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+        	ReservationList = UserModelDAO.listReservations();
+        	
+        	//Now we need to remove the current reservations from the possible reservations
+        	//aFacilityList will be the list with the remaining possible reservations
+        	UserModelDAO.AvailableReservations(aFacilityList, ReservationList);
+        	
+        	session.setAttribute("FACILITYs", aFacilityList);
         	url = "/UserListAvailableReservations.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }

@@ -14,6 +14,7 @@ public class Facility implements Serializable
     private String day;
     private String from;
     private String to;
+    private String date;
     
     public String getName()
     {
@@ -103,5 +104,15 @@ public class Facility implements Serializable
     public void setTo(String to)
     {
         this.to = to;
+    }
+    
+    public String getDate()
+    {
+        return date;
+    }
+    
+    public void setDate(String date)
+    {
+        this.date = date;
     }
 }
