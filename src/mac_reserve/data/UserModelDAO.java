@@ -158,13 +158,22 @@ public class UserModelDAO {
         return time;
     }
     
-    public static ArrayList<Facility> listAvailableReservations(String type, String date, String time)
+    public static ArrayList<Facility> listAvailableReservations(String type, String date, String time, String week)
     {
     	ArrayList<Facility> facilities = new ArrayList<Facility>();
     	if(time.equals("All Times"))
     		time = "";
-        
-    	String queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "'"; 
+    	String queryString="";
+        if(week.equals("Saturday") || week.equals("Sunday"))
+        {
+        	queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='E'"; 
+
+        }
+        else
+        {
+        	queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='D'"; 
+
+        }
     	
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();

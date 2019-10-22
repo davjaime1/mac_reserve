@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.text.DateFormat;
+import java.text.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +52,14 @@ public class UserController extends HttpServlet
     	this.date = date;
     	this.time = time;
     }
+    
+    public static Date parseDate(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -226,7 +235,7 @@ public class UserController extends HttpServlet
         	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         	Date date = new Date();
         	String cDate = formatter.format(date);
-        	System.out.println(cDate);
+      
         	LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             localDateTime = localDateTime.plusDays(1);
             String nDate = dateFormat8.format(localDateTime);
@@ -240,12 +249,6 @@ public class UserController extends HttpServlet
             String nDate5 = dateFormat8.format(localDateTime);
             localDateTime = localDateTime.plusDays(1);
             String nDate6 = dateFormat8.format(localDateTime);
-            System.out.println(nDate);
-            System.out.println(nDate2);
-            System.out.println(nDate3);
-            System.out.println(nDate4);
-            System.out.println(nDate5);
-            System.out.println(nDate6);
             
             boolean error = true;
         	
@@ -270,13 +273,16 @@ public class UserController extends HttpServlet
             }
         	
             if(error) {
+            SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
+            Date myDate = parseDate(request.getParameter("iddate"));
+            String dayOfWeek = simpleDateformat.format(myDate);
         	//System.out.println(request.getParameter("idfacilitytype"));
         	//System.out.println(request.getParameter("iddate"));
         	//System.out.println(request.getParameter("idtimes"));
         	//Now we need to query based on these fields
         	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
         	setParam(request, request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
-        	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
+        	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"), dayOfWeek);
         	session.setAttribute("AVAILABLE", aFacilityList);
         	
 			//Get All Reserved Facilities List
@@ -303,7 +309,10 @@ public class UserController extends HttpServlet
 				//+++++++The following is to get the reservation previously selected +++++++
 				//Now we need to query based on these fields
 	        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
-	        	aFacilityList = UserModelDAO.listAvailableReservations(type, date, time);
+	        	SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
+	            Date myDate = parseDate(date);
+	            String dayOfWeek = simpleDateformat.format(myDate);
+	        	aFacilityList = UserModelDAO.listAvailableReservations(type, date, time, dayOfWeek);
 	        	session.setAttribute("AVAILABLE", aFacilityList);
 	        	
 				//Get All Reserved Facilities List
