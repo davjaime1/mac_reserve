@@ -38,10 +38,11 @@
         	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
-        <article>
+        <article style="height: auto">
         	<table class="center">
 				<tr>
 					<td>
+						<form name="userForm" action="/mac_reserve/FMController?action=userReservations" method="post">
 			        	<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
@@ -102,11 +103,28 @@
 			    				<td> Email: </td>
 			    				<td> <c:out value="${USERS.email}" /> </td>
 			    			</tr>
+			    			
+			    			<tr>
+			    				<td> No Shows: </td>
+			    				<td> <c:out value="0" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Violations: </td>
+			    				<td> <c:out value="0" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Status: </td>
+			    				<td> <c:out value="Not Revoked" /> </td>
+			    			</tr>
 			
 			    			<tr>
 			   				</tr>
 			    		</table>
-					</td>
+						<input name="action" value="searchUser" type="hidden">
+		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="View User Reservations">
+		    			</form>
 				</tr>
 			</table>
         </article>

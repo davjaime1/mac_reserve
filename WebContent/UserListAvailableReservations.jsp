@@ -49,8 +49,8 @@
 			        	<table class="center" border="1"> 
 			        		<tr>
 			        			<th class="myTableHead" style="padding-right: 35px; text-align: left"></th> 
-								<th class="myTableHead" style="padding-right: 35px; text-align: left">Facility Type</th> 
-								<th class="myTableHead" style="padding-right: 20px; text-align: left">Facility Name</th>
+								<th class="myTableHead" style="padding-right: 35px; text-align: left">Type</th> 
+								<th class="myTableHead" style="padding-right: 20px; text-align: left">Name</th>
 								<th class="myTableHead" style="padding-right: 30px; text-align: left">Venue</th>
 								<th class="myTableHead" style="padding-right: 30px; text-align: left">Hours</th> 
 								<th class="myTableHead" style="padding-right: 30px; text-align: left">Date</th> 
@@ -62,19 +62,19 @@
 					 		<c:forEach items="${AVAILABLE}" var="item" varStatus="status">
 								<tr class="myTableRow">	
 								<td class="myTableCell" style="width: 20px; text-align: center"><input type="radio" id="radioRes${status.count}" name="radioRes" value="${status.count}"></td>		
-								<td class="myTableCell" style="padding-right: 35px; "><c:out value="${item.type}"/></td>
-								<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.name}" /></td>
-								<td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.venue}" /></td>
-								<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.day}" /></td>
-								<td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.date}" /></td>
-					            <td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.from}" /></td>
-					            <td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.to}" /></td>
-					            <td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.deposit}" /></td>
+								<td class="myTableCell" style="padding-right: 35px; font-size: 20px;"><c:out value="${item.type}"/></td>
+								<td class="myTableCell" style="padding-right: 20px; font-size: 20px;"><c:out value="${item.name}" /></td>
+								<td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.venue}" /></td>
+								<td class="myTableCell" style="padding-right: 20px; font-size: 20px;"><c:out value="${item.day}" /></td>
+								<td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.date}" /></td>
+					            <td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.from}" /></td>
+					            <td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.to}" /></td>
+					            <td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.deposit}" /></td>
 								</tr>
 							</c:forEach>
 			        	</table>
 			        	<input name="ListSelectedResButton" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Reservations">
+		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Reserve Facility">
 		    			</form>
 			        </td>
 			    </tr>
