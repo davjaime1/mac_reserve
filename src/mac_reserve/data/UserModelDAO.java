@@ -340,9 +340,17 @@ public class UserModelDAO {
 			{
 				if(aFacilityList.get(i).getName().equals(ReservationList.get(j).getName()) && aFacilityList.get(i).getDate().equals(ReservationList.get(j).getDate()) && aFacilityList.get(i).getFrom().equals(ReservationList.get(j).getFrom()))
 				{
-					aFacilityList.remove(i);
-					i--;
-					possSize--;
+					if(i == 0)
+					{
+						aFacilityList.remove(i);
+						possSize--;
+					}
+					else
+					{
+						aFacilityList.remove(i);
+						i--;
+						possSize--;
+					}
 				}
 			}
 		}

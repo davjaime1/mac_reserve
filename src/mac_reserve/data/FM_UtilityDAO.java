@@ -1,17 +1,18 @@
 package mac_reserve.data;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import mac_reserve.model.Facility;
 import mac_reserve.model.State;
 import mac_reserve.model.UserModel;
 import mac_reserve.util.SQLConnection;
-
-import java.sql.Date;
 
 public class FM_UtilityDAO {
 
@@ -90,5 +91,48 @@ public class FM_UtilityDAO {
 	public static ArrayList<UserModel> searchUsers(String username, String role)
 	{
 		return ReturnMatchingUsers("SELECT * FROM users where username LIKE '%"+ username +"' AND role ='"+ role +"'");
+	}
+	
+	public static ArrayList<String> getTypes() {
+		ArrayList<String> type = new ArrayList<String>();
+			
+		
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		String queryString = "SELECT id FROM facilitytypes";
+		try {
+            stmt = conn.createStatement();
+            ResultSet resultSet = stmt.executeQuery(queryString);
+			while (resultSet.next()) {
+				type.add(resultSet.getString("id"));		
+			}
+		} catch (SQLException e) {}
+		
+		return type;
+	}
+	
+	public static ArrayList<Facility> getFacilities(String type) {
+		ArrayList<Facility> list = new ArrayList<Facility>();
+			
+		
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		String queryString = "SELECT * FROM facilities WHERE facilitytype=\""+type+"\"";
+		try {
+            stmt = conn.createStatement();
+            ResultSet resultSet = stmt.executeQuery(queryString);
+			while (resultSet.next()) {
+				Facility res=new Facility();
+				res.setName(resultSet.getString("name"));
+				res.setType(resultSet.getString("facilitytype"));
+				res.setInterval(resultSet.getString("interval"));
+				res.setDuration(resultSet.getString("duration"));
+				res.setVenue(resultSet.getString("venue"));
+				res.setDeposit(resultSet.getString("deposit"));
+				list.add(res);		
+			}
+		} catch (SQLException e) {System.out.println("Whoops");}
+		
+		return list;
 	}
 }
