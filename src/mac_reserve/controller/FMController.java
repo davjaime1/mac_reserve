@@ -92,6 +92,15 @@ public class FMController extends HttpServlet
             getServletContext().getRequestDispatcher(url).forward(request, response);
         	
         }
+        else if(action.equalsIgnoreCase("viewFacilityReportList"))
+        {
+        	//Need to get list of types
+        	ArrayList<String> types = new ArrayList<String>();
+        	types = FM_UtilityDAO.getTypes();
+        	session.setAttribute("TYPES", types);
+        	url = "/FMFacilityList.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
         else // redirect all other gets to post
             doPost(request, response);
     }
@@ -278,6 +287,15 @@ public class FMController extends HttpServlet
         	session.setAttribute("USERS", results);
         	
         	url = "/FMListUserResults.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("viewTypeDetails"))
+        {
+        	ArrayList<Facility> results = new ArrayList<Facility>();
+        	results = FM_UtilityDAO.getFacilities(request.getParameter("type"));
+        	System.out.println(request.getParameter("type"));
+        	session.setAttribute("NAMES", results);
+        	url = "/FMViewTypeDetails.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
     }

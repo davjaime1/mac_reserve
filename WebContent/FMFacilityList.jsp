@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Facility Manager Homepage</title>
+<title>View Type List</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="css/commonUI.css" rel="stylesheet" type="text/css" />
 </head>
@@ -38,7 +38,30 @@
         	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
-        <article></article>
+        <article>
+        	<table class="center">
+				<tr>
+					<td>
+			        	<table class="center" border="1"> 
+			        		<tr>
+					            <td style="text-decoration: underline">Facility Type</td>
+					        </tr>
+					
+					        <c:forEach items="${TYPES}" var="type">
+					            <tr>
+					                <td>
+					                    <c:out value="${type}" />
+					                </td>
+					                <td>
+					                    <a href="/mac_reserve/FMController?action=viewTypeDetails&type=${type}">View</a>
+					                </td>
+					            </tr>
+					        </c:forEach>
+			        	</table>
+			        </td>
+			    </tr>
+			</table>        
+        </article>
     </section>
    
 </body>
