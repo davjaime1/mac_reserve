@@ -89,6 +89,22 @@ public class UserController extends HttpServlet
         	url = "/UserViewMyReservations.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
+        else if(action.equalsIgnoreCase("cancelReservation"))
+        {
+        	String username = (String) session.getAttribute("username");
+        	date = request.getParameter("date");
+        	
+        	//Query and delete reservation
+        	UserModelDAO.cancelReservation(request.getParameter("date"), request.getParameter("name"), request.getParameter("from"), request.getParameter("to"));
+        	
+        	//Display My Reservations
+        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+        	ReservationList = UserModelDAO.listMyReservations(username);
+        	session.setAttribute("AVAILABLE", ReservationList);
+        	url = "/UserViewMyReservations.jsp";
+        	getServletContext().getRequestDispatcher(url).forward(request, response);
+        	
+        }
         else // redirect all other gets to post
             doPost(request, response);
     }
