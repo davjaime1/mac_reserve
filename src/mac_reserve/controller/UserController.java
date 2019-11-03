@@ -310,6 +310,12 @@ public class UserController extends HttpServlet
         	//aFacilityList will be the list with the remaining possible reservations
         	UserModelDAO.AvailableReservations(aFacilityList, ReservationList);
         	
+        	//If we are modifying a time, we need to now delete the previous one
+        	if(request.getParameter("idmodify").equals("1"))
+        	{            	
+            	UserModelDAO.cancelReservation(request.getParameter("iddate"), request.getParameter("name"), request.getParameter("from"), request.getParameter("to"));
+        	}
+        	
         	session.setAttribute("FACILITYs", aFacilityList);
         	url = "/UserListAvailableReservations.jsp";
             }
@@ -317,7 +323,6 @@ public class UserController extends HttpServlet
         }
         else if(action.equalsIgnoreCase("addReservations"))
         {
-        	
         	String username = (String)session.getAttribute("username");
 			if (request.getParameter("radioRes")!=null)
 			{
@@ -325,24 +330,8 @@ public class UserController extends HttpServlet
 				//+++++++The following is to get the reservation previously selected +++++++
 				//Now we need to query based on these fields
 	        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
-	        	SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
-	            Date myDate = parseDate(date);
-	            String dayOfWeek = simpleDateformat.format(myDate);
-	        	aFacilityList = UserModelDAO.listAvailableReservations(type, date, time, dayOfWeek);
-	        	session.setAttribute("AVAILABLE", aFacilityList);
-	        	
-				//Get All Reserved Facilities List
-				//String username = (String) session.getAttribute("username");
-	        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
-	        	ReservationList = UserModelDAO.listReservations();
-	        	
-	        	//Now we need to remove the current reservations from the possible reservations
-	        	//aFacilityList will be the list with the remaining possible reservations
-	        	UserModelDAO.AvailableReservations(aFacilityList, ReservationList);
-	        	//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	        	
 				//Okay now we need to insert into database
-				
+	        	aFacilityList = (ArrayList<Facility>)session.getAttribute("AVAILABLE");
 				UserModelDAO.addReservation(aFacilityList.get(sel), username);
 				//res.setType();
 				url = "/UserHome.jsp";

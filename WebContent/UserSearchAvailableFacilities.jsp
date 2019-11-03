@@ -44,7 +44,7 @@
 				<tr>
 					<td>
 						<input name="errMsg"  value="<c:out value='${errorMsgs}'/>" type="text"  style ="background-color:#f68026;; color: white; border: none; width: 400px" disabled="disabled"> 
-						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations" method="post">
+						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations&idmodify=${0}" method="post">
 			        	<table class="center"> 
 			        		<tr>
 			    				<td> Facility Type: </td>
