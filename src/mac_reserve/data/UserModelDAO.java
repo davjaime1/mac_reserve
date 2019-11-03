@@ -233,7 +233,7 @@ public class UserModelDAO {
     {
     	ArrayList<Facility> facilities = new ArrayList<Facility>();
         
-    	String queryString = "SELECT * FROM facilityreservation f WHERE f.reservedUser=\"" + username + "\""; 
+    	String queryString = "SELECT * FROM facilityreservation f WHERE f.reservedUser=\"" + username + "\" ORDER BY f.date, f.from"; 
     	
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
@@ -273,7 +273,6 @@ public class UserModelDAO {
     public static ArrayList<Facility> listReservations()
     {
     	ArrayList<Facility> facilities = new ArrayList<Facility>();
-        
     	String queryString = "SELECT * FROM facilityreservation"; 
     	
         Statement stmt = null;
@@ -393,5 +392,22 @@ public class UserModelDAO {
             System.out.println("Error in UserDAO\n" + e.getMessage());
         }
         return deposit;
+    }
+    
+    public static void cancelReservation(String date, String name, String from, String to)
+    {
+		Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate("DELETE FROM facilityreservation  WHERE facilityname = \"" + name + "\" AND date = \""+ date +"\" AND `from` = \"" + from + "\" AND `to` = \""+ to + "\"");
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could remove reservation from database\n" + e.getMessage());
+        }
     }
 }

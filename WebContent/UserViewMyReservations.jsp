@@ -67,10 +67,10 @@
 					            <td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.to}" /></td>
 					            <td class="myTableCell" style="padding-right: 15px; font-size: 20px;"><c:out value="${item.deposit}" /></td>
 					            <td>
-					                    <a href="/mac_reserve/FMController?action=viewSpecificUser&username=${user.username}">Modify</a>
+					                    <a href="/mac_reserve/UserController?action=listAvailableReservations&idfacilitytype=${item.type}&iddate=${item.date}&idtimes=${''}&name=${item.name}&from=${item.from}&to=${item.to}&idmodify=${1}">Modify</a>
 					             </td>
 					             <td>
-					                    <a href="/mac_reserve/FMController?action=viewSpecificUser&username=${user.username}">Cancel</a>
+					                    <a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}">Cancel</a>
 					             </td>
 								</tr>
 							</c:forEach>
