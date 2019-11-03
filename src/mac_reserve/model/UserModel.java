@@ -16,8 +16,11 @@ public class UserModel {
 	private String zip;
 	private String email;
 	private String phone;
+	private String noshow;
+	private String violations;
+	private String status;
 	
-	public void setUser (String username, String id, String firstName, String lastName, String password, String role, String address,String state,String city,String zip, String phone, String email) {
+	public void setUser (String username, String id, String firstName, String lastName, String password, String role, String address,String state,String city,String zip, String phone, String email, String noshow, String violations, String status) {
 		setUsername(username);
 		setId(id);
 		setFirstName(firstName);
@@ -30,7 +33,9 @@ public class UserModel {
 		setZip(zip);
 		setPhone(phone);
 		setEmail(email);
-		
+		setNoshow(noshow);
+		setViolations(violations);
+		setStatus(status);
 	}
 	
 	
@@ -116,6 +121,36 @@ public class UserModel {
 	}
 	public String getEmail() {
 		return email;
+	}
+	
+	public void setNoshow(String noshow)
+	{
+		this.noshow = noshow;
+	}
+	
+	public String getNoshow()
+	{
+		return noshow;
+	}
+	
+	public void setViolations(String violations)
+	{
+		this.violations = violations;
+	}
+	
+	public String getViolations()
+	{
+		return violations;
+	}
+	
+	public void setStatus(String status)
+	{
+		this.status = status;
+	}
+	
+	public String getStatus()
+	{
+		return status;
 	}
 
 	public void validateUser (String action, UserErrorMsgs errorMsgs) {

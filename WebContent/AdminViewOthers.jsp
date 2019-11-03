@@ -100,31 +100,10 @@
 			    				<td> Email: </td>
 			    				<td> <c:out value="${USERS.email}" /> </td>
 			    			</tr>
-			    			
-			    			<tr>
-			    				<td> No Shows: </td>
-			    				<td> <c:out value="${USERS.noshow}" /> </td>
-			    			</tr>
-			    			
-			    			<tr>
-			    				<td> Violations: </td>
-			    				<td> <c:out value="${USERS.violations}" /> </td>
-			    			</tr>
-			    		
-			    			<tr>
-			    				<td> Status: </td>
-			    				<td> <c:out value="${USERS.status}" /> </td>
-			    			</tr>
-			
+		
 			    			<tr>
 			   				</tr>
 			    		</table>
-			    		<input name="action" value="registerUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:14px" type="submit" value="Revoke/Unrevoke">
-		    			</form>
-		    			<input name="action" value="registerUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:20px" type="submit" value="Change User Role">
-		    			</form>
 					</td>
 				</tr>
 			</table>

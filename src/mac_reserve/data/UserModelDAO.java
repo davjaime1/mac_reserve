@@ -30,7 +30,10 @@ public class UserModelDAO {
 					+ user.getState() + "','"
 					+ user.getZip() + "','"
 					+ user.getPhone() + "','"
-					+ user.getEmail() + "')";
+					+ user.getEmail() + "','"
+					+ user.getNoshow() + "','"
+					+ user.getViolations() + "','"
+					+ user.getStatus() + "')";
 			stmt.executeUpdate(insertmar);	
 			conn.commit(); 
 		} catch (SQLException e) {}
@@ -66,6 +69,9 @@ public class UserModelDAO {
 				res.setZip(resultSet.getString("zip"));
 				res.setPhone(resultSet.getString("phone"));
 				res.setEmail(resultSet.getString("email"));
+				res.setNoshow(resultSet.getString("noshows"));
+				res.setViolations(resultSet.getString("violations"));
+				res.setStatus(resultSet.getString("status"));
 				fetch_profile.add(res);		
 				
 				

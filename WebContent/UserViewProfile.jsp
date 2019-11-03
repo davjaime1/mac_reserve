@@ -104,16 +104,20 @@
 			    				<td> <c:out value="${USERS.email}" /> </td>
 			    			</tr>
 			    			
-			    						    			<tr>
+			    			<tr>
 			    				<td> No Shows: </td>
-			    				<td> <c:out value="0" /> </td>
+			    				<td> <c:out value="${USERS.noshow}" /> </td>
 			    			</tr>
 			    			
 			    			<tr>
 			    				<td> Violations: </td>
-			    				<td> <c:out value="0" /> </td>
+			    				<td> <c:out value="${USERS.violations}" /> </td>
 			    			</tr>
 			    		
+			    			<tr>
+			    				<td> Status: </td>
+			    				<td> <c:out value="${USERS.status}" /> </td>
+			    			</tr>
 			
 			    			<tr>
 			   				</tr>
