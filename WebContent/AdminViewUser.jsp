@@ -36,7 +36,7 @@
 	      	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
-        <article>
+        <article style="height: auto">
         	<table class="center">
 				<tr>
 					<td>

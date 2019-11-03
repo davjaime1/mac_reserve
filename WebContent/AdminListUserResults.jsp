@@ -67,7 +67,7 @@
 					                    <c:out value="${user.role}" />
 					                </td>
 					                <td>
-					                    <a href="/mac_reserve/AdminController?action=viewSpecificUser&username=${user.username}">View</a>
+					                    <a href="/mac_reserve/AdminController?action=viewSpecificUser&username=${user.username}&role=${user.role}">View</a>
 					                </td>
 					            </tr>
 					        </c:forEach>
