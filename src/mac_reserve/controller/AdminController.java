@@ -30,7 +30,7 @@ public class AdminController extends HttpServlet
     
     private void userParam(HttpServletRequest request, UserModel user)
     {
-        user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"));
+        user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"), request.getParameter("noshow"), request.getParameter("violations"), request.getParameter("status"));
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -51,16 +51,24 @@ public class AdminController extends HttpServlet
         else if(action.equalsIgnoreCase("viewSpecificUser"))
         {
         	String username = request.getParameter("username");
+        	String role = request.getParameter("role");
         	
         	ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
             fetch_profile = UserModelDAO.returnProfile(username);
             UserModel user = new UserModel();
             user.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
                     fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
-                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail(), fetch_profile.get(0).getNoshow(), fetch_profile.get(0).getViolations(), fetch_profile.get(0).getStatus());
             
             session.setAttribute("USERS", user);
-            url = "/AdminViewUser.jsp";
+            if(role.equals("U"))
+            {
+            	url = "/AdminViewUser.jsp";
+            }
+            else
+            {
+            	url = "/AdminViewOthers.jsp";
+            }
             getServletContext().getRequestDispatcher(url).forward(request, response);
         	
         }
@@ -90,7 +98,7 @@ public class AdminController extends HttpServlet
             UserModel currentUser = new UserModel();
             currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
                     fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
-                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail(), fetch_profile.get(0).getNoshow(), fetch_profile.get(0).getViolations(), fetch_profile.get(0).getStatus());
             
             session.setAttribute("USERS", currentUser);
             url = "/AdminViewProfile.jsp";
@@ -107,7 +115,7 @@ public class AdminController extends HttpServlet
             UserModel currentUser = new UserModel();
             currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
                     fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
-                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail(), fetch_profile.get(0).getNoshow(), fetch_profile.get(0).getViolations(), fetch_profile.get(0).getStatus());
             
             stateInDB = FM_UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
@@ -147,7 +155,7 @@ public class AdminController extends HttpServlet
 	            UserModel currentUser = new UserModel();
 	            currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
 	                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
-	                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+	                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail(), fetch_profile.get(0).getNoshow(), fetch_profile.get(0).getViolations(), fetch_profile.get(0).getStatus());
 	            
 	            session.setAttribute("USERS", currentUser);
 	            url = "/AdminViewProfile.jsp";

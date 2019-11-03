@@ -25,25 +25,21 @@
 	</div>
 	
     <header>
-        <h1 style="color:white">Facility Manager Home</h1>
+        <h1 style="color:white">Admin Home</h1>
     </header>
 
     <section>
     	<nav>
 	        <ul>
-            	<li><a href="/mac_reserve/FMController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
-          		<li><a href="/mac_reserve/FMController?action=viewSearchAvailableFacilities"  target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
-          		<li><a href="/mac_reserve/FMController?action=viewFacilityReportList"  target="_top" style="color:white"><span>View Facility Details</span></a></li>          		
-          		<li><a href="/mac_reserve/FMController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
-          		<li><a href="/mac_reserve/FMController?action=facilityAvailability" target="_top" style="color:white"><span>Modify Facility Availability</span></a></li>
-        	</ul>
+	            	<li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+	      			<li><a href="/mac_reserve/AdminController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
+	      	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
-        <article style="height: auto">
+        <article>
         	<table class="center">
 				<tr>
 					<td>
-						<form name="userForm" action="/mac_reserve/FMController?action=viewUserReservations&currentUser=${USERS.username}" method="post">
 			        	<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
@@ -104,28 +100,11 @@
 			    				<td> Email: </td>
 			    				<td> <c:out value="${USERS.email}" /> </td>
 			    			</tr>
-			    			
-			    			<tr>
-			    				<td> No Shows: </td>
-			    				<td> <c:out value="${USERS.noshow}" /> </td>
-			    			</tr>
-			    			
-			    			<tr>
-			    				<td> Violations: </td>
-			    				<td> <c:out value="${USERS.violations}" /> </td>
-			    			</tr>
-			    		
-			    			<tr>
-			    				<td> Status: </td>
-			    				<td> <c:out value="${USERS.status}" /> </td>
-			    			</tr>
-			
+		
 			    			<tr>
 			   				</tr>
 			    		</table>
-						<input name="action" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="View User Reservations">
-		    			</form>
+					</td>
 				</tr>
 			</table>
         </article>

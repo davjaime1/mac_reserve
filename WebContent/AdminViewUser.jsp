@@ -36,7 +36,7 @@
 	      	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
-        <article>
+        <article style="height: auto">
         	<table class="center">
 				<tr>
 					<td>
@@ -99,6 +99,21 @@
 			    			<tr>
 			    				<td> Email: </td>
 			    				<td> <c:out value="${USERS.email}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> No Shows: </td>
+			    				<td> <c:out value="${USERS.noshow}" /> </td>
+			    			</tr>
+			    			
+			    			<tr>
+			    				<td> Violations: </td>
+			    				<td> <c:out value="${USERS.violations}" /> </td>
+			    			</tr>
+			    		
+			    			<tr>
+			    				<td> Status: </td>
+			    				<td> <c:out value="${USERS.status}" /> </td>
 			    			</tr>
 			
 			    			<tr>
