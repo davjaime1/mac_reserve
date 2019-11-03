@@ -43,7 +43,7 @@
         	<table class="center">
 				<tr>
 					<td>
-						<form name="userForm" action="/mac_reserve/FMController?action=userReservations" method="post">
+						<form name="userForm" action="/mac_reserve/FMController?action=viewUserReservations&currentUser=${USERS.username}" method="post">
 			        	<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>

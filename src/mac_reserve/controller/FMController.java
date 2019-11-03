@@ -110,7 +110,9 @@ public class FMController extends HttpServlet
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else // redirect all other gets to post
+        {
             doPost(request, response);
+        }
     }
     
     
@@ -159,6 +161,15 @@ public class FMController extends HttpServlet
             session.setAttribute("USERS", currentUser);
             url = "/FMUpdateProfile.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("viewUserReservations"))
+        {
+        	String currentUser = request.getParameter("currentUser");
+        	ArrayList<Facility> list = new ArrayList<Facility>();
+        	list = UserModelDAO.listMyReservations(currentUser);
+        	session.setAttribute("RESERVATIONS", list);
+        	url = "/FMListAllReservations.jsp";
+        	getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("viewSearchAvailableFacilities"))
         {
