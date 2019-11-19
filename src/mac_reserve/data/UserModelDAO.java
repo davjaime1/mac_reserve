@@ -172,12 +172,12 @@ public class UserModelDAO {
     	String queryString="";
         if(week.equals("Saturday") || week.equals("Sunday"))
         {
-        	queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='E'"; 
+        	queryString = "SELECT f.facilityname, f.facilitytype, f.venue, f.day, f.from, f.to FROM facilitiesoptions f LEFT JOIN facilities g ON g.name = f.facilityname WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='E' AND g.availiability = 'Available'"; 
 
         }
         else
         {
-        	queryString = "SELECT * FROM facilitiesoptions f WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='D'"; 
+        	queryString = "SELECT f.facilityname, f.facilitytype, f.venue, f.day, f.from, f.to FROM facilitiesoptions f LEFT JOIN facilities g ON g.name = f.facilityname WHERE f.facilitytype=\"" + type + "\" AND f.from LIKE '%" + time + "' AND day='D' AND g.availiability = 'Available'"; 
 
         }
     	
