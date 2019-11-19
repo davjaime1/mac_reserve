@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>View Profile</title>
+<title>Change Role</title>
 
 <link rel="stylesheet" href="css/commonUI.css" type="text/css"/>   
 
@@ -31,16 +31,17 @@
     <section>
     	<nav>
 	        <ul>
-	            	<li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
-	      			<li><a href="/mac_reserve/AdminController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
-	      	</ul>
+	            <li><a href="/mac_reserve/AdminController?action=viewProfile"  target="_top" style="color:white"><span>View Profile</span></a></li>
+		      			<li><a href="/mac_reserve/AdminController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
+	        </ul>
         </nav>
         <!-- Here goes the page the function stuff for each page -->
         <article>
         	<table class="center">
 				<tr>
 					<td>
-			        	<table class="center"> 
+						<form name="companyForm" action="/mac_reserve/AdminController?action=updateRole&idusername=${USERS.username}" method="post">
+			        		<table class="center"> 
 			    			<tr>
 			    				<td> Username: </td>
 			    				<td> <c:out value="${USERS.username}" /> </td>
@@ -52,13 +53,21 @@
 			    			</tr>
 			    			
 			    			<tr>
-			    				<td> Password: </td>
-			    				<td> <c:out value="${USERS.password}" /> </td>
+			    				<td> Role: </td>
+			    				<td>
+				                    <select name="idrole">
+				                        <c:forEach items="${ROLE}" var="item" varStatus="status">
+				                            <option value="${item.id}">
+				                                <c:out value='${item.name}' />
+				                            </option>
+				                        </c:forEach>
+				                    </select>
+				                </td>
 			    			</tr>
 			    			
 			    			<tr>
-			    				<td> Role: </td>
-			    				<td> <c:out value="${USERS.role}" /> </td>
+			    				<td> Password: </td>
+			    				<td> <c:out value="${USERS.password}" /> </td>
 			    			</tr>
 			    			
 			    			<tr>
@@ -92,7 +101,7 @@
 			    			</tr>
 			    			
 			    			<tr>
-			    				<td> Phone: </td>
+			    				<td> Phone : </td>
 			    				<td> <c:out value="${USERS.phone}" /> </td>
 			    			</tr>
 			    			
@@ -100,15 +109,17 @@
 			    				<td> Email: </td>
 			    				<td> <c:out value="${USERS.email}" /> </td>
 			    			</tr>
-		
-			    			<table>
-				    			<form name="companyForm" action="/mac_reserve/AdminController?action=changeRole&username=${USERS.username}" method="post">
-				    			<input name="action" value="registerUser" type="hidden">
-			    				<input style="color:blue;background-color: orange; width:163px; margin-left:80px" type="submit" value="Change User Role">
-		    					</form>
-			   				
-			   				</table>
+			
+			    			<tr>
+			   				</tr>
 			    		</table>
+			    		<tr>
+							<td>
+					    		<input name="action" value="registerUser" type="hidden">
+		    					<input style="width:163px; margin-left:157px" type="submit" value="Update">
+		    					</form>
+	    					</td>
+						</tr>
 					</td>
 				</tr>
 			</table>
