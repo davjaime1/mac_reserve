@@ -312,9 +312,16 @@ public class FMController extends HttpServlet
         {
         	ArrayList<Facility> results = new ArrayList<Facility>();
         	results = FM_UtilityDAO.getFacilities(request.getParameter("type"));
-        	System.out.println(request.getParameter("type"));
         	session.setAttribute("NAMES", results);
         	url = "/FMViewTypeDetails.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("changeFacilityAvailability"))
+        {
+        	String name = request.getParameter("name");
+        	String ava = request.getParameter("ava");
+        	FM_UtilityDAO.setAvaliability(name, ava);
+        	url = "/FM_Home.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
     }
