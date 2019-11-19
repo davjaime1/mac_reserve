@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import mac_reserve.data.FM_UtilityDAO;
 import mac_reserve.data.RoleDAO;
 import mac_reserve.data.UserModelDAO;
+import mac_reserve.data.AdminDAO;
 import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
@@ -173,6 +174,14 @@ public class AdminController extends HttpServlet
         	session.setAttribute("USERS", results);
         	
         	url = "/AdminListUserResults.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("userStatus"))
+        {
+        	String username = request.getParameter("username");
+        	String status = request.getParameter("status");
+        	AdminDAO.UserStatus(username, status);
+        	url = "/AdminHome.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
     }
