@@ -90,7 +90,7 @@ public class FM_UtilityDAO {
 	
 	public static ArrayList<UserModel> searchUsers(String username, String role)
 	{
-		return ReturnMatchingUsers("SELECT * FROM users where username LIKE '%"+ username +"' AND role ='"+ role +"'");
+		return ReturnMatchingUsers("SELECT * FROM users where username LIKE '%"+ username +"' AND role ='"+ role +"' ORDER BY username");
 	}
 	
 	public static ArrayList<String> getTypes() {
@@ -142,7 +142,6 @@ public class FM_UtilityDAO {
 		String change = "";
 		if(ava.equals("Available"))
 		{
-			System.out.println("Here");
 			change = "Unavailable";
 		}
 		else
