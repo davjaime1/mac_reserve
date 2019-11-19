@@ -72,6 +72,9 @@
 					                <td>
 					                    <c:out value="${NAMES.deposit}" />
 					                </td>
+					           		<td>
+					                    <a href="/mac_reserve/FMController?action=changeFacilityAvailability&name=${NAMES.name}&ava=${NAMES.avaliability}">${NAMES.avaliability}</a>
+					                </td>
 					            </tr>
 					        </c:forEach>
 			        	</table>

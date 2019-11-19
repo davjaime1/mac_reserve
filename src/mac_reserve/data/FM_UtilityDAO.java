@@ -129,10 +129,33 @@ public class FM_UtilityDAO {
 				res.setDuration(resultSet.getString("duration"));
 				res.setVenue(resultSet.getString("venue"));
 				res.setDeposit(resultSet.getString("deposit"));
+				res.setAvaliability(resultSet.getString("availiability"));
 				list.add(res);		
 			}
 		} catch (SQLException e) {System.out.println("Whoops");}
 		
 		return list;
+	}
+	
+	public static void setAvaliability(String name, String ava)
+	{
+		String change = "";
+		if(ava.equals("Available"))
+		{
+			System.out.println("Here");
+			change = "Unavailable";
+		}
+		else
+		{
+			change = "Available";
+		}
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		String queryString = "UPDATE `facilities` SET availiability = '" +change+"' WHERE name = '" + name +"'";
+		try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate(queryString);
+            conn.commit();
+		} catch (SQLException e) {System.out.println("Whoops");}
 	}
 }
