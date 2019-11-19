@@ -16,6 +16,7 @@ public class UserErrorMsgs{
 	private String phoneError;
 	private String emailError;
 	private String userNameError;
+	private String statusError;
 
 	
 	public UserErrorMsgs() {
@@ -181,6 +182,16 @@ public class UserErrorMsgs{
 
 	public void setUserNameError(String userNameError) {
 		this.userNameError = userNameError;
+	}
+	
+	public String getStatusError()
+	{
+		return statusError;
+	}
+	
+	public void setStatusError(String err)
+	{
+		statusError = err;
 	}
 
 //	public String getErrorMsg() {

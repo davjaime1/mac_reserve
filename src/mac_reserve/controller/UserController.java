@@ -248,6 +248,20 @@ public class UserController extends HttpServlet
         }
         else if(action.equalsIgnoreCase("listAvailableReservations"))
         {
+        	String username = (String) session.getAttribute("username");
+        	//Need to see if the user is revoked or not
+        	ArrayList<UserModel> user = new ArrayList<UserModel>();
+        	user = UserModelDAO.returnProfile(username);
+        	UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+        	if(user.get(0).getStatus().equals("Revoked"))
+        	{
+        		System.out.println("You are revoked");
+        		//Add an error message, saying you are revoked
+        		CerrorMsgs.setStatusError("You are revoked, you cannot make any reservations");
+        		session.setAttribute("errorMsgs", CerrorMsgs);
+        		url = "/UserSearchAvailableFacilities.jsp";
+        	}
+        	else {
         	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         	Date date = new Date();
         	String cDate = formatter.format(date);
@@ -302,7 +316,7 @@ public class UserController extends HttpServlet
         	session.setAttribute("AVAILABLE", aFacilityList);
         	
 			//Get All Reserved Facilities List
-			String username = (String) session.getAttribute("username");
+			//String username = (String) session.getAttribute("username");
         	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
         	ReservationList = UserModelDAO.listReservations();
         	
@@ -319,6 +333,7 @@ public class UserController extends HttpServlet
         	session.setAttribute("FACILITYs", aFacilityList);
         	url = "/UserListAvailableReservations.jsp";
             }
+        	}
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("addReservations"))
@@ -347,6 +362,7 @@ public class UserController extends HttpServlet
 				}
 			}
         }
+        //Login user
         else
         {
             
