@@ -157,4 +157,67 @@ public class FM_UtilityDAO {
             conn.commit();
 		} catch (SQLException e) {System.out.println("Whoops");}
 	}
+	
+	public static void addViolation(String username, String facilityname, String date, String from, String to, String desc)
+	{
+    	String queryString = "INSERT INTO `violations` VALUES ('"+username+"', '"+facilityname+"', '"+date+"', '"+from+"', '"+to+"','"+desc+"')";
+    	Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate(queryString);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not add Violation");
+        }
+        queryString = "UPDATE `users` SET violations = violations + 1 WHERE username = '" + username +"'";
+    	stmt = null;
+        conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate(queryString);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not add Violation");
+        }
+	}
+	public static void addNoShow(String username, String facilityname, String date, String from, String to, String desc)
+	{
+    	String queryString = "INSERT INTO `noshows` VALUES ('"+username+"', '"+facilityname+"', '"+date+"', '"+from+"', '"+to+"','"+desc+"')";
+    	Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate(queryString);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not add NoShow");
+        }
+        queryString = "UPDATE `users` SET noshows = noshows + 1 WHERE username = '" + username +"'";
+    	stmt = null;
+        conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate(queryString);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not increment noshow");
+        }
+	}
 }

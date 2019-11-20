@@ -7,8 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import mac_reserve.model.Facility;
-import mac_reserve.model.User;
+import mac_reserve.model.NoShows;
 import mac_reserve.model.UserModel;
+import mac_reserve.model.Violations;
 import mac_reserve.util.SQLConnection;
 
 public class UserModelDAO {
@@ -18,7 +19,7 @@ public class UserModelDAO {
 		Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
-			String insertmar = queryString + " VALUES ('"  
+			String insertuser = queryString + " VALUES ('"  
 					+ user.getUsername()  + "','"	
 					+ user.getId()  + "','"	
 					+ user.getFirstName() + "','"
@@ -34,9 +35,9 @@ public class UserModelDAO {
 					+ user.getNoshow() + "','"
 					+ user.getViolations() + "','"
 					+ user.getStatus() + "')";
-			stmt.executeUpdate(insertmar);	
+			stmt.executeUpdate(insertuser);	
 			conn.commit(); 
-		} catch (SQLException e) {}
+		} catch (SQLException e) {};
 	}
 	
 	public static ArrayList<UserModel> returnProfile (String username) 
@@ -82,7 +83,7 @@ public class UserModelDAO {
 	
 	
 	public static void insertUser(UserModel user) {  
-		StoreListinDB(user,"INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");
+		StoreListinDB(user,"INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email,noshows,violations,status) ");
 	} 
     
 	public static Boolean userNameunique(String name)  {  
@@ -415,5 +416,69 @@ public class UserModelDAO {
         {
             System.out.println("Could remove reservation from database\n" + e.getMessage());
         }
+    }
+    
+    public static ArrayList<NoShows> getNoShows(String username)
+    {
+    	ArrayList<NoShows> noshows = new ArrayList<NoShows>();
+        
+    	String queryString = "SELECT * FROM noshows"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                NoShows obj = new NoShows();
+                obj.setUsername(list.getString("username"));
+                obj.setName(list.getString("names"));
+                obj.setDate(list.getString("date"));
+                obj.setFrom(list.getString("from"));
+                obj.setTo(list.getString("to"));
+                obj.setDescription(list.getString("description"));
+                noshows.add(obj);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not get no shows");
+        }
+        
+        return noshows;
+    }
+    
+    public static ArrayList<Violations> getViolations(String username)
+    {
+    	ArrayList<Violations> noshows = new ArrayList<Violations>();
+        
+    	String queryString = "SELECT * FROM violations"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Violations obj = new Violations();
+                obj.setUsername(list.getString("username"));
+                obj.setName(list.getString("name"));
+                obj.setDate(list.getString("date"));
+                obj.setFrom(list.getString("from"));
+                obj.setTo(list.getString("to"));
+                obj.setDescription(list.getString("description"));
+                noshows.add(obj);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not get violations");
+        }
+        
+        return noshows;
     }
 }

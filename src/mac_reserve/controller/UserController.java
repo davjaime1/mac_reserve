@@ -1,14 +1,14 @@
 package mac_reserve.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +21,12 @@ import mac_reserve.data.FM_UtilityDAO;
 import mac_reserve.data.RoleDAO;
 import mac_reserve.data.UserModelDAO;
 import mac_reserve.model.Facility;
+import mac_reserve.model.NoShows;
 import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
 import mac_reserve.model.UserModel;
+import mac_reserve.model.Violations;
 
 
 /**
@@ -44,6 +46,11 @@ public class UserController extends HttpServlet
     private void userParam(HttpServletRequest request, UserModel user)
     {
         user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"), request.getParameter("noshow"), request.getParameter("violations"), request.getParameter("status"));
+    }
+    
+    private void userParam2(HttpServletRequest request, UserModel user)
+    {
+        user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"), "0", "0", "Unrevoked");
     }
     
     private void setParam(HttpServletRequest request, String type, String date, String time)
@@ -112,9 +119,7 @@ public class UserController extends HttpServlet
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
-        // doGet(request, response);
-        
+       
         String action = request.getParameter("action"), url = "/";
         HttpSession session = request.getSession();
         
@@ -137,7 +142,7 @@ public class UserController extends HttpServlet
         {
             UserModel user = new UserModel();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
-            userParam(request, user);
+            userParam2(request, user);
             user.validateUser(action, CerrorMsgs);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))
@@ -362,6 +367,26 @@ public class UserController extends HttpServlet
 				}
 			}
         }
+        else if(action.equalsIgnoreCase("viewNoShow"))
+        {
+        	//Need to ge the list of no shows for the current user
+        	String username =(String) session.getAttribute("username");
+        	ArrayList<NoShows> noshow = new ArrayList<NoShows>();
+        	noshow = UserModelDAO.getNoShows(username);
+        	session.setAttribute("NOSHOWS", noshow);
+        	url = "/UserViewNoShows.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("viewViolation"))
+        {
+        	//Need to ge the list of no shows for the current user
+        	String username =(String) session.getAttribute("username");
+        	ArrayList<Violations> viol = new ArrayList<Violations>();
+        	viol = UserModelDAO.getViolations(username);
+        	session.setAttribute("VIOLATIONS", viol);
+        	url = "/UserViewViolations.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
         //Login user
         else
         {
@@ -427,9 +452,6 @@ public class UserController extends HttpServlet
                     request.getRequestDispatcher("/Repairer_Home.jsp").forward(request, response);
                 }
             }
-            
-            
         }
-        
     }
 }
