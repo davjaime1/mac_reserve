@@ -120,14 +120,14 @@
 			   				</tr>
 			    		</table>
 			    		<table>
-			    		<form name="companyForm" action="/mac_reserve/AdminController?action=userStatus&username=${USERS.username}&status=${USERS.status}" method="post">
-			    		<input name="action" value="registerUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:14px" type="submit" value="Revoke/Unrevoke">
-		    			</form>
-		    			<form name="companyForm" action="/mac_reserve/AdminController?action=registerUser" method="post">
-		    			<input name="action" value="registerUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:20px" type="submit" value="Change User Role">
-		    			</form>
+				    		<form name="companyForm" action="/mac_reserve/AdminController?action=userStatus&username=${USERS.username}&status=${USERS.status}" method="post">
+				    		<input name="action" value="registerUser" type="hidden">
+			    			<input style="color:blue;background-color: orange; width:163px; margin-left:14px" type="submit" value="Revoke/Unrevoke">
+			    			</form>
+			    			<form name="companyForm" action="/mac_reserve/AdminController?action=changeRole&username=${USERS.username}" method="post">
+			    			<input name="action" value="registerUser" type="hidden">
+		    				<input style="color:blue;background-color: orange; width:163px; margin-left:80px" type="submit" value="Change User Role">
+	    					</form>
 		    			</table>
 					</td>
 				</tr>

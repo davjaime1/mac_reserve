@@ -36,4 +36,16 @@ public class AdminDAO
             conn.commit();
 		} catch (SQLException e) {System.out.println("Whoops");}
 	}
+    
+    public static void updateRole(String username, String role)
+    {
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		String queryString = "UPDATE `users` SET role = '" +role+"' WHERE username = '" + username +"'";
+		try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate(queryString);
+            conn.commit();
+		} catch (SQLException e) {System.out.println("Whoops");}
+    }
 }

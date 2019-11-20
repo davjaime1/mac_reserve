@@ -184,5 +184,40 @@ public class AdminController extends HttpServlet
         	url = "/AdminHome.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
+        else if(action.equalsIgnoreCase("changeRole"))
+        {
+        	//Gotta get the roles list
+        	ArrayList<Role> roleInDB = new ArrayList<Role>();
+            roleInDB = RoleDAO.listRoles();
+            session.setAttribute("ROLE", roleInDB);
+        	url = "/AdminChangeRole.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("updateRole"))
+        {
+        	String role = request.getParameter("idrole");
+        	System.out.println(role);
+        	String username = request.getParameter("idusername");
+        	//Need to update the user's role now
+        	AdminDAO.updateRole(username, role);
+        	//Then redirect to homepage
+        	ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+            fetch_profile = UserModelDAO.returnProfile(username);
+            UserModel user = new UserModel();
+            user.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
+                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail(), fetch_profile.get(0).getNoshow(), fetch_profile.get(0).getViolations(), fetch_profile.get(0).getStatus());
+            
+            session.setAttribute("USERS", user);
+            if(role.equals("U"))
+            {
+            	url = "/AdminViewUser.jsp";
+            }
+            else
+            {
+            	url = "/AdminViewOthers.jsp";
+            }
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
     }
 }
