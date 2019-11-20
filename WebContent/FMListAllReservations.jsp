@@ -69,6 +69,9 @@
 					            <td>
 					            	<a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}">Cancel</a>
 					            </td>
+					            <td>
+					            	<a href="/mac_reserve/FMController?action=reportUser&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}">Report</a>
+					            </td>
 								</tr>
 							</c:forEach>
 			        	</table>

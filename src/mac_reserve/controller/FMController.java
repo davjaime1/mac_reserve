@@ -165,6 +165,7 @@ public class FMController extends HttpServlet
         else if(action.equalsIgnoreCase("viewUserReservations"))
         {
         	String currentUser = request.getParameter("currentUser");
+        	session.setAttribute("CURRENT", currentUser);
         	ArrayList<Facility> list = new ArrayList<Facility>();
         	list = UserModelDAO.listMyReservations(currentUser);
         	session.setAttribute("RESERVATIONS", list);
@@ -321,6 +322,30 @@ public class FMController extends HttpServlet
         	String name = request.getParameter("name");
         	String ava = request.getParameter("ava");
         	FM_UtilityDAO.setAvaliability(name, ava);
+        	url = "/FM_Home.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("reportUser"))
+        {
+        	//Now we need to create the form with all the details, and a description box
+        	Facility fac = new Facility();
+        	fac.setName(request.getParameter("name"));
+        	fac.setDate(request.getParameter("date"));
+        	fac.setFrom(request.getParameter("from"));
+        	fac.setTo(request.getParameter("to"));
+        	fac.setDate(request.getParameter("date"));
+        	session.setAttribute("FAC", fac);
+        	
+        	url = "/FMReportViolation.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("submitViolation"))
+        {
+        	//We need to add this violation to the database
+        	String desc = request.getParameter("descriptionTextArea");
+        	
+        	FM_UtilityDAO.addViolation(request.getParameter("currentUser"),request.getParameter("name"),request.getParameter("date"),request.getParameter("from"),request.getParameter("to"), desc);
+        	//Also need to increment the value in the user table
         	url = "/FM_Home.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }

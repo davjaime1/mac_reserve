@@ -262,7 +262,7 @@ CREATE TABLE `users` (
   `email` varchar(120) NOT NULL,
   `noshows` varchar(3),
   `violations` varchar(3),
-  `status` varchar(3),
+  `status` varchar(10),
   PRIMARY KEY (`username`),
   KEY `fk_role_idx` (`role`),
   KEY `fk_state_idx` (`state`),
@@ -277,6 +277,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('user','1001343611', 'John', 'Smith', 'password', 'U', 'Lane', 'Arlington', 'TX', '76019', '1231231234', 'email@mavs.uta.edu', '0', '0', 'Unrevoked'),('fm','1001343611', 'John', 'Smith', 'password', 'FM', 'Lane', 'Arlington', 'TX', '76019', '1231231234', 'email@mavs.uta.edu', '0', '0', 'Unrevoked'),('admin','1001343611', 'John', 'Smith', 'password', 'A', 'Lane', 'Arlington', 'TX', '76019', '1231231234', 'email@mavs.uta.edu', '0', '0', 'Unrevoked');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -302,6 +303,33 @@ LOCK TABLES `venues` WRITE;
 /*!40000 ALTER TABLE `venues` DISABLE KEYS */;
 INSERT INTO `venues` VALUES ('I','Indoor'),('O','Outdoor');
 /*!40000 ALTER TABLE `venues` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `violations`
+--
+
+DROP TABLE IF EXISTS `violations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `violations` (
+  `username` varchar(16) NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `date` DATE NOT NULL,
+  `from` varchar(45) NOT NULL,
+  `to` varchar(45) NOT NULL,
+  `description` varchar(120) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `violations`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
