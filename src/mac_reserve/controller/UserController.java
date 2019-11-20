@@ -46,6 +46,11 @@ public class UserController extends HttpServlet
         user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"), request.getParameter("noshow"), request.getParameter("violations"), request.getParameter("status"));
     }
     
+    private void userParam2(HttpServletRequest request, UserModel user)
+    {
+        user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"), "0", "0", "Unrevoked");
+    }
+    
     private void setParam(HttpServletRequest request, String type, String date, String time)
     {
     	this.type = type;
@@ -137,7 +142,7 @@ public class UserController extends HttpServlet
         {
             UserModel user = new UserModel();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
-            userParam(request, user);
+            userParam2(request, user);
             user.validateUser(action, CerrorMsgs);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))

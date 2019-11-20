@@ -18,7 +18,7 @@ public class UserModelDAO {
 		Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
-			String insertmar = queryString + " VALUES ('"  
+			String insertuser = queryString + " VALUES ('"  
 					+ user.getUsername()  + "','"	
 					+ user.getId()  + "','"	
 					+ user.getFirstName() + "','"
@@ -34,9 +34,9 @@ public class UserModelDAO {
 					+ user.getNoshow() + "','"
 					+ user.getViolations() + "','"
 					+ user.getStatus() + "')";
-			stmt.executeUpdate(insertmar);	
+			stmt.executeUpdate(insertuser);	
 			conn.commit(); 
-		} catch (SQLException e) {}
+		} catch (SQLException e) {};
 	}
 	
 	public static ArrayList<UserModel> returnProfile (String username) 
@@ -82,7 +82,7 @@ public class UserModelDAO {
 	
 	
 	public static void insertUser(UserModel user) {  
-		StoreListinDB(user,"INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");
+		StoreListinDB(user,"INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email,noshows,violations,status) ");
 	} 
     
 	public static Boolean userNameunique(String name)  {  

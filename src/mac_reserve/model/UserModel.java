@@ -16,9 +16,9 @@ public class UserModel {
 	private String zip;
 	private String email;
 	private String phone;
-	private String noshow;
-	private String violations;
-	private String status;
+	private String noshow = "0";
+	private String violations = "0";
+	private String status = "Unrevoked";
 	
 	public void setUser (String username, String id, String firstName, String lastName, String password, String role, String address,String state,String city,String zip, String phone, String email, String noshow, String violations, String status) {
 		setUsername(username);
