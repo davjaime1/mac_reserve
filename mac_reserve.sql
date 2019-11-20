@@ -48,7 +48,7 @@ CREATE TABLE `facilities` (
 
 LOCK TABLES `facilities` WRITE;
 /*!40000 ALTER TABLE `facilities` DISABLE KEYS */;
-INSERT INTO `facilities` VALUES ('BMC1','BMC','30M','SD','I','$25','Available'),('BMC10','BMC','30M','SD','I','$25','Available'),('BMC2','BMC','30M','SD','I','$25','Available'),('BMC3','BMC','30M','SD','I','$25','Available'),('BMC4','BMC','30M','SD','I','$25','Available'),('BMC5','BMC','30M','SD','I','$25','Available'),('BMC6','BMC','30M','SD','I','$25','Available'),('BMC7','BMC','30M','SD','I','$25','Available'),('BMC8','BMC','30M','SD','I','$25','Available'),('BMC9','BMC','30M','SD','I','$25','Available'),('CR1','CR','1H','SD','I','$50','Available'),('CR2','CR','1H','SD','I','$50','Available'),('CR3','CR','1H','SD','I','$50','Available'),('CR4','CR','1H','SD','I','$50','Available'),('CR5','CR','1H','SD','I','$50','Available'),('IBBC1','IBBC','1H','SD','I','$25','Available'),('IBBC2','IBBC','1H','SD','I','$25','Available'),('IBBC3','IBBC','1H','SD','I','$25','Available'),('IBBC4','IBBC','1H','SD','I','$25','Available'),('IBBC5','IBBC','1H','SD','I','$25','Available'),('IVBC1','IVBC','1H','SD','I','$25','Available'),('IVBC2','IVBC','1H','SD','I','$25','Available'),('IVBC3','IVBC','1H','SD','I','$25','Available'),('IVBC4','IVBC','1H','SD','I','$25','Available'),('IVBC5','IVBC','1H','SD','I','$25','Available'),('IVBC6','IVBC','1H','SD','I','$25','Available'),('IVBC7','IVBC','1H','SD','I','$25','Available'),('IVBC8','IVBC','1H','SD','I','$25','Available'),('IVBC9','IVBC','1H','SD','I','$25','Available'),('MR1','MR','1H','SD','I','$50,','Available'),('MR2','MR','1H','SD','I','$50','Available'),('MR3','MR','1H','SD','I','$50','Available'),('MR4','MR','1H','SD','I','$50','Available'),('OBBC1','OBBC','2H','7D','O','$100','Available'),('OBBC2','OBBC','2H','7D','O','$100','Available'),('OVBC1','OVBC','2H','7D','O','$100','Available'),('OVBC2','OVBC','2H','7D','O','$100','Available'),('RBC1','RBC','30M','SD','I','$25','Available'),('RBC2','RBC','30M','SD','I','$25','Available'),('RBC3','RBC','30M','SD','I','$25','Available'),('RBC4','RBC','30M','SD','I','$25','Available'),('RBC5','RBC','30M','SD','I','$25','Available'),('SCG','SCG','2H','SD','I','$50','Available'),('TT1','TT','30M','SD','I','$50','Available');
+INSERT INTO `facilities` VALUES ('BMC1','BMC','30M','SD','I','$25','Available'),('BMC10','BMC','30M','SD','I','$25','Available'),('BMC2','BMC','30M','SD','I','$25','Available'),('BMC3','BMC','30M','SD','I','$25','Available'),('BMC4','BMC','30M','SD','I','$25','Available'),('BMC5','BMC','30M','SD','I','$25','Available'),('BMC6','BMC','30M','SD','I','$25','Available'),('BMC7','BMC','30M','SD','I','$25','Available'),('BMC8','BMC','30M','SD','I','$25','Available'),('BMC9','BMC','30M','SD','I','$25','Available'),('CR1','CR','1H','SD','I','$50','Available'),('CR2','CR','1H','SD','I','$50','Available'),('CR3','CR','1H','SD','I','$50','Available'),('CR4','CR','1H','SD','I','$50','Available'),('CR5','CR','1H','SD','I','$50','Available'),('IBBC1','IBBC','1H','SD','I','$25','Available'),('IBBC2','IBBC','1H','SD','I','$25','Available'),('IBBC3','IBBC','1H','SD','I','$25','Available'),('IBBC4','IBBC','1H','SD','I','$25','Available'),('IBBC5','IBBC','1H','SD','I','$25','Available'),('IVBC1','IVBC','1H','SD','I','$25','Available'),('IVBC2','IVBC','1H','SD','I','$25','Available'),('IVBC3','IVBC','1H','SD','I','$25','Available'),('IVBC4','IVBC','1H','SD','I','$25','Available'),('IVBC5','IVBC','1H','SD','I','$25','Available'),('IVBC6','IVBC','1H','SD','I','$25','Available'),('IVBC7','IVBC','1H','SD','I','$25','Available'),('IVBC8','IVBC','1H','SD','I','$25','Available'),('IVBC9','IVBC','1H','SD','I','$25','Available'),('MR1','MR','1H','SD','I','$50','Available'),('MR2','MR','1H','SD','I','$50','Available'),('MR3','MR','1H','SD','I','$50','Available'),('MR4','MR','1H','SD','I','$50','Available'),('OBBC1','OBBC','2H','7D','O','$100','Available'),('OBBC2','OBBC','2H','7D','O','$100','Available'),('OVBC1','OVBC','2H','7D','O','$100','Available'),('OVBC2','OVBC','2H','7D','O','$100','Available'),('RBC1','RBC','30M','SD','I','$25','Available'),('RBC2','RBC','30M','SD','I','$25','Available'),('RBC3','RBC','30M','SD','I','$25','Available'),('RBC4','RBC','30M','SD','I','$25','Available'),('RBC5','RBC','30M','SD','I','$25','Available'),('SCG','SCG','2H','SD','I','$50','Available'),('TT1','TT','30M','SD','I','$50','Available');
 /*!40000 ALTER TABLE `facilities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,7 +319,8 @@ CREATE TABLE `violations` (
   `from` varchar(45) NOT NULL,
   `to` varchar(45) NOT NULL,
   `description` varchar(120) NOT NULL,
-  PRIMARY KEY (`username`)
+  KEY `fk_facilitytype_idx` (`name`),
+  CONSTRAINT `fk_name` FOREIGN KEY (`name`) REFERENCES `facilities` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,12 +342,13 @@ DROP TABLE IF EXISTS `noshows`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `noshows` (
   `username` varchar(16) NOT NULL,
-  `name` varchar(10) NOT NULL,
+  `names` varchar(10) NOT NULL,
   `date` DATE NOT NULL,
   `from` varchar(45) NOT NULL,
   `to` varchar(45) NOT NULL,
   `description` varchar(120) NOT NULL,
-  PRIMARY KEY (`username`)
+  KEY `fk_facilitytype_id` (`names`),
+  CONSTRAINT `fk_names` FOREIGN KEY (`names`) REFERENCES `facilities` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

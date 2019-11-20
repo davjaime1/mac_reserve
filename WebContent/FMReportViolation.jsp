@@ -75,7 +75,12 @@
 			    				<td> Description: </td>
 			    				<td><textarea name=descriptionTextArea maxlength="120" wrap="soft" rows=4></textarea></td>
 			    			</tr>
-			
+			    			
+							<tr>
+			    				<td><input type="radio" name="report" value="violation" checked="checked"> Violation<br> </td>
+	  							<td><input type="radio" name="report" value="noshow"> No Show<br> </td>
+			    			</tr>
+				    			
 			    			<tr>
 			   				</tr>
 			    		</table>

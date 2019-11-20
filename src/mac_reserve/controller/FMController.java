@@ -343,8 +343,17 @@ public class FMController extends HttpServlet
         {
         	//We need to add this violation to the database
         	String desc = request.getParameter("descriptionTextArea");
+        	String type = request.getParameter("report");
         	
-        	FM_UtilityDAO.addViolation(request.getParameter("currentUser"),request.getParameter("name"),request.getParameter("date"),request.getParameter("from"),request.getParameter("to"), desc);
+        	if(type.equals("violation"))
+        	{
+            	FM_UtilityDAO.addViolation(request.getParameter("currentUser"),request.getParameter("name"),request.getParameter("date"),request.getParameter("from"),request.getParameter("to"), desc);
+        	}
+        	else
+        	{
+            	FM_UtilityDAO.addNoShow(request.getParameter("currentUser"),request.getParameter("name"),request.getParameter("date"),request.getParameter("from"),request.getParameter("to"), desc);
+
+        	}
         	//Also need to increment the value in the user table
         	url = "/FM_Home.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
