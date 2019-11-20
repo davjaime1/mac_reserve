@@ -26,6 +26,7 @@ import mac_reserve.model.Role;
 import mac_reserve.model.State;
 import mac_reserve.model.UserErrorMsgs;
 import mac_reserve.model.UserModel;
+import mac_reserve.model.Violations;
 
 
 /**
@@ -374,6 +375,16 @@ public class UserController extends HttpServlet
         	noshow = UserModelDAO.getNoShows(username);
         	session.setAttribute("NOSHOWS", noshow);
         	url = "/UserViewNoShows.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("viewViolation"))
+        {
+        	//Need to ge the list of no shows for the current user
+        	String username =(String) session.getAttribute("username");
+        	ArrayList<Violations> viol = new ArrayList<Violations>();
+        	viol = UserModelDAO.getViolations(username);
+        	session.setAttribute("VIOLATIONS", viol);
+        	url = "/UserViewViolations.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         //Login user

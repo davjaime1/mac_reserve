@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import mac_reserve.model.Facility;
 import mac_reserve.model.NoShows;
 import mac_reserve.model.UserModel;
+import mac_reserve.model.Violations;
 import mac_reserve.util.SQLConnection;
 
 public class UserModelDAO {
@@ -444,6 +445,38 @@ public class UserModelDAO {
         catch (SQLException e)
         {
             System.out.println("Could not get no shows");
+        }
+        
+        return noshows;
+    }
+    
+    public static ArrayList<Violations> getViolations(String username)
+    {
+    	ArrayList<Violations> noshows = new ArrayList<Violations>();
+        
+    	String queryString = "SELECT * FROM violations"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                Violations obj = new Violations();
+                obj.setUsername(list.getString("username"));
+                obj.setName(list.getString("name"));
+                obj.setDate(list.getString("date"));
+                obj.setFrom(list.getString("from"));
+                obj.setTo(list.getString("to"));
+                obj.setDescription(list.getString("description"));
+                noshows.add(obj);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not get violations");
         }
         
         return noshows;
