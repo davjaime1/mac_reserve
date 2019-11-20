@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import mac_reserve.model.Facility;
-import mac_reserve.model.User;
+import mac_reserve.model.NoShows;
 import mac_reserve.model.UserModel;
 import mac_reserve.util.SQLConnection;
 
@@ -415,5 +415,37 @@ public class UserModelDAO {
         {
             System.out.println("Could remove reservation from database\n" + e.getMessage());
         }
+    }
+    
+    public static ArrayList<NoShows> getNoShows(String username)
+    {
+    	ArrayList<NoShows> noshows = new ArrayList<NoShows>();
+        
+    	String queryString = "SELECT * FROM noshows"; 
+    	
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet list = stmt.executeQuery(queryString);
+            while (list.next())
+            {
+                NoShows obj = new NoShows();
+                obj.setUsername(list.getString("username"));
+                obj.setName(list.getString("names"));
+                obj.setDate(list.getString("date"));
+                obj.setFrom(list.getString("from"));
+                obj.setTo(list.getString("to"));
+                obj.setDescription(list.getString("description"));
+                noshows.add(obj);
+            }
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not get no shows");
+        }
+        
+        return noshows;
     }
 }
