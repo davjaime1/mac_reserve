@@ -346,15 +346,16 @@ public class UserController extends HttpServlet
         	String username = (String)session.getAttribute("username");
 			if (request.getParameter("radioRes")!=null)
 			{
-				int sel = Integer.parseInt(request.getParameter("radioRes")) - 1;
-				//+++++++The following is to get the reservation previously selected +++++++
-				//Now we need to query based on these fields
-	        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
-				//Okay now we need to insert into database
-	        	aFacilityList = (ArrayList<Facility>)session.getAttribute("AVAILABLE");
-				UserModelDAO.addReservation(aFacilityList.get(sel), username);
+				//Display current date
+				SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+	        	Date date = new Date();
+	        	String dates = formatter.format(date);
+	        	session.setAttribute("DATE", dates);
 				//res.setType();
-				url = "/UserHome.jsp";
+				//Need to make payment now
+	        	int sel = Integer.parseInt(request.getParameter("radioRes")) - 1;
+	        	session.setAttribute("SEL", sel);
+				url = "/UserPayDeposit.jsp";
 	            getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 			else 
@@ -366,6 +367,21 @@ public class UserController extends HttpServlet
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 				}
 			}
+        }
+        else if(action.equalsIgnoreCase("payDeposit"))
+        {
+        	String username = (String)session.getAttribute("username");
+        	int sel = (int)session.getAttribute("SEL");
+			//+++++++The following is to get the reservation previously selected +++++++
+			//Now we need to query based on these fields
+        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
+			//Okay now we need to insert into database
+        	aFacilityList = (ArrayList<Facility>)session.getAttribute("AVAILABLE");
+        	//Set the depsosit status
+        	aFacilityList.get(sel).setStatus("In Process");
+			UserModelDAO.addReservation(aFacilityList.get(sel), username);
+			url="/UserHome.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("viewNoShow"))
         {

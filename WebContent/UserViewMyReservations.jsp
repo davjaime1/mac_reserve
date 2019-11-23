@@ -49,29 +49,32 @@
 								<th class="myTableHead" style="padding-right: 15px; text-align: left">Type</th> 
 								<th class="myTableHead" style="padding-right: 15px; text-align: left">Name</th>
 								<th class="myTableHead" style="padding-right: 15px; text-align: left">Venue</th>
-								<th class="myTableHead" style="padding-right: 30px; text-align: left">Hours</th> 
-								<th class="myTableHead" style="padding-right: 30px; text-align: left">Date</th> 
-				                <th class="myTableHead" style="padding-right: 30px; text-align: left">From</th> 
-				                <th class="myTableHead" style="padding-right: 30px; text-align: left">To</th>
+								<th class="myTableHead" style="padding-right: 20px; text-align: left">Hours</th> 
+								<th class="myTableHead" style="padding-right: 35px; text-align: left">Date</th> 
+				                <th class="myTableHead" style="padding-right: 20px; text-align: left">From</th> 
+				                <th class="myTableHead" style="padding-right: 20px; text-align: left">To</th>
 				                <th class="myTableHead" style="padding-right: 15px; text-align: left">Deposit</th>  
+				                <th class="myTableHead" style="padding-right: 15px; text-align: left">Status</th>
 							</tr>
 
 					 		<c:forEach items="${AVAILABLE}" var="item" varStatus="status">
 								<tr class="myTableRow">			
-								<td class="myTableCell" style="padding-right: 15px; font-size: 20px; "><c:out value="${item.type}" /></td>
-								<td class="myTableCell" style="padding-right: 15px; font-size: 20px;"><c:out value="${item.name}" /></td>
-								<td class="myTableCell" style="padding-right: 20px; font-size: 20px;"><c:out value="${item.venue}" /></td>
-								<td class="myTableCell" style="padding-right: 20px; font-size: 20px;"><c:out value="${item.day}" /></td>
-								<td class="myTableCell" style="padding-right: 25px; font-size: 20px;"><c:out value="${item.date}" /></td>
-					            <td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.from}" /></td>
-					            <td class="myTableCell" style="padding-right: 30px; font-size: 20px;"><c:out value="${item.to}" /></td>
-					            <td class="myTableCell" style="padding-right: 15px; font-size: 20px;"><c:out value="${item.deposit}" /></td>
+								<td class="myTableCell" style="padding-right: 15px; font-size: 18px; "><c:out value="${item.type}" /></td>
+								<td class="myTableCell" style="padding-right: 15px; font-size: 18px;"><c:out value="${item.name}" /></td>
+								<td class="myTableCell" style="padding-right: 20px; font-size: 18px;"><c:out value="${item.venue}" /></td>
+								<td class="myTableCell" style="padding-right: 10px; font-size: 18px;"><c:out value="${item.day}" /></td>
+								<td class="myTableCell" style="padding-right: 25px; font-size: 18px;"><c:out value="${item.date}" /></td>
+					            <td class="myTableCell" style="padding-right: 30px; font-size: 18px;"><c:out value="${item.from}" /></td>
+					            <td class="myTableCell" style="padding-right: 30px; font-size: 18px;"><c:out value="${item.to}" /></td>
+					            <td class="myTableCell" style="padding-right: 15px; font-size: 18px;"><c:out value="${item.deposit}" /></td>
+					            <td class="myTableCell" style="padding-right: 15px; font-size: 18px;"><c:out value="${item.status}" /></td>
 					            <td>
-					                    <a href="/mac_reserve/UserController?action=listAvailableReservations&idfacilitytype=${item.type}&iddate=${item.date}&idtimes=${''}&name=${item.name}&from=${item.from}&to=${item.to}&idmodify=${1}">Modify</a>
+					                    <a href="/mac_reserve/UserController?action=listAvailableReservations&idfacilitytype=${item.type}&iddate=${item.date}&idtimes=${''}&name=${item.name}&from=${item.from}&to=${item.to}&idmodify=${1}" style="font-size: 20px;">Modify</a>
 					             </td>
 					             <td>
-					                    <a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}">Cancel</a>
+					                    <a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;">Cancel</a>
 					             </td>
+					             
 								</tr>
 							</c:forEach>
 			        	</table>

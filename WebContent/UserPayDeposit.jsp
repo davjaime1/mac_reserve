@@ -45,7 +45,7 @@
 				<tr>
 					<td>
 						<input name="errMsg"  value="<c:out value='${errorMsgs}'/>" type="text"  style ="background-color:#f68026;; color: white; border: none; width: 400px" disabled="disabled"> 
-						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations" method="post">
+						<form name="userForm" action="/mac_reserve/UserController?action=payDeposit" method="post">
 			        	<table class="center"> 
 			        		<tr>
 			    				<td> Card Company: </td>
@@ -70,7 +70,10 @@
 	    
 	    				<tr>
 					    	<td style="color:white"> Exp Date (*): </td>
-					    	<td> <input name="idfirstname" value="10-22-2019" type="text" maxlength="16"> </td>
+					    	<td>
+				    				<input type="date" id="iddate" name="iddate"
+				    				value= "${DATE}">
+							</td>
 					    </tr>
 					    
 			        	</table>

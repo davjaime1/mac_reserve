@@ -255,6 +255,7 @@ public class UserModelDAO {
                 user.setName(list.getString("facilityname"));
                 user.setVenue(list.getString("venue"));
                 user.setDate(list.getString("date"));
+                user.setStatus(list.getString("status"));
                 if(list.getString("day").equals("D"))
                 {
                 	user.setDay("Weekday Hours");
@@ -365,7 +366,7 @@ public class UserModelDAO {
     public static void addReservation(Facility res, String user)
     {
 
-    	String queryString = "INSERT INTO `facilityreservation` VALUES (\"" + res.getName() + "\",\"" + res.getType() +"\",\"" + res.getVenue() + "\",\"" + user + "\",\"" + res.getDate() + "\",\"" + res.getDay() + "\",\"" + res.getFrom() + "\",\"" + res.getTo() + "\",\"" + res.getDeposit() + "\");";
+    	String queryString = "INSERT INTO `facilityreservation` VALUES (\"" + res.getName() + "\",\"" + res.getType() +"\",\"" + res.getVenue() + "\",\"" + user + "\",\"" + res.getDate() + "\",\"" + res.getDay() + "\",\"" + res.getFrom() + "\",\"" + res.getTo() + "\",\"" + res.getDeposit() + "\", \"" + res.getStatus() + "\");";
     	Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
         try
