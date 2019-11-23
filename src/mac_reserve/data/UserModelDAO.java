@@ -295,6 +295,7 @@ public class UserModelDAO {
             user1.setName(list.getString("facilityname"));
             user1.setVenue(list.getString("venue"));
             user1.setDate(list.getString("date"));
+            user1.setStatus(list.getString("status"));
             if(list.getString("day").equals("D"))
             {
             	user1.setDay("Weekday Hours");
@@ -315,6 +316,7 @@ public class UserModelDAO {
                 user.setName(list.getString("facilityname"));
                 user.setVenue(list.getString("venue"));
                 user.setDate(list.getString("date"));
+                user.setStatus(list.getString("status"));
                 if(list.getString("day").equals("D"))
                 {
                 	user.setDay("Weekday Hours");

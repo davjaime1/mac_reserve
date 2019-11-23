@@ -358,5 +358,11 @@ public class FMController extends HttpServlet
         	url = "/FM_Home.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
+        else if(action.equalsIgnoreCase("processPayment"))
+        {
+        	FM_UtilityDAO.processPayment(request.getParameter("name"), request.getParameter("date"), request.getParameter("from"), request.getParameter("to"));
+        	url = "/FM_Home.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
     }
 }

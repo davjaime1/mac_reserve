@@ -189,6 +189,7 @@ public class FM_UtilityDAO {
             System.out.println("Could not add Violation");
         }
 	}
+	
 	public static void addNoShow(String username, String facilityname, String date, String from, String to, String desc)
 	{
     	String queryString = "INSERT INTO `noshows` VALUES ('"+username+"', '"+facilityname+"', '"+date+"', '"+from+"', '"+to+"','"+desc+"')";
@@ -218,6 +219,24 @@ public class FM_UtilityDAO {
         catch (SQLException e)
         {
             System.out.println("Could not increment noshow");
+        }
+	}
+	
+	public static void processPayment(String facilityname, String date, String from, String to)
+	{
+    	String queryString = "UPDATE `facilityreservation` SET status = 'Processed' WHERE facilityname = '" + facilityname +"' AND date = '" + date + "' AND facilityreservation.from = '" + from + "' AND facilityreservation.to = '" + to + "'";
+    	Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate(queryString);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not process");
         }
 	}
 }
