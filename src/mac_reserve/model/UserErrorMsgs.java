@@ -17,6 +17,9 @@ public class UserErrorMsgs{
 	private String emailError;
 	private String userNameError;
 	private String statusError;
+	private String ccError;
+	private String ccvError;
+	private String dateError;
 
 	
 	public UserErrorMsgs() {
@@ -193,6 +196,38 @@ public class UserErrorMsgs{
 	{
 		statusError = err;
 	}
+	
+	public void setCcError(String err)
+	{
+		ccError = err;
+	}
+	
+	public String getCcError()
+	{
+		return ccError;
+	}
+	
+	public void setCcvError(String err)
+	{
+		ccvError = err;
+	}
+	
+	public String getCcvError()
+	{
+		return ccvError;
+	}
+	
+	public void setDateError(String dat)
+	{
+		dateError = dat;
+	}
+	
+	public String getDateError()
+	{
+		return dateError;
+	}
+	
+
 
 //	public String getErrorMsg() {
 //		return this.errorMsg;

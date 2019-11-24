@@ -44,8 +44,7 @@
         	<table class="center">
 				<tr>
 					<td>
-						<input name="errMsg"  value="<c:out value='${errorMsgs}'/>" type="text"  style ="background-color:#f68026;; color: white; border: none; width: 400px" disabled="disabled"> 
-						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations" method="post">
+						<form name="userForm" action="/mac_reserve/UserController?action=payDeposit" method="post">
 			        	<table class="center"> 
 			        		<tr>
 			    				<td> Card Company: </td>
@@ -60,17 +59,24 @@
 
 							<tr>
 	    					<td style="color:white"> Card Number : </td>
-	    					<td> <input name="idusername" value="<c:out value='${user.username}'/>"  type="text" maxlength="16"> </td>
+	    					<td> <input name="idccNum" value="" type="text" maxlength="16"> </td>
+	    					<td style="padding:0px"><input name="statusError"  value="<c:out value='${errorMsgs.ccError}'/>" type="text"  style ="background-color: #f68026; color: #0948b1; border: none;margin-left:100;width:185px"   disabled="disabled" maxlength="120">		        
 	    				</tr>
 	    
 						<tr>
-	   						<td style="color:white"> Sceurity Code : </td>
-					    	<td> <input name="idutaID" value="" type="text" maxlength="16"> </td>
+	   						<td style="color:white"> Security Code : </td>
+					    	<td> <input name="idccvNum" value="" type="text" maxlength="16"> </td>
+					   		<td style="padding:0px"><input name="statusError"  value="<c:out value='${errorMsgs.ccvError}'/>" type="text"  style ="background-color: #f68026; color: #0948b1; border: none;margin-left:100;width:185px"   disabled="disabled" maxlength="120">		        
+					    	
 					    </tr>
 	    
 	    				<tr>
 					    	<td style="color:white"> Exp Date (*): </td>
-					    	<td> <input name="idfirstname" value="10-22-2019" type="text" maxlength="16"> </td>
+					    	<td>
+				    				<input type="date" id="iddate" name="iddate"
+				    				value= "${DATE}">
+							</td>
+							<td style="padding:0px"><input name="statusError"  value="<c:out value='${errorMsgs.dateError}'/>" type="text"  style ="background-color: #f68026; color: #0948b1; border: none;margin-left:100;width:185px"   disabled="disabled" maxlength="120">		        
 					    </tr>
 					    
 			        	</table>

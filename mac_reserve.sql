@@ -124,6 +124,7 @@ CREATE TABLE `facilityreservation` (
   `from` TIME(3) NOT NULL,
   `to` TIME(3) NOT NULL,
   `deposit` varchar(16) NOT NULL,
+  `status` varchar(16) NOT NULL,
   KEY `fk_fr_facilityname_idx` (`facilityname`),
   KEY `fk_fr_facilitytype_idx` (`facilitytype`),
   KEY `fk_fr_venue_idx` (`venue`),
