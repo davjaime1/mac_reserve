@@ -72,7 +72,7 @@
 					                    <a href="/mac_reserve/UserController?action=listAvailableReservations&idfacilitytype=${item.type}&iddate=${item.date}&idtimes=${''}&name=${item.name}&from=${item.from}&to=${item.to}&idmodify=${1}" style="font-size: 20px;">Modify</a>
 					             </td>
 					             <td>
-					                    <a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;">Cancel</a>
+					                    <a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;" onclick="return confirm('Are you sure you want to cancel your reservation? ...there are no refunds hehe :)');">Cancel</a>
 					             </td>
 					             
 								</tr>

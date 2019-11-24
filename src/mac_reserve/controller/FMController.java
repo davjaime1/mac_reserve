@@ -303,7 +303,7 @@ public class FMController extends HttpServlet
         	
         	//Need to search query based on the username and role
         	ArrayList<UserModel> results = new ArrayList<UserModel>();
-        	results = FM_UtilityDAO.searchUsers(searchUsername, searchRole);
+        	results = FM_UtilityDAO.searchUsers(searchUsername, "Null" ,searchRole);
         	session.setAttribute("USERS", results);
         	
         	url = "/FMListUserResults.jsp";
