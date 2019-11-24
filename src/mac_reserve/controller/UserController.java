@@ -292,7 +292,7 @@ public class UserController extends HttpServlet
             {
             	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate) || request.getParameter("iddate").equals(nDate2)|| request.getParameter("iddate").equals(nDate3)|| request.getParameter("iddate").equals(nDate4)|| request.getParameter("iddate").equals(nDate5)|| request.getParameter("iddate").equals(nDate6))) {
             		String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved within a week in advance";
-    				session.setAttribute("errorMsgs",errorMsgs);
+    				session.setAttribute("errorMsg",errorMsgs);
     				url="/UserSearchAvailableFacilities.jsp";
     				error = false;
     			}
@@ -301,7 +301,7 @@ public class UserController extends HttpServlet
             {
             	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate))) {
     				String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved a day in advanced";
-    				session.setAttribute("errorMsgs",errorMsgs);
+    				session.setAttribute("errorMsg",errorMsgs);
     				url="/UserSearchAvailableFacilities.jsp";
     				error = false;
     			}	
@@ -370,6 +370,46 @@ public class UserController extends HttpServlet
         }
         else if(action.equalsIgnoreCase("payDeposit"))
         {
+        	String ccNum = request.getParameter("idccNum");
+        	String ccvNum = request.getParameter("idccvNum");
+        	String inputdate = request.getParameter("iddate");
+        	boolean error = false;
+        	UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+        	if(ccNum.length() < 16 || ccNum.length() > 16)
+        	{
+        		CerrorMsgs.setCcError("Not a valid credit card number");
+        		error = true;
+        	}
+        	if(ccvNum.length() > 4 || ccvNum.length() < 4)
+        	{
+        		CerrorMsgs.setCcvError("Not a valid CCV number");
+        		error = true;       		
+        	}
+        	
+        	try
+        	{
+	        	Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(inputdate);
+	        	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+	        	Date date = new Date();
+	        	String cDate = formatter.format(date);
+	        	Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(cDate);
+	        	if(date1.compareTo(date2) < 0)
+	        	{
+	        		CerrorMsgs.setDateError("Exp must be in the future");
+	        		error = true;  
+	        	}
+        	}
+        	catch(Exception e) {}
+        	
+        	
+        	
+        	if(error)
+        	{
+        		session.setAttribute("errorMsgs", CerrorMsgs);
+        		url = "/UserPayDeposit.jsp";
+				getServletContext().getRequestDispatcher(url).forward(request, response);
+        	}
+        	else {
         	String username = (String)session.getAttribute("username");
         	int sel = (int)session.getAttribute("SEL");
 			//+++++++The following is to get the reservation previously selected +++++++
@@ -382,6 +422,7 @@ public class UserController extends HttpServlet
 			UserModelDAO.addReservation(aFacilityList.get(sel), username);
 			url="/UserHome.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
+        	}
         }
         else if(action.equalsIgnoreCase("viewNoShow"))
         {

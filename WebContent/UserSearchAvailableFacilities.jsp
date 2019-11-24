@@ -43,6 +43,7 @@
         	<table class="center">
 				<tr>
 					<td>
+						<input name="errMsg"  value="<c:out value='${errorMsg}'/>" type="text"  style ="background-color:#f68026;; color: white; margin-left:5px;border: none; width: 350px" disabled="disabled"> 
 						<form name="userForm" action="/mac_reserve/UserController?action=listAvailableReservations&idmodify=${0}" method="post">
 			        	<table class="center"> 
 			        		<tr>
