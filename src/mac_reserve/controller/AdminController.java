@@ -92,7 +92,6 @@ public class AdminController extends HttpServlet
         if (action.equalsIgnoreCase("viewProfile"))
         {
             String username = (String) session.getAttribute("username");
-            //System.out.println(username);
             
             ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
             fetch_profile = UserModelDAO.returnProfile(username);
@@ -108,7 +107,6 @@ public class AdminController extends HttpServlet
         else if(action.equalsIgnoreCase("viewUpdateProfile"))
         {
         	String username = (String) session.getAttribute("username");
-            //System.out.println(username);
             
             ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
             ArrayList<State> stateInDB = new ArrayList<State>();
@@ -149,7 +147,6 @@ public class AdminController extends HttpServlet
 				
 				//Takes you back to the view profile, to view the changes
 	        	String username = (String) session.getAttribute("username");
-	            //System.out.println(username);
 	            
 	            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
 	            fetch_profile = UserModelDAO.returnProfile(username);
@@ -165,12 +162,13 @@ public class AdminController extends HttpServlet
         }
         else if(action.equalsIgnoreCase("searchForUser"))
         {
+        	String username = (String) session.getAttribute("username");
         	String searchUsername = request.getParameter("idusername");
         	String searchRole = request.getParameter("idrole");
         	
         	//Need to search query based on the username and role
         	ArrayList<UserModel> results = new ArrayList<UserModel>();
-        	results = FM_UtilityDAO.searchUsers(searchUsername, searchRole);
+        	results = FM_UtilityDAO.searchUsers(searchUsername, username, searchRole);
         	session.setAttribute("USERS", results);
         	
         	url = "/AdminListUserResults.jsp";
@@ -181,7 +179,16 @@ public class AdminController extends HttpServlet
         	String username = request.getParameter("username");
         	String status = request.getParameter("status");
         	AdminDAO.UserStatus(username, status);
-        	url = "/AdminHome.jsp";
+        	ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+            fetch_profile = UserModelDAO.returnProfile(username);
+            UserModel user = new UserModel();
+            user.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
+                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail(), fetch_profile.get(0).getNoshow(), fetch_profile.get(0).getViolations(), fetch_profile.get(0).getStatus());
+            
+            session.setAttribute("USERS", user);
+
+            url = "/AdminViewUser.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("changeRole"))
@@ -196,7 +203,6 @@ public class AdminController extends HttpServlet
         else if(action.equalsIgnoreCase("updateRole"))
         {
         	String role = request.getParameter("idrole");
-        	System.out.println(role);
         	String username = request.getParameter("idusername");
         	//Need to update the user's role now
         	AdminDAO.updateRole(username, role);

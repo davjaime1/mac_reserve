@@ -165,6 +165,7 @@ public class FMController extends HttpServlet
         else if(action.equalsIgnoreCase("viewUserReservations"))
         {
         	String currentUser = request.getParameter("currentUser");
+        	session.setAttribute("currentUser", currentUser);
         	session.setAttribute("CURRENT", currentUser);
         	ArrayList<Facility> list = new ArrayList<Facility>();
         	list = UserModelDAO.listMyReservations(currentUser);
@@ -303,7 +304,7 @@ public class FMController extends HttpServlet
         	
         	//Need to search query based on the username and role
         	ArrayList<UserModel> results = new ArrayList<UserModel>();
-        	results = FM_UtilityDAO.searchUsers(searchUsername, searchRole);
+        	results = FM_UtilityDAO.searchUsers(searchUsername, "Null" ,searchRole);
         	session.setAttribute("USERS", results);
         	
         	url = "/FMListUserResults.jsp";
@@ -322,7 +323,10 @@ public class FMController extends HttpServlet
         	String name = request.getParameter("name");
         	String ava = request.getParameter("ava");
         	FM_UtilityDAO.setAvaliability(name, ava);
-        	url = "/FM_Home.jsp";
+        	ArrayList<Facility> results = new ArrayList<Facility>();
+        	results = FM_UtilityDAO.getFacilities(request.getParameter("type"));
+        	session.setAttribute("NAMES", results);
+        	url = "/FMViewTypeDetails.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("reportUser"))
@@ -354,14 +358,38 @@ public class FMController extends HttpServlet
             	FM_UtilityDAO.addNoShow(request.getParameter("currentUser"),request.getParameter("name"),request.getParameter("date"),request.getParameter("from"),request.getParameter("to"), desc);
 
         	}
-        	//Also need to increment the value in the user table
-        	url = "/FM_Home.jsp";
+        	String currentUser = (String)session.getAttribute("currentUser");
+        	ArrayList<Facility> list = new ArrayList<Facility>();
+        	list = UserModelDAO.listMyReservations(currentUser);
+        	session.setAttribute("RESERVATIONS", list);
+        	url = "/FMListAllReservations.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("processPayment"))
         {
         	FM_UtilityDAO.processPayment(request.getParameter("name"), request.getParameter("date"), request.getParameter("from"), request.getParameter("to"));
-        	url = "/FM_Home.jsp";
+        	String currentUser = (String)session.getAttribute("currentUser");
+        	//session.removeAttribute("currentUser");
+        	//session.setAttribute("CURRENT", currentUser);
+        	ArrayList<Facility> list = new ArrayList<Facility>();
+        	list = UserModelDAO.listMyReservations(currentUser);
+        	session.setAttribute("RESERVATIONS", list);
+        	url = "/FMListAllReservations.jsp";
+            getServletContext().getRequestDispatcher(url).forward(request, response);
+        }
+        else if(action.equalsIgnoreCase("cancelReservation"))
+        {
+        	String username = (String)session.getAttribute("currentUser");
+        	date = request.getParameter("date");
+        	
+        	//Query and delete reservation
+        	UserModelDAO.cancelReservation(request.getParameter("date"), request.getParameter("name"), request.getParameter("from"), request.getParameter("to"));
+        	
+        	//Display My Reservations
+        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+        	ReservationList = UserModelDAO.listMyReservations(username);
+        	session.setAttribute("RESERVATIONS", ReservationList);
+        	url = "/FMListAllReservations.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
     }

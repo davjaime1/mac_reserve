@@ -35,8 +35,7 @@
           		<li><a href="/mac_reserve/FMController?action=viewSearchAvailableFacilities"  target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
           		<li><a href="/mac_reserve/FMController?action=viewFacilityReportList"  target="_top" style="color:white"><span>View Facility Details</span></a></li>          		
           		<li><a href="/mac_reserve/FMController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
-          		<li><a href="/mac_reserve/FMController?action=facilityAvailability" target="_top" style="color:white"><span>Modify Facility Availability</span></a></li>
-        	</ul>
+	       	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page-->
         <article>
@@ -62,7 +61,7 @@
 						    </tr>
 			        	</table>
 			        	<input name="action" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Users">
+		    			<input style="width:163px; margin-left:90px" type="submit" value="Search for Users">
 		    			</form>
 			        </td>
 			    </tr>

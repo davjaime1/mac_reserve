@@ -36,7 +36,6 @@
           		<li><a href="/mac_reserve/FMController?action=viewSearchAvailableFacilities"  target="_top" style="color:white"><span>Search Available Facilities</span></a></li>
           		<li><a href="/mac_reserve/FMController?action=viewFacilityReportList"  target="_top" style="color:white"><span>View Facility Details</span></a></li>          		
           		<li><a href="/mac_reserve/FMController?action=viewSearchForUser"  target="_top" style="color:white"><span>Search for User</span></a></li>
-          		<li><a href="/mac_reserve/FMController?action=facilityAvailability" target="_top" style="color:white"><span>Modify Facility Availability</span></a></li>
         	</ul>
         </nav>
         <!-- Here goes the page the function stuff for each page (This is the homepage so nothing goes here) -->
@@ -68,10 +67,10 @@
 					            <td class="myTableCell" style="padding-right: 15px; font-size: 18px;"><c:out value="${item.to}" /></td>
 					            <td class="myTableCell" style="padding-right: 15px; font-size: 18px;"><c:out value="${item.deposit}" /></td>
 					            <td>
-					            	<a href="/mac_reserve/FMController?action=processPayment&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;">${item.status}</a>
+					            	<a href="/mac_reserve/FMController?action=processPayment&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;" onclick="return confirm('Complete Deposit Payment Process?');">${item.status}</a>
 					            </td>
 					            <td>
-					            	<a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;">Cancel</a>
+					            	<a href="/mac_reserve/FMController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;" onclick="return confirm('Are you sure you want to cancel the reservation?');">Cancel</a>
 					            </td>
 					            <td>
 					            	<a href="/mac_reserve/FMController?action=reportUser&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;">Report</a>

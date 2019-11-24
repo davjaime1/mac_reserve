@@ -425,7 +425,7 @@ public class UserModelDAO {
     {
     	ArrayList<NoShows> noshows = new ArrayList<NoShows>();
         
-    	String queryString = "SELECT * FROM noshows"; 
+    	String queryString = "SELECT * FROM noshows order by date, noshows.from"; 
     	
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
@@ -457,7 +457,7 @@ public class UserModelDAO {
     {
     	ArrayList<Violations> noshows = new ArrayList<Violations>();
         
-    	String queryString = "SELECT * FROM violations"; 
+    	String queryString = "SELECT * FROM violations ORDER BY date, violations.from"; 
     	
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();

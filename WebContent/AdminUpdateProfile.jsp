@@ -122,7 +122,7 @@
 			    		<tr>
 							<td>
 					    		<input name="action" value="registerUser" type="hidden">
-		    					<input style="width:163px; margin-left:157px" type="submit" value="Update">
+		    					<input style="width:163px; margin-left:157px" type="submit" value="Update" onclick="return confirm('Are you sure you want to update?');">
 		    					</form>
 	    					</td>
 						</tr>

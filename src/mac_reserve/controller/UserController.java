@@ -266,83 +266,87 @@ public class UserController extends HttpServlet
         		session.setAttribute("errorMsgs", CerrorMsgs);
         		url = "/UserSearchAvailableFacilities.jsp";
         	}
-        	else {
-        	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
-        	Date date = new Date();
-        	String cDate = formatter.format(date);
-      
-        	LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-            localDateTime = localDateTime.plusDays(1);
-            String nDate = dateFormat8.format(localDateTime);
-            localDateTime = localDateTime.plusDays(1);
-            String nDate2 = dateFormat8.format(localDateTime);
-            localDateTime = localDateTime.plusDays(1);
-            String nDate3 = dateFormat8.format(localDateTime);
-            localDateTime = localDateTime.plusDays(1);
-            String nDate4 = dateFormat8.format(localDateTime);
-            localDateTime = localDateTime.plusDays(1);
-            String nDate5 = dateFormat8.format(localDateTime);
-            localDateTime = localDateTime.plusDays(1);
-            String nDate6 = dateFormat8.format(localDateTime);
-            
-            boolean error = true;
-        	
-            //Decide between next day or next week
-            if(request.getParameter("idfacilitytype").equals("OVBC") || request.getParameter("idfacilitytype").equals("OBBC"))
-            {
-            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate) || request.getParameter("iddate").equals(nDate2)|| request.getParameter("iddate").equals(nDate3)|| request.getParameter("iddate").equals(nDate4)|| request.getParameter("iddate").equals(nDate5)|| request.getParameter("iddate").equals(nDate6))) {
-            		String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved within a week in advance";
-    				session.setAttribute("errorMsg",errorMsgs);
-    				url="/UserSearchAvailableFacilities.jsp";
-    				error = false;
-    			}
-            }
-            else
-            {
-            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate))) {
-    				String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved a day in advanced";
-    				session.setAttribute("errorMsg",errorMsgs);
-    				url="/UserSearchAvailableFacilities.jsp";
-    				error = false;
-    			}	
-            }
-        	
-            if(error) {
-            SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
-            Date myDate = parseDate(request.getParameter("iddate"));
-            String dayOfWeek = simpleDateformat.format(myDate);
-        	//System.out.println(request.getParameter("idfacilitytype"));
-        	//System.out.println(request.getParameter("iddate"));
-        	//System.out.println(request.getParameter("idtimes"));
-        	//Now we need to query based on these fields
-        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
-        	setParam(request, request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
-        	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"), dayOfWeek);
-        	session.setAttribute("AVAILABLE", aFacilityList);
-        	
-			//Get All Reserved Facilities List
-			//String username = (String) session.getAttribute("username");
-        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
-        	ReservationList = UserModelDAO.listReservations();
-        	
-        	//Now we need to remove the current reservations from the possible reservations
-        	//aFacilityList will be the list with the remaining possible reservations
-        	UserModelDAO.AvailableReservations(aFacilityList, ReservationList);
-        	
-        	//If we are modifying a time, we need to now delete the previous one
-        	if(request.getParameter("idmodify").equals("1"))
-        	{            	
-            	UserModelDAO.cancelReservation(request.getParameter("iddate"), request.getParameter("name"), request.getParameter("from"), request.getParameter("to"));
-        	}
-        	
-        	session.setAttribute("FACILITYs", aFacilityList);
-        	url = "/UserListAvailableReservations.jsp";
-            }
+        	else 
+        	{
+	        	SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+	        	Date date = new Date();
+	        	String cDate = formatter.format(date);
+	      
+	        	LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+	            localDateTime = localDateTime.plusDays(1);
+	            String nDate = dateFormat8.format(localDateTime);
+	            localDateTime = localDateTime.plusDays(1);
+	            String nDate2 = dateFormat8.format(localDateTime);
+	            localDateTime = localDateTime.plusDays(1);
+	            String nDate3 = dateFormat8.format(localDateTime);
+	            localDateTime = localDateTime.plusDays(1);
+	            String nDate4 = dateFormat8.format(localDateTime);
+	            localDateTime = localDateTime.plusDays(1);
+	            String nDate5 = dateFormat8.format(localDateTime);
+	            localDateTime = localDateTime.plusDays(1);
+	            String nDate6 = dateFormat8.format(localDateTime);
+	            
+	            boolean error = true;
+	        	
+	            //Decide between next day or next week
+	            if(request.getParameter("idfacilitytype").equals("OVBC") || request.getParameter("idfacilitytype").equals("OBBC"))
+	            {
+	            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate) || request.getParameter("iddate").equals(nDate2)|| request.getParameter("iddate").equals(nDate3)|| request.getParameter("iddate").equals(nDate4)|| request.getParameter("iddate").equals(nDate5)|| request.getParameter("iddate").equals(nDate6))) {
+	            		String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved within a week in advance";
+	    				session.setAttribute("errorMsg",errorMsgs);
+	    				url="/UserSearchAvailableFacilities.jsp";
+	    				error = false;
+	    			}
+	            }
+	            else
+	            {
+	            	if (!(request.getParameter("iddate").equals(cDate) || request.getParameter("iddate").equals(nDate))) {
+	    				String errorMsgs =  request.getParameter("idfacilitytype") +" may only be reserved a day in advanced";
+	    				session.setAttribute("errorMsg",errorMsgs);
+	    				url="/UserSearchAvailableFacilities.jsp";
+	    				error = false;
+	    			}	
+	            }
+	        	
+	            if(error) 
+	            {
+		            SimpleDateFormat simpleDateformat = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
+		            Date myDate = parseDate(request.getParameter("iddate"));
+		            String dayOfWeek = simpleDateformat.format(myDate);
+		        	//System.out.println(request.getParameter("idfacilitytype"));
+		        	//System.out.println(request.getParameter("iddate"));
+		        	//System.out.println(request.getParameter("idtimes"));
+		        	//Now we need to query based on these fields
+		        	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
+		        	setParam(request, request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
+		        	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"), dayOfWeek);
+		        	session.setAttribute("AVAILABLE", aFacilityList);
+		        	
+					//Get All Reserved Facilities List
+					//String username = (String) session.getAttribute("username");
+		        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+		        	ReservationList = UserModelDAO.listReservations();
+		        	
+		        	//Now we need to remove the current reservations from the possible reservations
+		        	//aFacilityList will be the list with the remaining possible reservations
+		        	UserModelDAO.AvailableReservations(aFacilityList, ReservationList);
+		        	session.setAttribute("modify", 0);
+		        	//If we are modifying a time, we need to now delete the previous one
+		        	if(request.getParameter("idmodify").equals("1"))
+		        	{            	
+		        		session.setAttribute("modify", 1);
+		        		UserModelDAO.cancelReservation(request.getParameter("iddate"), request.getParameter("name"), request.getParameter("from"), request.getParameter("to"));
+		        	}
+		        	
+		        	session.setAttribute("FACILITYs", aFacilityList);
+		        	url = "/UserListAvailableReservations.jsp";
+		        }
         	}
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
         else if(action.equalsIgnoreCase("addReservations"))
         {
+        	
         	String username = (String)session.getAttribute("username");
 			if (request.getParameter("radioRes")!=null)
 			{
@@ -355,7 +359,29 @@ public class UserController extends HttpServlet
 				//Need to make payment now
 	        	int sel = Integer.parseInt(request.getParameter("radioRes")) - 1;
 	        	session.setAttribute("SEL", sel);
-				url = "/UserPayDeposit.jsp";
+	        	
+	        	if((int)session.getAttribute("modify") == 1)
+	        	{
+	    			//+++++++The following is to get the reservation previously selected +++++++
+	    			//Now we need to query based on these fields
+	            	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
+	    			//Okay now we need to insert into database
+	            	aFacilityList = (ArrayList<Facility>)session.getAttribute("AVAILABLE");
+	            	//Set the depsosit status
+	            	aFacilityList.get(sel).setStatus("In Process");
+	    			UserModelDAO.addReservation(aFacilityList.get(sel), username);
+	            	//Display My Reservations
+	            	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+	            	ReservationList = UserModelDAO.listMyReservations(username);
+	            	session.setAttribute("AVAILABLE", ReservationList);
+	            	url = "/UserViewMyReservations.jsp";
+	        	}
+	        	else
+	        	{
+	        		url = "/UserPayDeposit.jsp";
+	        	}
+	        	session.setAttribute("modify", 0);
+				
 	            getServletContext().getRequestDispatcher(url).forward(request, response);
 			}
 			else 
@@ -420,7 +446,11 @@ public class UserController extends HttpServlet
         	//Set the depsosit status
         	aFacilityList.get(sel).setStatus("In Process");
 			UserModelDAO.addReservation(aFacilityList.get(sel), username);
-			url="/UserHome.jsp";
+			
+        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+        	ReservationList = UserModelDAO.listMyReservations(username);
+        	session.setAttribute("AVAILABLE", ReservationList);
+        	url = "/UserViewMyReservations.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
         	}
         }

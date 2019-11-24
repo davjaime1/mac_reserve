@@ -88,9 +88,9 @@ public class FM_UtilityDAO {
 		return fetch_profile;
 	}
 	
-	public static ArrayList<UserModel> searchUsers(String username, String role)
+	public static ArrayList<UserModel> searchUsers(String searchusername, String username,String role)
 	{
-		return ReturnMatchingUsers("SELECT * FROM users where username LIKE '%"+ username +"' AND role ='"+ role +"' ORDER BY username");
+		return ReturnMatchingUsers("SELECT * FROM users where username LIKE '%"+ searchusername +"' AND role ='"+ role +"' AND username != '"+username+"' ORDER BY username");
 	}
 	
 	public static ArrayList<String> getTypes() {
@@ -117,7 +117,7 @@ public class FM_UtilityDAO {
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
-		String queryString = "SELECT * FROM facilities WHERE facilitytype=\""+type+"\"";
+		String queryString = "SELECT * FROM facilities WHERE facilitytype=\""+type+"\" ORDER BY LENGTH(name), name";
 		try {
             stmt = conn.createStatement();
             ResultSet resultSet = stmt.executeQuery(queryString);

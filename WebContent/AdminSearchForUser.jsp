@@ -59,7 +59,7 @@
 						    </tr>
 			        	</table>
 			        	<input name="action" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Users">
+		    			<input style="width:163px; margin-left:92px" type="submit" value="Search for Users">
 		    			</form>
 			        </td>
 			    </tr>
