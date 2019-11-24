@@ -73,7 +73,7 @@
 						    </tr>
 			        	</table>
 			        	<input name="action" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Search for Reservations">
+		    			<input style="width:163px; margin-left:104px" type="submit" value="Search for Reservations">
 		    			</form>
 			        </td>	
 			        <tr> <td style="padding:0px"><input name="statusError"  value="<c:out value='${errorMsgs.statusError}'/>" type="text"  style ="background-color: #f68026; color: #0948b1; border: none;margin-left:100;width:350px"   disabled="disabled" maxlength="120"> </td>		        

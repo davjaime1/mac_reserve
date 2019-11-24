@@ -122,11 +122,11 @@
 			    		<table>
 				    		<form name="companyForm" action="/mac_reserve/AdminController?action=userStatus&username=${USERS.username}&status=${USERS.status}" method="post">
 				    		<input name="action" value="registerUser" type="hidden">
-			    			<input style="color:blue;background-color: orange; width:163px; margin-left:14px" type="submit" value="Revoke/Unrevoke" onclick="return confirm('Change ${USERS.username}\'s privileges?');">
+			    			<input style="width:163px; margin-left:14px" type="submit" value="Revoke/Unrevoke" onclick="return confirm('Change ${USERS.username}\'s privileges?');">
 			    			</form>
 			    			<form name="companyForm" action="/mac_reserve/AdminController?action=changeRole&username=${USERS.username}" method="post">
 			    			<input name="action" value="registerUser" type="hidden">
-		    				<input style="color:blue;background-color: orange; width:163px; margin-left:80px" type="submit" value="Change User Role">
+		    				<input style="width:163px; margin-left:80px" type="submit" value="Change User Role">
 	    					</form>
 		    			</table>
 					</td>

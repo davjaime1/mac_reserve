@@ -116,7 +116,7 @@
 			    		<tr>
 							<td>
 					    		<input name="action" value="registerUser" type="hidden">
-		    					<input style="width:163px; margin-left:157px" type="submit" value="Update" onclick="return confirm('Update ${USERS.username}\'s role?');">
+		    					<input style="width:163px; margin-left:105px" type="submit" value="Update" onclick="return confirm('Update ${USERS.username}\'s role?');">
 		    					</form>
 	    					</td>
 						</tr>

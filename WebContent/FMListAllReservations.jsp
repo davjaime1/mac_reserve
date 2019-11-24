@@ -70,7 +70,7 @@
 					            	<a href="/mac_reserve/FMController?action=processPayment&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;" onclick="return confirm('Complete Deposit Payment Process?');">${item.status}</a>
 					            </td>
 					            <td>
-					            	<a href="/mac_reserve/UserController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;" onclick="return confirm('Are you sure you want to cancel the reservation?');">Cancel</a>
+					            	<a href="/mac_reserve/FMController?action=cancelReservation&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;" onclick="return confirm('Are you sure you want to cancel the reservation?');">Cancel</a>
 					            </td>
 					            <td>
 					            	<a href="/mac_reserve/FMController?action=reportUser&name=${item.name}&date=${item.date}&from=${item.from}&to=${item.to}" style="font-size: 20px;">Report</a>

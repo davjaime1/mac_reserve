@@ -370,7 +370,11 @@ public class UserController extends HttpServlet
 	            	//Set the depsosit status
 	            	aFacilityList.get(sel).setStatus("In Process");
 	    			UserModelDAO.addReservation(aFacilityList.get(sel), username);
-	        		url = "/UserHome.jsp";
+	            	//Display My Reservations
+	            	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+	            	ReservationList = UserModelDAO.listMyReservations(username);
+	            	session.setAttribute("AVAILABLE", ReservationList);
+	            	url = "/UserViewMyReservations.jsp";
 	        	}
 	        	else
 	        	{
@@ -442,7 +446,11 @@ public class UserController extends HttpServlet
         	//Set the depsosit status
         	aFacilityList.get(sel).setStatus("In Process");
 			UserModelDAO.addReservation(aFacilityList.get(sel), username);
-			url="/UserHome.jsp";
+			
+        	ArrayList<Facility> ReservationList = new ArrayList<Facility>();
+        	ReservationList = UserModelDAO.listMyReservations(username);
+        	session.setAttribute("AVAILABLE", ReservationList);
+        	url = "/UserViewMyReservations.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
         	}
         }

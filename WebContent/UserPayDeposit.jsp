@@ -81,7 +81,7 @@
 					    
 			        	</table>
 			        	<input name="action" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Pay Deposit" onclick="return confirm('Please confirm selection and payment of reservation');">
+		    			<input style="width:163px; margin-left:193px" type="submit" value="Pay Deposit" onclick="return confirm('Please confirm payment of reservation');">
 		    			</form>
 			        </td>
 			    </tr>

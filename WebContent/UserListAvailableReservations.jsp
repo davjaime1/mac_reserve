@@ -74,7 +74,7 @@
 							</c:forEach>
 			        	</table>
 			        	<input name="ListSelectedResButton" value="searchUser" type="hidden">
-		    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Reserve Facility" onclick="return confirm('Please confirm this selection');">
+		    			<input style="width:163px; margin-left:400px" type="submit" value="Reserve Facility" onclick="return confirm('Please confirm this selection');">
 		    			</form>
 			        </td>
 			    </tr>
