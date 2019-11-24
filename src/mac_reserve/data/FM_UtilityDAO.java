@@ -117,7 +117,7 @@ public class FM_UtilityDAO {
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
-		String queryString = "SELECT * FROM facilities WHERE facilitytype=\""+type+"\"";
+		String queryString = "SELECT * FROM facilities WHERE facilitytype=\""+type+"\" ORDER BY LENGTH(name), name";
 		try {
             stmt = conn.createStatement();
             ResultSet resultSet = stmt.executeQuery(queryString);
