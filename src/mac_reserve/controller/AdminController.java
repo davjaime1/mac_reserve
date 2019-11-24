@@ -165,12 +165,13 @@ public class AdminController extends HttpServlet
         }
         else if(action.equalsIgnoreCase("searchForUser"))
         {
+        	String username = (String) session.getAttribute("username");
         	String searchUsername = request.getParameter("idusername");
         	String searchRole = request.getParameter("idrole");
         	
         	//Need to search query based on the username and role
         	ArrayList<UserModel> results = new ArrayList<UserModel>();
-        	results = FM_UtilityDAO.searchUsers(searchUsername, searchRole);
+        	results = FM_UtilityDAO.searchUsers(searchUsername, username, searchRole);
         	session.setAttribute("USERS", results);
         	
         	url = "/AdminListUserResults.jsp";
