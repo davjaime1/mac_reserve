@@ -113,7 +113,7 @@
     			</table>
     			
     			<input name="action" value="registerUser" type="hidden">
-    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Register System User">
+    			<input style="color:blue;background-color: orange; width:163px; margin-left:104px" type="submit" value="Register System User" onclick="return confirm('Register new profile?');">
     			</form>
 			</td>
 		</tr>
