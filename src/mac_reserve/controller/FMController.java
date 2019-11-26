@@ -34,23 +34,12 @@ import mac_reserve.model.UserModel;
 public class FMController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
-    private String type;
-    private String date;
-    private String time;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
     private static final DateTimeFormatter dateFormat8 = DateTimeFormatter.ofPattern(DATE_FORMAT);
     
     private void userParam(HttpServletRequest request, UserModel user)
     {
         user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"), request.getParameter("noshow"), request.getParameter("violations"), request.getParameter("status"));
-    }
-    
-    private void setParam(HttpServletRequest request, String type, String date, String time)
-    {
-    	this.type = type;
-    	this.date = date;
-    	this.time = time;
     }
     
     public static Date parseDate(String date) {
@@ -117,10 +106,7 @@ public class FMController extends HttpServlet
     
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        // TODO Auto-generated method stub
-        // doGet(request, response);
-        
+    {       
         String action = request.getParameter("action"), url = "";
         HttpSession session = request.getSession();
         
@@ -241,7 +227,9 @@ public class FMController extends HttpServlet
         	//System.out.println(request.getParameter("idtimes"));
         	//Now we need to query based on these fields
         	ArrayList<Facility> aFacilityList = new ArrayList<Facility>();
-        	setParam(request, request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"));
+        	session.setAttribute("facilitytype", request.getParameter("idfacilitytype"));
+        	session.setAttribute("date", request.getParameter("iddate"));
+        	session.setAttribute("times", request.getParameter("idtimes"));
         	aFacilityList = UserModelDAO.listAvailableReservations(request.getParameter("idfacilitytype"), request.getParameter("iddate"), request.getParameter("idtimes"), dayOfWeek);
         	session.setAttribute("AVAILABLE", aFacilityList);
         	
@@ -380,8 +368,7 @@ public class FMController extends HttpServlet
         else if(action.equalsIgnoreCase("cancelReservation"))
         {
         	String username = (String)session.getAttribute("currentUser");
-        	date = request.getParameter("date");
-        	
+       	
         	//Query and delete reservation
         	UserModelDAO.cancelReservation(request.getParameter("date"), request.getParameter("name"), request.getParameter("from"), request.getParameter("to"));
         	
